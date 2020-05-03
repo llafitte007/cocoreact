@@ -1,7 +1,7 @@
 {
   "name": "cocoreact",
-  "version": "1.0.4",
-  "description": "set of builders & components & stuffs for starting react project",
+  "version": "1.0.5",
+  "description": "Set of builders & components & stuffs for starting react project",
   "author": "llafitte007",
   "repository": {
     "type": "git",
