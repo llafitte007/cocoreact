@@ -10,9 +10,9 @@ export default class AxiosHttpClient implements IHttpClient {
 		this._baseUrl = baseUrl;
 	}
 
-	async sendRequest(request: IRequest): Promise<any> {
+	async sendRequest(request: IRequest): Promise<string> {
 		const axiosRequest = this._buildConfiguration(request);
-		const response = await axios.request<any>(axiosRequest);
+		const response = await axios.request<string>(axiosRequest);
 		return response.data;
 	}
 

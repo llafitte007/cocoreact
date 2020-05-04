@@ -21,6 +21,9 @@ export default class JsonSerializer implements ISerializer {
 	private static dateRegexp = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z?)/;
 
 	protected _serialize(data: any): string | undefined {
+		if (data === undefined) {
+			return undefined;
+		}
 		return JSON.stringify(data, this._jsonStringify);
 	}
 
@@ -33,8 +36,11 @@ export default class JsonSerializer implements ISerializer {
 			d = new Date(d.setMinutes(d.getMinutes() - d.getTimezoneOffset()));
 			return d.toISOString();
 		}
-		// force stringify (toString) value
-		return "" + value;
+		if (key && value) {
+			// force stringify (toString) value
+			return "" + value;
+		}
+		return value;
 	}
 
 	private _queryString(data: any): string | undefined {

@@ -16,7 +16,7 @@ export default class JwtDecorator implements IHttpClient {
 		request: TRequest
 	): Promise<any> {
 		try {
-			if (request.needAuthentication) {
+			if (request.needAuthentication === true) {
 				request.headers = {
 					...request.headers,
 					Authorization: "Bearer " + this._authTokenService.getToken()
@@ -26,7 +26,7 @@ export default class JwtDecorator implements IHttpClient {
 		} catch (e) {
 			if (
 				e.response &&
-				request.needAuthentication &&
+				request.needAuthentication === true &&
 				e.response.status === this._authTokenService.responseErrorCode
 			) {
 				// try refresh access token (1 - build, 2 - process, 3 - get back new token)

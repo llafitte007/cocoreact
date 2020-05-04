@@ -13,8 +13,8 @@ export type RequestMethod =
 export default interface IRequest {
 	path: string;
 	method: RequestMethod;
-	queryString: string | undefined;
-	body: string | undefined;
-	needAuthentication: boolean;
-	headers: Record<string, string>;
+	queryString?: string;
+	body?: string;
+	needAuthentication?: boolean;
+	headers?: Record<string, string>;
 }

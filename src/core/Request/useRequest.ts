@@ -41,7 +41,7 @@ export default function useRequest<TRequest extends IRequest>(
 
 	useEffect(() => {
 		_updateData();
-	}, [_updateData]);
+	}, []);
 
 	const updateData = useCallback(() => {
 		_updateData();
