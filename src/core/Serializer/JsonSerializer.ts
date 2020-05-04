@@ -18,10 +18,6 @@ export default class JsonSerializer implements ISerializer {
 		} as IRequest;
 	}
 
-	deserializeResponse<TResponse>(response: string): TResponse {
-		return this.deserialize<TResponse>(response);
-	}
-
 	private static dateRegexp = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z?)/;
 
 	protected _serialize(data: any): string | undefined {
@@ -69,7 +65,10 @@ export default class JsonSerializer implements ISerializer {
 		return results.join("&");
 	}
 
-	public deserialize<TResponse = any>(data: string): TResponse {
+	public deserialize<TResponse = any>(data: any): TResponse {
+		if (typeof data !== "string") {
+			data = JSON.stringify(data);
+		}
 		const response: TResponse = JSON.parse(data, this._jsonDeserialize);
 		return response;
 	}
