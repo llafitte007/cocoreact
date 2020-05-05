@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import IFormError from "./IFormError";
-import IFormErrorService from "./IFormErrorService";
+import IFormError from "./core/FormError/IFormError";
+import IFormErrorService from "./core/FormError/IFormErrorService";
 
 export default class DefaultFormErrorService implements IFormErrorService {
 	isValid(response: any): boolean {

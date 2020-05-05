@@ -1,10 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useMemo } from "react";
 
 import { IFormField } from "../../core/FormField";
 import { IFormError } from "../../core/FormError";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
-import { useFormFieldError, useFormFieldValue } from "./hooks";
+
+function useFormFieldValue<T>(fieldName: string, data: any): T {
+	return useMemo(() => {
+		if (data[fieldName] === undefined) {
+			throw new Error(
+				`invalid fieldName '${fieldName}' in data : ${JSON.stringify(
+					data
+				)}`
+			);
+		}
+		return data[fieldName] as T;
+	}, [fieldName, data]);
+}
+
+function useFormFieldError(
+	name: string,
+	errors?: IFormError[]
+): string | undefined {
+	return useMemo(() => {
+		if (errors === undefined) return undefined;
+		const error = errors.find((x) => x.fieldName === name);
+		return error === undefined ? undefined : error.message;
+	}, [name, errors]);
+}
 
 export interface FormWidgetConfiguration {
 	widgetOptions: TypeWidgetOptions;
