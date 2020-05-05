@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import TextField from "./FormWidgets/TextField";
-import SelectField from "./FormWidgets/SelectField";
-import SwitchField from "./FormWidgets/SwitchField";
-import DateField from "./FormWidgets/DateField";
-import TimeField from "./FormWidgets/TimeField";
-import AutoCompleteField from "./FormWidgets/AutoCompleteField";
+import TextField from "./components/FormWidgets/TextField";
+import SelectField from "./components/FormWidgets/SelectField";
+import SwitchField from "./components/FormWidgets/SwitchField";
+import DateField from "./components/FormWidgets/DateField";
+import TimeField from "./components/FormWidgets/TimeField";
+import AutoCompleteField from "./components/FormWidgets/AutoCompleteField";
 
 import { FormWidgetOptionsBuilder } from "./core/FormWidget";
 

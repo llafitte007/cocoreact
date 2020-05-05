@@ -10,10 +10,10 @@ import {
 	SvgIconProps
 } from "@material-ui/core";
 
-import { IMessage } from "../core/Message";
-import { IFormField } from "../core/FormField";
-import { IFormError, IFormErrorService } from "../core/FormError";
-import { FormWidgetOptions } from "../core/FormWidget";
+import { IMessage } from "../../core/Message";
+import { IFormField } from "../../core/FormField";
+import { IFormError, IFormErrorService } from "../../core/FormError";
+import { FormWidgetOptions } from "../../core/FormWidget";
 import FormWidget from "./FormWidget";
 import { StyledComponent, CircularProgress } from "../Theme";
 

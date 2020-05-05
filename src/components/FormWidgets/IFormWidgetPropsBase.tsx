@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { PropTypes } from "@material-ui/core";
-import { IFormFieldBase } from "../core/FormField";
+import { IFormFieldBase } from "../../core/FormField";
 import { CSSProperties } from "@material-ui/styles";
 
 export default interface IFormWidgetPropsBase<T = any> extends IFormFieldBase {

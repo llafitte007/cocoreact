@@ -5,12 +5,12 @@ import { IRequest } from "../Request";
 import Guid, { isGuid } from "../types/Guid";
 
 export default class JsonSerializer implements ISerializer {
-	serialize<TMessage extends IMessage>(message: TMessage): IRequest {
+	serializeMessage<TMessage extends IMessage>(message: TMessage): IRequest {
 		return {
 			path: message.getPath(),
 			method: message.getMethod(),
 			queryString: this._queryString(message.getQueryString()),
-			body: this._serialize(message.getBody()),
+			body: this.serialize(message.getBody()),
 			needAuthentication: message.needAuthentication(),
 			headers: {
 				"Content-Type": "application/json"
@@ -20,10 +20,9 @@ export default class JsonSerializer implements ISerializer {
 
 	private static dateRegexp = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z?)/;
 
-	protected _serialize(data: any): string | undefined {
-		if (data === undefined) {
-			return undefined;
-		}
+	public serialize(data: any): string | undefined | null {
+		if (data === undefined) return undefined;
+		else if (data === null) return undefined;
 		return JSON.stringify(data, this._jsonStringify);
 	}
 
@@ -58,7 +57,7 @@ export default class JsonSerializer implements ISerializer {
 				return;
 			}
 
-			const vStr = this._serialize(v);
+			const vStr = this.serialize(v);
 			if (vStr === `"${undefined}"` || vStr === `"${null}"`) {
 				return;
 			}

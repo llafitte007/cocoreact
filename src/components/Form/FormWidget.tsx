@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-import { IFormField } from "../core/FormField";
-import { IFormError } from "../core/FormError";
-import { FormWidgetOptions } from "../core/FormWidget";
+import { IFormField } from "../../core/FormField";
+import { IFormError } from "../../core/FormError";
+import { FormWidgetOptions } from "../../core/FormWidget";
 import { useFormFieldError, useFormFieldValue } from "./hooks";
 
 export interface FormWidgetConfiguration {

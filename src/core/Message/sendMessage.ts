@@ -9,7 +9,7 @@ export default async function sendMessage<TResponse>(
 	serializer: ISerializer,
 	httpClient: IHttpClient
 ): Promise<TResponse> {
-	const request = serializer.serialize(message);
+	const request = serializer.serializeMessage(message);
 
 	const data = await sendRequest<IRequest>(request, httpClient);
 

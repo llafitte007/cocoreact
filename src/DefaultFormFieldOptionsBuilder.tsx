@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { TextFieldProps } from "./FormWidgets/TextField";
-import { SelectFieldProps } from "./FormWidgets/SelectField";
-import { DateFieldProps } from "./FormWidgets/DateField";
-import { TimeFieldProps } from "./FormWidgets/TimeField";
-import { AutoCompleteFieldProps } from "./FormWidgets/AutoCompleteField";
+import { TextFieldProps } from "./components/FormWidgets/TextField";
+import { SelectFieldProps } from "./components/FormWidgets/SelectField";
+import { DateFieldProps } from "./components/FormWidgets/DateField";
+import { TimeFieldProps } from "./components/FormWidgets/TimeField";
+import { AutoCompleteFieldProps } from "./components/FormWidgets/AutoCompleteField";
 
 import {
 	FormFieldOptionsBuilder as FormFieldOptionsBuilderBase,
 	IFormField
 } from "./core/FormField";
-import IFormWidgetPropsBase from "./FormWidgets/IFormWidgetPropsBase";
+import IFormWidgetPropsBase from "./components/FormWidgets/IFormWidgetPropsBase";
 import IField from "./core/types/IField";
 import { slugify } from "./StringExtension";
 

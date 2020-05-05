@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { IRequest } from "../Request";
 
-export default interface IAuthTokenService {
+export default interface IJwtService {
 	responseErrorCode: number;
 	getToken(): string;
 	setToken(token: string): void;

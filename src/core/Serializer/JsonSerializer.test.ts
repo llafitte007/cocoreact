@@ -4,6 +4,30 @@ import { IMessage } from "../Message";
 import { RequestMethod } from "../Request";
 import { createEmptyGuid } from "../types/Guid";
 
+const serializer = new JsonSerializer();
+
+test("serialize base", () => {
+	expect(serializer.serialize(undefined)).toBe(undefined);
+	expect(serializer.serialize(null)).toBe(undefined);
+
+	expect(serializer.serialize([])).toBe("[]");
+	expect(serializer.serialize({})).toBe("{}");
+
+	expect(serializer.serialize(true)).toBe("true");
+	expect(serializer.serialize(false)).toBe("false");
+
+	expect(serializer.serialize(1)).toBe("1");
+	expect(serializer.serialize(3.14)).toBe("3.14");
+
+	const d = new Date(1986, 11, 9, 16, 0, 0);
+	// date value not special serialized
+	expect(serializer.serialize(d)).toBe('"1986-12-09T15:00:00.000Z"');
+	// date object field special serialized
+	expect(serializer.serialize({ date: d })).toContain(
+		'"1986-12-09T16:00:00.000Z"'
+	);
+});
+
 class CustomrMessage implements IMessage {
 	path!: string;
 	method!: RequestMethod;
@@ -23,13 +47,12 @@ class CustomrMessage implements IMessage {
 }
 
 test("serialize simple message", () => {
-	const serializer = new JsonSerializer();
 	const message = new CustomrMessage({
 		path: "/users",
 		method: "GET",
 		needAuth: false
 	});
-	const data = serializer.serialize(message);
+	const data = serializer.serializeMessage(message);
 
 	expect(data.path).toBe("/users");
 	expect(data.method).toBe("GET");
@@ -39,17 +62,15 @@ test("serialize simple message", () => {
 });
 
 test("serialize message with authentication", () => {
-	const serializer = new JsonSerializer();
 	const message = new CustomrMessage({
 		needAuth: true
 	});
-	const data = serializer.serialize(message);
+	const data = serializer.serializeMessage(message);
 
 	expect(data.needAuthentication).toBe(true);
 });
 
 test("serialize message with body", () => {
-	const serializer = new JsonSerializer();
 	const message = new CustomrMessage({
 		body: {
 			str: "str",
@@ -59,7 +80,7 @@ test("serialize message with body", () => {
 			createdAt: new Date(1986, 11, 9, 16, 0, 0)
 		}
 	});
-	const data = serializer.serialize(message);
+	const data = serializer.serializeMessage(message);
 	expect(data.body).toContain(`"str":"str"`);
 	expect(data.body).toContain(`"count":"10"`);
 	expect(data.body).toContain(`"flag":"true"`);
@@ -68,13 +89,12 @@ test("serialize message with body", () => {
 });
 
 test("serialize message with querystring", () => {
-	const serializer = new JsonSerializer();
 	const message = new CustomrMessage({
 		queryString: {
 			orderBy: "name",
 			limit: 10
 		}
 	});
-	const data = serializer.serialize(message);
+	const data = serializer.serializeMessage(message);
 	expect(data.queryString).toEqual(`orderBy="name"&limit=10`);
 });

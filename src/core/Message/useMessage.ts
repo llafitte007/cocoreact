@@ -12,7 +12,7 @@ export default function useMessage<TResponse>(
 	httpClient: IHttpClient
 ): [boolean, TResponse, () => void, Error | null] {
 	const request = useMemo(() => {
-		return serializer.serialize(message);
+		return serializer.serializeMessage(message);
 	}, [message, serializer]);
 
 	const [loading, data, updateData, error] = useRequest<IRequest>(

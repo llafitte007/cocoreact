@@ -25,7 +25,7 @@ test("send request and retreive valid response (string)", async () => {
 	expect(todo.id).toBe(1);
 });
 
-test("throw error if unvalid request", async () => {
+test("throw error if something went wrong", async () => {
 	const httpClient = new AxiosHttpClient(
 		"https://jsonplaceholder.typicode.com"
 	);
@@ -41,4 +41,4 @@ test("throw error if unvalid request", async () => {
 		error = e;
 	}
 	expect(error).not.toBeNull();
-});
+}, 5000);

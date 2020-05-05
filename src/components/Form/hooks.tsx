@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { IFormError } from "../core/FormError";
+import { IFormError } from "../../core/FormError";
 
 export function useFormFieldValue<T>(fieldName: string, data: any): T {
 	return React.useMemo(() => {
