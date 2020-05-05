@@ -6,9 +6,9 @@ import DateField from "./components/FormWidgets/DateField";
 import TimeField from "./components/FormWidgets/TimeField";
 import AutoCompleteField from "./components/FormWidgets/AutoCompleteField";
 
-import { FormWidgetOptionsBuilder } from "./core/FormWidget";
+import { TypeWidgetOptionsBuilder } from "./core/TypeWidget";
 
-const defaultFormWidgetOptionsBuilder = new FormWidgetOptionsBuilder()
+const defaultFormWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
 	.add("string", TextField)
 	.add("number", TextField)
 	.add("email", TextField)

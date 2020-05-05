@@ -3,11 +3,11 @@ import React from "react";
 
 import { IFormField } from "../../core/FormField";
 import { IFormError } from "../../core/FormError";
-import { FormWidgetOptions } from "../../core/FormWidget";
+import { TypeWidgetOptions } from "../../core/TypeWidget";
 import { useFormFieldError, useFormFieldValue } from "./hooks";
 
 export interface FormWidgetConfiguration {
-	widgetOptions: FormWidgetOptions;
+	widgetOptions: TypeWidgetOptions;
 }
 
 export interface FormWidgetProps {

@@ -15,5 +15,10 @@ export interface ITableFieldBase {
 }
 
 export default interface ITableField<T = any> extends ITableFieldBase {
-	render?: (item: T) => JSX.Element;
+	render?: (fieldProps: ITableFieldRenderer<T>) => JSX.Element;
+}
+
+export interface ITableFieldRenderer<T> {
+	fieldProps: ITableField<T>;
+	data: T;
 }

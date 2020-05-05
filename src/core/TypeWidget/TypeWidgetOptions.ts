@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import IFormWidget from "./IFormWidget";
+import ITypeWidget from "./ITypeWidget";
 
-export default class FormWidgetOptions {
-	private _widgets: IFormWidget[];
+export default class TypeWidgetOptions {
+	private _widgets: ITypeWidget[];
 
-	constructor(widgets: IFormWidget[]) {
+	constructor(widgets: ITypeWidget[]) {
 		this._widgets = widgets;
 	}
 
 	public get(type: string) {
 		const widget = this._get(type);
 		if (widget === undefined) {
-			throw Error(`undefined form widget type "${type}"`);
+			throw Error(`undefined type widget type "${type}"`);
 		}
 		return widget;
 	}

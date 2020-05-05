@@ -13,7 +13,7 @@ import {
 import { IMessage } from "../../core/Message";
 import { IFormField } from "../../core/FormField";
 import { IFormError, IFormErrorService } from "../../core/FormError";
-import { FormWidgetOptions } from "../../core/FormWidget";
+import { TypeWidgetOptions } from "../../core/TypeWidget";
 import FormWidget from "./FormWidget";
 import { StyledComponent, CircularProgress } from "../Theme";
 
@@ -46,7 +46,7 @@ export interface FormStyles {
 }
 
 export interface FormConfiguration {
-	widgetOptions: FormWidgetOptions;
+	widgetOptions: TypeWidgetOptions;
 	errorService: IFormErrorService;
 }
 
