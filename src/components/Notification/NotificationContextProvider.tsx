@@ -8,10 +8,7 @@ import Notification from "./Notification";
 export interface NotificationContextProviderProps {
 	autoHideDuration?: number;
 	children: React.ReactNode | React.ReactNode[];
-	component?:
-		| React.Component<INotificationProps>
-		| React.FC<INotificationProps>
-		| ((props: INotificationProps) => JSX.Element);
+	component?: React.ComponentType<INotificationProps>;
 }
 
 export default function NotificationContextProvider({
