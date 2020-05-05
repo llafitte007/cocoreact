@@ -6,6 +6,7 @@ import NotificationContext from "./NotificationContext";
 import Notification from "./Notification";
 
 export interface NotificationContextProviderProps {
+	autoHideDuration?: number;
 	children: React.ReactNode | React.ReactNode[];
 	component?:
 		| React.Component<INotificationProps>
@@ -14,6 +15,7 @@ export interface NotificationContextProviderProps {
 }
 
 export default function NotificationContextProvider({
+	autoHideDuration,
 	children,
 	component
 }: NotificationContextProviderProps) {
@@ -80,7 +82,7 @@ export default function NotificationContextProvider({
 				<Component
 					open
 					onClose={clear}
-					autoHideDuration={3000}
+					autoHideDuration={autoHideDuration ?? 3000}
 					{...state}
 				/>
 			)}
