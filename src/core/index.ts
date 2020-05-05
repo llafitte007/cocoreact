@@ -6,6 +6,7 @@ export * from "./Jwt";
 export * from "./Message";
 export * from "./Request";
 export * from "./Serializer";
+export * from "./TableField";
 export * from "./types/Guid";
 export * from "./types/IField";
 export * from "./Url";
