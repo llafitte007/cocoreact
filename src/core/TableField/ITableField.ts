@@ -9,7 +9,6 @@ export interface ITableFieldBase {
 	label?: string;
 	align?: Align;
 	padding?: Padding;
-	scope?: string;
 	icon?: React.ReactElement<SvgIconProps>;
 	className?: string;
 }

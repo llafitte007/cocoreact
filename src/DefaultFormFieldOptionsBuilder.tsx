@@ -5,10 +5,7 @@ import { DateFieldProps } from "./components/FormWidgets/DateField";
 import { TimeFieldProps } from "./components/FormWidgets/TimeField";
 import { AutoCompleteFieldProps } from "./components/FormWidgets/AutoCompleteField";
 
-import {
-	FormFieldOptionsBuilder as FormFieldOptionsBuilderBase,
-	IFormField
-} from "./core/FormField";
+import { FormFieldOptionsBuilder, IFormField } from "./core/FormField";
 import IFormWidgetPropsBase from "./components/FormWidgets/IFormWidgetPropsBase";
 import IField from "./core/types/IField";
 import { slugify } from "./StringExtension";
@@ -17,6 +14,7 @@ export interface IFormWidgetFieldOptions extends IFormField {
 	fullWidth?: IFormWidgetPropsBase["fullWidth"];
 	color?: IFormWidgetPropsBase["color"];
 	margin?: IFormWidgetPropsBase["margin"];
+	style?: IFormWidgetPropsBase["style"];
 
 	autoClearAdornment?: TextFieldProps["autoClearAdornment"];
 	autoClearIcon?: TextFieldProps["autoClearIcon"];
@@ -28,12 +26,12 @@ export interface IFormWidgetFieldOptions extends IFormField {
 	minutesStep?: TimeFieldProps["minutesStep"];
 	groupBy?: AutoCompleteFieldProps["groupBy"];
 	noOptionsText?: AutoCompleteFieldProps["noOptionsText"];
-	startAdornment?: React.ReactNode;
+	startAdornment?: SelectFieldProps["startAdornment"];
 }
 
-export default class FormFieldOptionsBuilder<
+export default class DefaultFormFieldOptionsBuilder<
 	T
-> extends FormFieldOptionsBuilderBase<T, IFormWidgetFieldOptions> {
+> extends FormFieldOptionsBuilder<T, IFormWidgetFieldOptions> {
 	attachFieldToSlug(
 		srcformField: IField | string,
 		slugFormField: IField | string
@@ -72,4 +70,4 @@ export default class FormFieldOptionsBuilder<
 // required: true,
 // label: field.name,
 // label: capitalize(this.label),
-// noOptionsText: noOptionsText(this.noOptionsText)
+// noOptionsText: capitalize(this.noOptionsText)
