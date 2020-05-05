@@ -19,6 +19,7 @@ import {
 	CloseIcon,
 	StyledComponent
 } from "../Theme";
+import { NotificationType, INotificationProps } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -68,15 +69,9 @@ export interface NotificationStyles {
 	error: any;
 }
 
-export type NotificationType = "info" | "success" | "warning" | "error";
-
-export interface NotificationProps extends StyledComponent<NotificationStyles> {
-	open: boolean;
-	type: NotificationType;
-	message: string;
-	onClose: () => void;
-	autoHideDuration?: number;
-}
+export interface NotificationProps
+	extends INotificationProps,
+		StyledComponent<NotificationStyles> {}
 
 function getIconFromType(type: NotificationType) {
 	switch (type) {
@@ -99,6 +94,7 @@ export default function Notification({
 	message,
 	onClose,
 	autoHideDuration,
+	position,
 
 	className,
 	classes,
@@ -113,8 +109,8 @@ export default function Notification({
 			onClose={onClose}
 			autoHideDuration={autoHideDuration}
 			anchorOrigin={{
-				vertical: "bottom",
-				horizontal: "left"
+				vertical: position?.vertical ?? "bottom",
+				horizontal: position?.horizontal ?? "left"
 			}}
 			className={clsx(styles.snackbar, classes?.snackbar, className)}
 			style={style}
