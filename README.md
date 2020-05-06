@@ -1,9 +1,10 @@
 # cocoreact
 
-[![NPM](https://img.shields.io/npm/v/cocoreact.svg)](https://www.npmjs.com/package/cocoreact) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/cocoreact.svg)](https://www.npmjs.com/package/cocoreact)
 
-small description
+CocoReact is a set of tools and [material-ui](https://material-ui.com) components.
 
+Made with [create-react-library](https://www.npmjs.com/package/create-react-library).
 
 ## Install
 
@@ -11,10 +12,26 @@ small description
 npm install --save cocoreact
 ```
 
-## Content
+## core
 
-All features listing & descriptions coming soon ...
+Main features & descriptions :
 
-Made with create-react-library.
+- request : use hooks or/and functions to easly send a request using a specified http client.
+- message : hooks and functions overcoating previous request sender to add a customized serializer for the data sent and the response.
+- form builder : manage a your form fields options to create fast and reusable form with your own widget.
+- table builder : same as form builder but to build a fast and easy table
+- url : a tools to manage all you route (with parameters) and rapid access.
 
-## License GNU © 
+## components
+
+All components & descriptions :
+
+- ErrorBoundary : an error boundary to catch error and display your sepcified component.
+- Form : display all form field using core/form options, and manage submit using core/message
+- Notification : a notification system (widget, context, provider, hook) to easy display different types of notification
+- Table : display all table field using core/table options
+- Theme : a complete theme system (context, provider, hook) to use and hot swap your app theming
+
+A set of form and table widget to quickly start dev of your app.
+
+### License GNU ©

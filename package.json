@@ -1,6 +1,6 @@
 {
   "name": "cocoreact",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Set of builders & components & stuffs for starting react project",
   "author": "llafitte007",
   "repository": {
@@ -14,6 +14,7 @@
     "context",
     "material-ui",
     "form",
+    "table",
     "theme",
     "fetch",
     "http client"
