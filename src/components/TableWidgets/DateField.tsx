@@ -9,25 +9,20 @@ export interface DateFieldProps extends ITableWidgetPropsBase<Date> {
 }
 
 export default function DateField({
-	value,
 	formatter,
 	format,
 	align,
 	padding,
-	scope
+	scope,
+	...props
 }: DateFieldProps) {
-	const dateStr = useMemo(() => {
-		return formatter(value, format ?? "dddd Do MMMM");
-	}, [value, format, formatter]);
+	const value = useMemo(() => {
+		return formatter(props.value, format ?? "dddd Do MMMM");
+	}, [props.value, format, formatter]);
 
 	return (
-		<TableCell
-			align={align}
-			padding={padding}
-			scope={scope}
-			title={dateStr}
-		>
-			{dateStr}
+		<TableCell align={align} padding={padding} scope={scope} title={value}>
+			{value}
 		</TableCell>
 	);
 }

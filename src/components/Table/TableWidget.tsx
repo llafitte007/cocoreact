@@ -6,6 +6,7 @@ import { TypeWidgetOptions } from "../../core/TypeWidget";
 
 function useTableFieldValue<T>(fieldName: string, data: any): T {
 	return useMemo(() => {
+		if (fieldName === "") return data;
 		if (data[fieldName] === undefined) {
 			throw new Error(
 				`invalid fieldName '${fieldName}' in data : ${JSON.stringify(

@@ -33,7 +33,7 @@ export default function TableHeader({
 	const styles = useStyles();
 
 	return (
-		<TableCell align={align} padding={padding ?? "default"}>
+		<TableCell align={align} padding={padding ?? "default"} scope="col">
 			<span className={styles.cell}>
 				{icon && <span className={styles.icon}>{icon}</span>}
 				<span className={styles.title}>{label || null}</span>

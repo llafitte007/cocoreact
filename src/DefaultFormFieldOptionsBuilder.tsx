@@ -32,6 +32,34 @@ export interface IFormWidgetFieldOptions extends IFormField {
 export default class DefaultFormFieldOptionsBuilder<
 	T
 > extends FormFieldOptionsBuilder<T, IFormWidgetFieldOptions> {
+	setDefaultAutoFocusEnabled(enabled: boolean) {
+		super.setDefaultAutoFocusEnabled(enabled);
+		return this;
+	}
+
+	initialize(formFields: IField[] | Record<string, IField>) {
+		super.initialize(formFields);
+		return this;
+	}
+
+	add(
+		field: IField | IFormWidgetFieldOptions,
+		options?: Partial<IFormWidgetFieldOptions>
+	) {
+		super.add(field, options);
+		return this;
+	}
+
+	set(field: IField | string, options: Partial<IFormWidgetFieldOptions>) {
+		super.set(field, options);
+		return this;
+	}
+
+	hidden(formField: IField | string) {
+		super.hidden(formField);
+		return this;
+	}
+
 	attachFieldToSlug(
 		srcformField: IField | string,
 		slugFormField: IField | string
@@ -58,7 +86,7 @@ export default class DefaultFormFieldOptionsBuilder<
 	}
 }
 
-// TODO : make own app instance with this default settings exempe:
+// TODO : make own app instance with this default settings exemple:
 // position: 500,
 // hidden: false,
 // color: "secondary",
