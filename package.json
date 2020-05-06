@@ -1,7 +1,7 @@
 {
   "name": "cocoreact",
   "version": "1.0.7",
-  "description": "Set of builders & components & stuffs for starting react project",
+  "description": "CocoReact is a set of tools and material-ui components",
   "author": "llafitte007",
   "repository": {
     "type": "git",
