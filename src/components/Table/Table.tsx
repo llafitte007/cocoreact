@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useCallback } from "react";
 import clsx from "clsx";
 import {
 	Theme,
@@ -85,7 +85,7 @@ export default function Table<T>({
 }: TableProps<T> & TableConfiguration) {
 	const styles = useStyles() as TableStyles;
 
-	const renderHeaderRow = React.useCallback(() => {
+	const renderHeaderRow = useCallback(() => {
 		return (
 			<TableRow>
 				{fields.map((field: ITableField, idx) => {
@@ -95,7 +95,7 @@ export default function Table<T>({
 		);
 	}, [fields]);
 
-	const renderDataRow = React.useCallback(
+	const renderDataRow = useCallback(
 		(data: any, key: number) => {
 			return (
 				<TableRow key={key}>
@@ -115,7 +115,7 @@ export default function Table<T>({
 		[fields]
 	);
 
-	const renderEmptyRow = React.useCallback(() => {
+	const renderEmptyRow = useCallback(() => {
 		return (
 			<TableRow>
 				<TableCell colSpan={fields.length} scope="row">

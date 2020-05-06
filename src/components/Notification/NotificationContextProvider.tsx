@@ -49,21 +49,21 @@ export default function NotificationContextProvider({
 		[setNotification]
 	);
 
-	const success = React.useCallback(
+	const success = useCallback(
 		(message: string) => {
 			setNotification("success", message);
 		},
 		[setNotification]
 	);
 
-	const warning = React.useCallback(
+	const warning = useCallback(
 		(message: string) => {
 			setNotification("warning", message);
 		},
 		[setNotification]
 	);
 
-	const error = React.useCallback(
+	const error = useCallback(
 		(message: string) => {
 			setNotification("error", message);
 		},

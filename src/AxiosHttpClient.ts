@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios, { AxiosRequestConfig } from "axios";
-import IHttpClient from "./IHttpClient";
-import { IRequest } from "../Request";
+import { IHttpClient } from "./core/HttpClient";
+import { IRequest } from "./core/Request";
 
 export default class AxiosHttpClient implements IHttpClient {
 	_baseUrl: string;

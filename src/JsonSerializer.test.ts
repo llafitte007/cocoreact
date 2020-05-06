@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import JsonSerializer from "./JsonSerializer";
-import { IMessage } from "../Message";
-import { RequestMethod } from "../Request";
-import { createEmptyGuid } from "../types/Guid";
+import { IMessage } from "./core/Message";
+import { RequestMethod } from "./core/Request";
+import { createEmptyGuid } from "./core/types/Guid";
 
 const serializer = new JsonSerializer();
 
@@ -24,7 +24,7 @@ test("serialize base", () => {
 	expect(serializer.serialize(d)).toBe('"1986-12-09T15:00:00.000Z"');
 	// date object field special serialized
 	expect(serializer.serialize({ date: d })).toContain(
-		'"1986-12-09T16:00:00.000Z"'
+		`{"date":"1986-12-09T16:00:00.000Z"}`
 	);
 });
 

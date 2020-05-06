@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import AxiosHttpClient from "./AxiosHttpClient";
-import { IRequest } from "../Request";
+import { IRequest } from "./core/Request";
 
 interface ITodo {
 	userId: number;

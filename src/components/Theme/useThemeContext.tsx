@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import { useContext } from "react";
 
 import ThemeContext, { IThemeContext } from "./ThemeContext";
 
 const useThemeContext = (): IThemeContext => {
-	return React.useContext(ThemeContext);
+	return useContext(ThemeContext);
 };
 
 export default useThemeContext;

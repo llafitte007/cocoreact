@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import ISerializer from "./ISerializer";
-import { IMessage } from "../Message";
-import { IRequest } from "../Request";
-import { Guid, isGuid } from "../types/Guid";
+import { ISerializer } from "./core/Serializer";
+import { IMessage } from "./core/Message";
+import { IRequest } from "./core/Request";
+import { Guid, isGuid } from "./core/types/Guid";
 
 export default class JsonSerializer implements ISerializer {
 	serializeMessage<TMessage extends IMessage>(message: TMessage): IRequest {

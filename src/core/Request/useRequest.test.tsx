@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useMemo } from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
@@ -22,7 +22,7 @@ class FakeHttpClient implements IHttpClient {
 }
 
 function FakeComponent({ defaultValue }: { defaultValue: number }) {
-	const httpClient = React.useMemo(() => new FakeHttpClient(defaultValue), [
+	const httpClient = useMemo(() => new FakeHttpClient(defaultValue), [
 		defaultValue
 	]);
 
