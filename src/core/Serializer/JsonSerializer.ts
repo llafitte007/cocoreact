@@ -2,7 +2,7 @@
 import ISerializer from "./ISerializer";
 import { IMessage } from "../Message";
 import { IRequest } from "../Request";
-import Guid, { isGuid } from "../types/Guid";
+import { Guid, isGuid } from "../types/Guid";
 
 export default class JsonSerializer implements ISerializer {
 	serializeMessage<TMessage extends IMessage>(message: TMessage): IRequest {
