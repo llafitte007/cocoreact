@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { IFormError } from "../FormError";
+import { IField } from "../Field";
 
-export interface IFormFieldBase {
-	name: string;
-	type: string;
+export interface IFormFieldBase extends IField {
 	label?: string;
 	placeholder?: string;
 	disabled?: boolean;

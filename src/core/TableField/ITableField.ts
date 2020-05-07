@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { Padding, SvgIconProps } from "@material-ui/core";
+import { IField } from "../Field";
 
 export type Align = "inherit" | "left" | "center" | "right" | "justify";
 
-export interface ITableFieldBase {
-	name: string;
-	type: string;
+export interface ITableFieldBase extends IField {
 	label?: string;
 	align?: Align;
 	padding?: Padding;

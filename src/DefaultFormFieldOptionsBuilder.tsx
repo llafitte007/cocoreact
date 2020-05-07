@@ -7,7 +7,7 @@ import { AutoCompleteFieldProps } from "./components/FormWidgets/AutoCompleteFie
 
 import { FormFieldOptionsBuilder, IFormField } from "./core/FormField";
 import IFormWidgetPropsBase from "./components/FormWidgets/IFormWidgetPropsBase";
-import IField from "./core/types/IField";
+import IField from "./core/Field/IField";
 import { slugify } from "./StringExtension";
 
 export interface IFormWidgetFieldOptions extends IFormField {

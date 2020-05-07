@@ -1,3 +1,4 @@
+export * from "./Field";
 export * from "./FormError";
 export * from "./FormField";
 export * from "./HttpClient";
@@ -6,6 +7,5 @@ export * from "./Request";
 export * from "./Serializer";
 export * from "./TableField";
 export * from "./types/Guid";
-export * from "./types/IField";
 export * from "./TypeWidget";
 export * from "./Url";
