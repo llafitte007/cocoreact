@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/llafitte007/cocoreact.git"
   },
-  "license": "GNU",
+  "license": "MIT",
   "keywords": [
     "react",
     "hooks",

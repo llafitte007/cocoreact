@@ -35,4 +35,4 @@ All components & descriptions :
 
 A set of form and table widget to quickly start dev of your app.
 
-### License GNU ©
+### License MIT ©
