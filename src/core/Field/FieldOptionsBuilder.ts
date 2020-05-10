@@ -6,6 +6,10 @@ interface _IFieldOptionsBase {
 	hidden?: boolean;
 }
 
+// Transformer en "IFieldSet" > enlever l'héritage sur table et form pour faire
+// de la composition (> fait sauter une couche d'héritage avec les DefaultXXFieldOptionsBuilder)
+// regarder les type Map/Set
+
 export default class FieldOptionsBuilder<TField extends IField = IField> {
 	protected _fields: (TField & _IFieldOptionsBase)[];
 	protected _defaultFieldBuilder?: (options: TField) => TField;

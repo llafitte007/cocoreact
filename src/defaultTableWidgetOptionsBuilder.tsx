@@ -8,9 +8,9 @@ import ButtonField from "./components/TableWidgets/ButtonField";
 import { TypeWidgetOptionsBuilder } from "./core/TypeWidget";
 
 const defaultTableWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
-	.add("string", TextField)
-	.add("date", DateField)
-	.add("boolean", SwitchField)
-	.add("button", ButtonField);
+	.set("string", TextField)
+	.set("date", DateField)
+	.set("boolean", SwitchField)
+	.set("button", ButtonField);
 
 export default defaultTableWidgetOptionsBuilder;

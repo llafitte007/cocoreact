@@ -1,26 +1,24 @@
-/* eslint-disable no-unused-vars */
-import ITypeWidget from "./ITypeWidget";
+export type ITypeWidgetComponent = any;
 
 export default class TypeWidgetOptions {
-	private _widgets: ITypeWidget[];
+	_typeComponents: Map<string, ITypeWidgetComponent>;
 
-	constructor(widgets: ITypeWidget[]) {
-		this._widgets = widgets;
+	constructor(typeComponents: Record<string, ITypeWidgetComponent>) {
+		this._typeComponents = new Map<string, ITypeWidgetComponent>();
+		for (var k in typeComponents) {
+			this._typeComponents.set(k, typeComponents[k]);
+		}
 	}
 
 	public get(type: string) {
-		const widget = this._get(type);
-		if (widget === undefined) {
-			throw Error(`undefined type widget type "${type}"`);
+		const component = this._typeComponents.get(type);
+		if (component === undefined) {
+			throw new Error(`undefined component for type "${type}"`);
 		}
-		return widget;
+		return component;
 	}
 
-	public getComponent(type: string) {
-		return this.get(type).component;
-	}
-
-	private _get(type: string) {
-		return this._widgets.find((r) => r.type === type);
+	public length() {
+		return this._typeComponents.size;
 	}
 }

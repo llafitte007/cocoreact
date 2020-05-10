@@ -8,15 +8,16 @@ import AutoCompleteField from "./components/FormWidgets/AutoCompleteField";
 
 import { TypeWidgetOptionsBuilder } from "./core/TypeWidget";
 
+// changer add en set
 const defaultFormWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
-	.add("string", TextField)
-	.add("number", TextField)
-	.add("email", TextField)
-	.add("password", TextField)
-	.add("select", SelectField)
-	.add("boolean", SwitchField)
-	.add("date", DateField)
-	.add("time", TimeField)
-	.add("autocomplete", AutoCompleteField);
+	.set("string", TextField)
+	.set("number", TextField)
+	.set("email", TextField)
+	.set("password", TextField)
+	.set("select", SelectField)
+	.set("boolean", SwitchField)
+	.set("date", DateField)
+	.set("time", TimeField)
+	.set("autocomplete", AutoCompleteField);
 
 export default defaultFormWidgetOptionsBuilder;

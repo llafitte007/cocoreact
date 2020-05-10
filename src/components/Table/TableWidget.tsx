@@ -41,7 +41,7 @@ export default function TableWidget(
 		});
 	}
 
-	const Component = widgetOptions.getComponent(field.type);
+	const Component = widgetOptions.get(field.type);
 
 	return <Component {...field} data={fieldData} />;
 }

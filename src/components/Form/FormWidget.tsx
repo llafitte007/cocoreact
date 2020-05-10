@@ -56,7 +56,7 @@ export default function FormWidget(
 		});
 	}
 
-	const Component = widgetOptions.getComponent(field.type);
+	const Component = widgetOptions.get(field.type);
 
 	return (
 		<Component

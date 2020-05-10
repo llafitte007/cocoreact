@@ -1,40 +1,24 @@
 /* eslint-disable no-unused-vars */
-import ITypeWidget, { ITypeWidgetComponent } from "./ITypeWidget";
-import TypeWidgetOptions from "./TypeWidgetOptions";
+import TypeWidgetOptions, { ITypeWidgetComponent } from "./TypeWidgetOptions";
 
 export default class TypeWidgetOptionsBuilder {
-	private _widgets: ITypeWidget[];
+	private _typeComponents: Record<string, ITypeWidgetComponent>;
 
 	constructor() {
-		this._widgets = [];
+		this._typeComponents = {};
 	}
 
-	add(
-		typeWidget: string | ITypeWidget,
-		component?: ITypeWidgetComponent
-	): TypeWidgetOptionsBuilder {
-		if (typeof typeWidget === "string" && component !== undefined) {
-			this._add(<ITypeWidget>{
-				type: typeWidget,
-				component: component
-			});
-		} else if (typeof typeWidget !== "string") {
-			this._add(typeWidget);
-		}
+	set(type: string, component: ITypeWidgetComponent) {
+		this._typeComponents[type] = component;
 		return this;
 	}
 
-	private _add(widget: ITypeWidget) {
-		const sameType = this._widgets.find((x) => x.type === widget.type);
-		if (sameType !== undefined) {
-			throw Error(
-				`Another from widget exists with same type ${widget.type}}`
-			);
-		}
-		this._widgets.push(widget);
+	remove(type: string) {
+		delete this._typeComponents[type];
+		return this;
 	}
 
 	build() {
-		return new TypeWidgetOptions(this._widgets);
+		return new TypeWidgetOptions(this._typeComponents);
 	}
 }

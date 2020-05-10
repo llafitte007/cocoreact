@@ -12,6 +12,7 @@ export interface TextFieldProps extends IFormWidgetPropsBase<string> {
 }
 
 export default function TextField(props: TextFieldProps) {
+	// TODO test force all props respect TextFieldProps !!! > use a function/hook to re-use in all widget
 	return (
 		<MuiTextField
 			required={props.required}
