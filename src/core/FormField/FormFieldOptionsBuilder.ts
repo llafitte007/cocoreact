@@ -1,27 +1,39 @@
 /* eslint-disable no-unused-vars */
-import { FieldOptionsBuilder } from "../Field";
 import IFormField from "./IFormField";
-import FormFieldOptions from "./FormFieldOptions";
+import { IFieldSet, IField, IFieldOptionsBase } from "../IField";
 
-interface _IFormFieldOptions {
-	position?: number;
-	hidden?: boolean;
-}
-
-export default class FormFieldOptionsBuilder<
-	T,
-	TFormField extends IFormField<T> = IFormField<T>
-> extends FieldOptionsBuilder<TFormField & _IFormFieldOptions> {
+export default class FormFieldOptionsBuilder<TFormField extends IFormField> {
+	private _fieldset: IFieldSet<TFormField & IFieldOptionsBase>;
 	private _defaultAutoFocus: boolean;
+	private _defaultOptionsInitializer?: (options: TFormField) => TFormField;
 
 	constructor(
 		defaultAutoFocus: boolean = true,
-		defaultFieldBuilder?: (
-			data: TFormField & _IFormFieldOptions
-		) => TFormField & _IFormFieldOptions
+		defaultOptionsInitializer?: (options: TFormField) => TFormField
 	) {
-		super(defaultFieldBuilder);
+		this._fieldset = new IFieldSet<TFormField & IFieldOptionsBase>();
 		this._defaultAutoFocus = defaultAutoFocus;
+		this._defaultOptionsInitializer = defaultOptionsInitializer;
+	}
+
+	initialize(
+		fields: TFormField[] | Record<string, TFormField & IFieldOptionsBase>
+	) {
+		this._fieldset.initialize(fields);
+		return this;
+	}
+
+	set(
+		field: IField | string,
+		options: Partial<TFormField & IFieldOptionsBase>
+	) {
+		this._fieldset.set(field, options);
+		return this;
+	}
+
+	hidden(field: IField | string) {
+		this._fieldset.hidden(field);
+		return this;
 	}
 
 	setDefaultAutoFocusEnabled(enabled: boolean) {
@@ -30,15 +42,19 @@ export default class FormFieldOptionsBuilder<
 	}
 
 	build() {
-		const fields = this.buildFields();
-
+		let fields = this._fieldset.toList() as TFormField[];
+		if (this._defaultOptionsInitializer) {
+			const callback = this._defaultOptionsInitializer;
+			fields = fields.map((f) => {
+				return callback(f);
+			}) as TFormField[];
+		}
 		if (this._defaultAutoFocus) {
-			const autoFocusField = fields.find((x) => x.autoFocus === true);
-			if (autoFocusField === undefined) {
+			const idx = fields.findIndex((x) => x.autoFocus === true);
+			if (idx === -1) {
 				fields[0].autoFocus = true;
 			}
 		}
-
-		return new FormFieldOptions<T, TFormField>(fields);
+		return fields;
 	}
 }

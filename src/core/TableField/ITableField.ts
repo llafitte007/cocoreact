@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Padding, SvgIconProps } from "@material-ui/core";
-import { IField } from "../Field";
+import { IField } from "../IField";
 
 export type Align = "inherit" | "left" | "center" | "right" | "justify";
 

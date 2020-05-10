@@ -2,7 +2,7 @@
 import AxiosHttpClient from "./AxiosHttpClient";
 import { IRequest } from "./core/Request";
 
-interface ITodo {
+interface ITestTodo {
 	userId: number;
 	id: number;
 	title: string;
@@ -21,7 +21,7 @@ test("send request and retreive valid response (string)", async () => {
 	const response = await httpClient.sendRequest(request);
 	expect(typeof response).toBe("string");
 
-	const todo = JSON.parse(response) as ITodo;
+	const todo = JSON.parse(response) as ITestTodo;
 	expect(todo.id).toBe(1);
 });
 

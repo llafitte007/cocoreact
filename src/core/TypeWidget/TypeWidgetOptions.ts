@@ -5,7 +5,7 @@ export default class TypeWidgetOptions {
 
 	constructor(typeComponents: Record<string, ITypeWidgetComponent>) {
 		this._typeComponents = new Map<string, ITypeWidgetComponent>();
-		for (var k in typeComponents) {
+		for (const k in typeComponents) {
 			this._typeComponents.set(k, typeComponents[k]);
 		}
 	}

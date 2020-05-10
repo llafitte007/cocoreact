@@ -3,10 +3,12 @@ import { DateFieldProps } from "./components/TableWidgets/DateField";
 import { SwitchFieldProps } from "./components/TableWidgets/SwitchField";
 import { ButtonFieldProps } from "./components/TableWidgets/ButtonField";
 
+import { IFieldOptionsBase, IField } from "./core/IField";
 import { TableFieldOptionsBuilder, ITableField } from "./core/TableField";
 import ITableWidgetPropsBase from "./components/TableWidgets/ITableWidgetPropsBase";
+import { capitalize } from "./StringExtension";
 
-export interface ITableWidgetFieldOptions extends ITableField {
+export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {
 	scope?: ITableWidgetPropsBase["scope"];
 	style?: ITableWidgetPropsBase["style"];
 
@@ -20,15 +22,54 @@ export interface ITableWidgetFieldOptions extends ITableField {
 	color?: ButtonFieldProps["color"];
 }
 
+export function defaultTableFieldOptionsInitializer<T>(
+	field: ITableWidgetFieldOptions<T>
+) {
+	const label = field.label
+		? capitalize(field.label)
+		: capitalize(field.name);
+	let align = field.align;
+	if (align === undefined) {
+		align = field.type === "number" ? "right" : "left";
+	}
+	let padding = field.padding;
+	if (padding === undefined) {
+		padding = field.type === "button" ? "checkbox" : "default";
+	}
+	return {
+		...field,
+		label,
+		padding,
+		align
+	} as ITableWidgetFieldOptions<T>;
+}
+
 export default class DefaultTableFieldOptionsBuilder<
 	T
-> extends TableFieldOptionsBuilder<T, ITableWidgetFieldOptions> {}
+> extends TableFieldOptionsBuilder<ITableWidgetFieldOptions<T>> {
+	constructor() {
+		super(defaultTableFieldOptionsInitializer);
+	}
 
-// TODO : make own app instance with this default settings exemple:
-// label: field.name,
-// label: capitalize(this.label),
-// padding: "default"
-// align: "left" | type number > right;
-// padding?: "default" | button > "chechbox";
-// icon?: React.ReactElement<SvgIconProps>;
-// className?: string;
+	initialize(
+		fields:
+			| ITableWidgetFieldOptions<T>[]
+			| Record<string, ITableWidgetFieldOptions<T> & IFieldOptionsBase>
+	) {
+		super.initialize(fields);
+		return this;
+	}
+
+	set(
+		field: IField | string,
+		options: Partial<ITableWidgetFieldOptions<T> & IFieldOptionsBase>
+	) {
+		super.set(field, options);
+		return this;
+	}
+
+	hidden(field: IField | string) {
+		super.hidden(field);
+		return this;
+	}
+}

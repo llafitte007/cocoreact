@@ -5,12 +5,12 @@ import { DateFieldProps } from "./components/FormWidgets/DateField";
 import { TimeFieldProps } from "./components/FormWidgets/TimeField";
 import { AutoCompleteFieldProps } from "./components/FormWidgets/AutoCompleteField";
 
+import { IFieldOptionsBase, IField } from "./core/IField";
 import { FormFieldOptionsBuilder, IFormField } from "./core/FormField";
 import IFormWidgetPropsBase from "./components/FormWidgets/IFormWidgetPropsBase";
-import IField from "./core/Field/IField";
-import { slugify } from "./StringExtension";
+import { slugify, capitalize } from "./StringExtension";
 
-export interface IFormWidgetFieldOptions extends IFormField {
+export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 	fullWidth?: IFormWidgetPropsBase["fullWidth"];
 	color?: IFormWidgetPropsBase["color"];
 	margin?: IFormWidgetPropsBase["margin"];
@@ -29,34 +29,55 @@ export interface IFormWidgetFieldOptions extends IFormField {
 	startAdornment?: SelectFieldProps["startAdornment"];
 }
 
+export function defaultTableFieldOptionsInitializer<T>(
+	field: IFormWidgetFieldOptions<T>
+) {
+	const label = field.label
+		? capitalize(field.label)
+		: capitalize(field.name);
+	return {
+		...field,
+		label,
+		required: field.required ?? true,
+		margin: field.margin ?? "normal",
+		color: field.color ?? "secondary",
+		autoComplete: field.autoComplete ?? "off",
+		autoFocus: field.autoFocus ?? false,
+		disabled: field.disabled ?? false,
+		fullWidth: field.fullWidth ?? true,
+		noOptionsText: field.noOptionsText
+			? capitalize(field.noOptionsText)
+			: undefined
+	} as IFormWidgetFieldOptions<T>;
+}
+
 export default class DefaultFormFieldOptionsBuilder<
 	T
-> extends FormFieldOptionsBuilder<T, IFormWidgetFieldOptions> {
-	setDefaultAutoFocusEnabled(enabled: boolean) {
-		super.setDefaultAutoFocusEnabled(enabled);
-		return this;
-	}
-
-	initialize(formFields: IField[] | Record<string, IField>) {
-		super.initialize(formFields);
-		return this;
-	}
-
-	add(
-		field: IField | IFormWidgetFieldOptions,
-		options?: Partial<IFormWidgetFieldOptions>
+> extends FormFieldOptionsBuilder<IFormWidgetFieldOptions<T>> {
+	initialize(
+		fields:
+			| IFormWidgetFieldOptions<T>[]
+			| Record<string, IFormWidgetFieldOptions<T> & IFieldOptionsBase>
 	) {
-		super.add(field, options);
+		super.initialize(fields);
 		return this;
 	}
 
-	set(field: IField | string, options: Partial<IFormWidgetFieldOptions>) {
+	set(
+		field: IField | string,
+		options: Partial<IFormWidgetFieldOptions<T> & IFieldOptionsBase>
+	) {
 		super.set(field, options);
 		return this;
 	}
 
-	hidden(formField: IField | string) {
-		super.hidden(formField);
+	hidden(field: IField | string) {
+		super.hidden(field);
+		return this;
+	}
+
+	setDefaultAutoFocusEnabled(enabled: boolean) {
+		super.setDefaultAutoFocusEnabled(enabled);
 		return this;
 	}
 
@@ -85,17 +106,3 @@ export default class DefaultFormFieldOptionsBuilder<
 		return this;
 	}
 }
-
-// TODO : make own app instance with this default settings exemple:
-// position: 500,
-// hidden: false,
-// color: "secondary",
-// autoComplete: "off",
-// autoFocus: false,
-// disabled: false,
-// fullWidth: true,
-// margin: "normal",
-// required: true,
-// label: field.name,
-// label: capitalize(this.label),
-// noOptionsText: capitalize(this.noOptionsText)
