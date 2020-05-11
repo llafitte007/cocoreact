@@ -28,7 +28,8 @@ function buildDefaultOptions(field: IFormField<any>) {
 		: capitalize(field.name);
 	return {
 		...field,
-		label
+		label,
+		required: true
 	} as IFormField<any>;
 }
 
@@ -77,8 +78,11 @@ test("use defined default options", () => {
 	const fields = builder.build();
 	expect(fields.length).toBe(3);
 	expect(fields[0].label).toBe("Contenu");
+	expect(fields[0].required).toBe(true);
 	expect(fields[1].label).toBe("Count");
+	expect(fields[1].required).toBe(true);
 	expect(fields[2].label).toBe("Enabled");
+	expect(fields[2].required).toBe(true);
 });
 
 test("first field as autofocus if no other is", () => {
