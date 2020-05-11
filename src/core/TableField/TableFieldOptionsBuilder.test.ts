@@ -28,7 +28,8 @@ function buildDefaultOptions(field: ITableField<any>) {
 		: capitalize(field.name);
 	return {
 		...field,
-		label
+		label,
+		padding: "default"
 	} as ITableField<any>;
 }
 
@@ -76,6 +77,9 @@ test("use defined default options", () => {
 	const fields = builder.build();
 	expect(fields.length).toBe(3);
 	expect(fields[0].label).toBe("Contenu");
+	expect(fields[0].padding).toBe("default");
 	expect(fields[1].label).toBe("Count");
+	expect(fields[1].padding).toBe("default");
 	expect(fields[2].label).toBe("Enabled");
+	expect(fields[2].padding).toBe("default");
 });
