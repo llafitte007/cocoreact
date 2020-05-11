@@ -29,7 +29,7 @@ export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 	startAdornment?: SelectFieldProps["startAdornment"];
 }
 
-export function defaultTableFieldOptionsInitializer<T>(
+export function defaultFormFieldOptionsInitializer<T>(
 	field: IFormWidgetFieldOptions<T>
 ) {
 	const label = field.label
@@ -54,6 +54,10 @@ export function defaultTableFieldOptionsInitializer<T>(
 export default class DefaultFormFieldOptionsBuilder<
 	T
 > extends FormFieldOptionsBuilder<IFormWidgetFieldOptions<T>> {
+	constructor() {
+		super(true, defaultFormFieldOptionsInitializer);
+	}
+
 	initialize(
 		fields:
 			| IFormWidgetFieldOptions<T>[]
