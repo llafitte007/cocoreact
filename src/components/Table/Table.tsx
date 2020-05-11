@@ -19,7 +19,7 @@ import { ITableField } from "../../core/TableField";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
 import { StyledComponent } from "../Theme";
 import TableWidget from "./TableWidget";
-import TableHeader from "../TableWidgets/TableHeader";
+import HeaderField from "../TableWidgets/HeaderField";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -89,7 +89,7 @@ export default function Table<T>({
 		return (
 			<TableRow>
 				{fields.map((field: ITableField, idx) => {
-					return <TableHeader key={idx} {...field} />;
+					return <HeaderField key={idx} {...field} />;
 				})}
 			</TableRow>
 		);
