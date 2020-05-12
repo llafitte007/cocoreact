@@ -4,7 +4,7 @@ import { MuiPickersUtilsProvider, TimePicker } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import MomentUtils from "@date-io/moment";
 
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
 export interface TimeFieldProps extends IFormWidgetPropsBase<string> {
 	minutesStep?: number;

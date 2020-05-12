@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IFormField from "./IFormField";
+import { IFormField } from "./IFormField";
 import FormFieldOptionsBuilder from "./FormFieldOptionsBuilder";
 import { IField } from "../IField";
 import { capitalize } from "../../StringExtension";

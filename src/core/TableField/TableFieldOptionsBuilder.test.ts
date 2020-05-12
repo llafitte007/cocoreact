@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import ITableField from "./ITableField";
+import { ITableField } from "./ITableField";
 import TableFieldOptionsBuilder from "./TableFieldOptionsBuilder";
 import { IField } from "../IField";
 import { capitalize } from "../../StringExtension";

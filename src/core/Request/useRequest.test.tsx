@@ -4,7 +4,7 @@ import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import { IHttpClient } from "../HttpClient";
-import IRequest from "./IRequest";
+import { IRequest } from "./IRequest";
 import useRequest from "./useRequest";
 
 configure({ adapter: new Adapter() });

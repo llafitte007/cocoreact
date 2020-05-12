@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IMessage from "./IMessage";
+import { IMessage } from "./IMessage";
 import { sendRequest, IRequest } from "../Request";
 import { ISerializer } from "../Serializer";
 import { IHttpClient } from "../HttpClient";

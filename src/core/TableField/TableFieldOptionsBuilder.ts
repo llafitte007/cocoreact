@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import ITableField from "./ITableField";
+import { ITableField } from "./ITableField";
 import { IFieldSet, IField, IFieldOptionsBase } from "../IField";
 
 export default class TableFieldOptionsBuilder<TTableField extends ITableField> {

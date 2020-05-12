@@ -2,7 +2,7 @@
 import React from "react";
 import { IconButton, SvgIconProps } from "@material-ui/core";
 import MuiTextField from "@material-ui/core/TextField";
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 import { CloseIcon } from "../Theme";
 
 export interface TextFieldProps extends IFormWidgetPropsBase<string> {

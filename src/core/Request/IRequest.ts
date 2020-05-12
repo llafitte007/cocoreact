@@ -7,10 +7,9 @@ export type RequestMethod =
 	| "PUT"
 	| "PATCH"
 	| "LINK"
-	| "UNLINK"
-	| undefined;
+	| "UNLINK";
 
-export default interface IRequest {
+export interface IRequest {
 	path: string;
 	method: RequestMethod;
 	queryString?: string;

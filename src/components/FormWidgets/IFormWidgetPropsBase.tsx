@@ -3,7 +3,7 @@ import { PropTypes } from "@material-ui/core";
 import { IFormFieldBase } from "../../core/FormField";
 import { CSSProperties } from "@material-ui/styles";
 
-export default interface IFormWidgetPropsBase<T = any> extends IFormFieldBase {
+export interface IFormWidgetPropsBase<T = any> extends IFormFieldBase {
 	value: T;
 	error?: string;
 	onChange?: (name: string, data: T) => void;

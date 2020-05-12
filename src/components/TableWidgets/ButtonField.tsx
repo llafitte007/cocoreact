@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
-import ITableWidgetPropsBase from "./ITableWidgetPropsBase";
+import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import { TableCell, IconButton, PropTypes, Button } from "@material-ui/core";
 
 export interface ButtonFieldProps extends ITableWidgetPropsBase<any> {

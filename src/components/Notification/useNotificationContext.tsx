@@ -5,8 +5,6 @@ import NotificationContext, {
 	INotificationContext
 } from "./NotificationContext";
 
-const useNotificationContext = (): INotificationContext => {
+export default function useNotificationContext(): INotificationContext {
 	return useContext(NotificationContext);
-};
-
-export default useNotificationContext;
+}

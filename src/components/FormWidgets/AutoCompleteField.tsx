@@ -5,7 +5,7 @@ import Autocomplete, {
 } from "@material-ui/lab/Autocomplete";
 
 import { TextField, Theme, makeStyles, createStyles } from "@material-ui/core";
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

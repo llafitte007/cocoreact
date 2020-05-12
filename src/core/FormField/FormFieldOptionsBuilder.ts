@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IFormField from "./IFormField";
+import { IFormField } from "./IFormField";
 import { IFieldSet, IField, IFieldOptionsBase } from "../IField";
 
 export default class FormFieldOptionsBuilder<TFormField extends IFormField> {

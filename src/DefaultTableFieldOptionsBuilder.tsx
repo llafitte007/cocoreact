@@ -5,7 +5,7 @@ import { ButtonFieldProps } from "./components/TableWidgets/ButtonField";
 
 import { IFieldOptionsBase, IField } from "./core/IField";
 import { TableFieldOptionsBuilder, ITableField } from "./core/TableField";
-import ITableWidgetPropsBase from "./components/TableWidgets/ITableWidgetPropsBase";
+import { ITableWidgetPropsBase } from "./components/TableWidgets/ITableWidgetPropsBase";
 import { capitalize } from "./StringExtension";
 
 export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {

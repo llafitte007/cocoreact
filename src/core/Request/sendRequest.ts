@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IRequest from "./IRequest";
+import { IRequest } from "./IRequest";
 import { IHttpClient } from "../HttpClient";
 
 export default function sendRequest<TRequest extends IRequest>(

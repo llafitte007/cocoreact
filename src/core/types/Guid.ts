@@ -1,5 +1,4 @@
-type Guid = string;
-export type { Guid };
+export type Guid = string;
 
 const emptyGuid = "0000000-0000-0000-0000-000000000000";
 const guidRegexp = /[0-9a-f]{7}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;

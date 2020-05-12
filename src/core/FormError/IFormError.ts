@@ -1,4 +1,4 @@
-export default interface IFormError {
+export interface IFormError {
 	fieldName?: string;
 	message: string;
 }

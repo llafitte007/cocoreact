@@ -8,7 +8,7 @@ import {
 	FormHelperText
 } from "@material-ui/core";
 
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({

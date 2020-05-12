@@ -10,7 +10,7 @@ import {
 	MenuProps as defaultMenuProps
 } from "@material-ui/core";
 import Select, { SelectProps } from "@material-ui/core/Select";
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
 export interface SelectOption {
 	label: any;

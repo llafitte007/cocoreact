@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import MomentUtils from "@date-io/moment";
-import IFormWidgetPropsBase from "./IFormWidgetPropsBase";
+import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
 export interface DateFieldProps extends IFormWidgetPropsBase<Date> {
 	format?: string;
@@ -12,7 +12,7 @@ export interface DateFieldProps extends IFormWidgetPropsBase<Date> {
 	startAdornment?: React.ReactNode;
 }
 
-function DateField(props: DateFieldProps) {
+export default function DateField(props: DateFieldProps) {
 	const handleChange = useCallback(
 		(d: MaterialUiPickersDate) => {
 			if (d !== null && props.onChange) {
@@ -59,5 +59,3 @@ function DateField(props: DateFieldProps) {
 		</MuiPickersUtilsProvider>
 	);
 }
-
-export default DateField;

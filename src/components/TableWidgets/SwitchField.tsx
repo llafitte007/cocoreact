@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
 import { TableCell } from "@material-ui/core";
-import ITableWidgetPropsBase from "./ITableWidgetPropsBase";
+import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import { ToggleOnIcon, ToggleOffIcon } from "../Theme";
 
 export interface SwitchFieldProps extends ITableWidgetPropsBase<boolean> {

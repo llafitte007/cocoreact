@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useMemo } from "react";
-import IMessage from "./IMessage";
+import { IMessage } from "./IMessage";
 import { useRequest, IRequest } from "../Request";
 import { ISerializer } from "../Serializer";
 import { IHttpClient } from "../HttpClient";

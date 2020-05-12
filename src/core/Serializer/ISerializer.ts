@@ -2,7 +2,7 @@
 import { IMessage } from "../Message";
 import { IRequest } from "../Request";
 
-export default interface ISerializer {
+export interface ISerializer {
 	serializeMessage<TMessage extends IMessage>(message: TMessage): IRequest;
 	deserialize<TResponse>(response: any): TResponse;
 }

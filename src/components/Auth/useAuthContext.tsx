@@ -3,8 +3,8 @@ import { useContext } from "react";
 
 import AuthContext, { IAuthContext } from "./AuthContext";
 
-const useAuthContext = (): IAuthContext => {
+export default function useAuthContext<TPayload = any>(): IAuthContext<
+	TPayload
+> {
 	return useContext(AuthContext);
-};
-
-export default useAuthContext;
+}

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
-import ITableWidgetPropsBase from "./ITableWidgetPropsBase";
+import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import { TableCell } from "@material-ui/core";
 
 export interface DateFieldProps extends ITableWidgetPropsBase<Date> {

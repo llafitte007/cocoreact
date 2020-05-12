@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useCallback, useRef, useEffect } from "react";
 
-import IRequest from "./IRequest";
+import { IRequest } from "./IRequest";
 import { IHttpClient } from "../HttpClient";
 
 export default function useRequest<TRequest extends IRequest>(
