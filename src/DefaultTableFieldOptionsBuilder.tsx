@@ -16,18 +16,19 @@ export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {
 	labelOff?: SwitchFieldProps["labelOff"];
 	format?: DateFieldProps["format"];
 	formatter?: DateFieldProps["formatter"];
-	title?: ButtonFieldProps["title"];
-	href?: ButtonFieldProps["href"];
-	onClick?: ButtonFieldProps["onClick"];
-	color?: ButtonFieldProps["color"];
+	title?: ButtonFieldProps<T>["title"];
+	href?: ButtonFieldProps<T>["href"];
+	onClick?: ButtonFieldProps<T>["onClick"];
+	color?: ButtonFieldProps<T>["color"];
 }
 
 export function defaultTableFieldOptionsInitializer<T>(
 	field: ITableWidgetFieldOptions<T>
 ) {
-	const label = field.label
-		? capitalize(field.label)
-		: capitalize(field.name);
+	let label = field.label;
+	if (label !== "") {
+		label = label ? capitalize(label) : capitalize(field.name);
+	}
 	let align = field.align;
 	if (align === undefined) {
 		align = field.type === "number" ? "right" : "left";

@@ -2,7 +2,7 @@
 import { IHttpClient } from "./core/HttpClient";
 import { IRequest } from "./core/Request";
 
-export interface IJwtService {
+export interface IRefreshJwtService {
 	responseErrorCode: number;
 	getToken(): string;
 	setToken(token: string): void;
@@ -12,9 +12,9 @@ export interface IJwtService {
 
 export default class JwtHttpClientDecorator implements IHttpClient {
 	_decorator: IHttpClient;
-	_jwtService: IJwtService;
+	_jwtService: IRefreshJwtService;
 
-	constructor(decorator: IHttpClient, jwtService: IJwtService) {
+	constructor(decorator: IHttpClient, jwtService: IRefreshJwtService) {
 		this._decorator = decorator;
 		this._jwtService = jwtService;
 	}

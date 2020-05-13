@@ -32,9 +32,10 @@ export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 export function defaultFormFieldOptionsInitializer<T>(
 	field: IFormWidgetFieldOptions<T>
 ) {
-	const label = field.label
-		? capitalize(field.label)
-		: capitalize(field.name);
+	let label = field.label;
+	if (label !== "") {
+		label = label ? capitalize(label) : capitalize(field.name);
+	}
 	return {
 		...field,
 		label,
