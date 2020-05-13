@@ -65,7 +65,7 @@ export interface FormProps<TInput, TResponse = any>
 	initial: TInput;
 	fields: IFormField<TInput>[];
 	buildMessage: (model: TInput) => IMessage;
-	sendMessage: (message: IMessage) => TResponse;
+	sendMessage: (message: IMessage) => Promise<TResponse>;
 	onSuccess?: (response: TResponse) => void;
 	onError?: (error: any) => void;
 	submit?: FormSubmitProps;
