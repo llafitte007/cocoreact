@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo, useCallback, Fragment, useRef } from "react";
 
-import Table, { TableProps } from "./Table";
+import { Table, TableProps } from "../Table";
 import { IMessage, useMessage } from "../../core/Message";
 import { ISerializer } from "../../core/Serializer";
 import { IHttpClient } from "../../core/HttpClient";
