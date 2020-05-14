@@ -58,16 +58,13 @@ export interface TableStyles {
 	tableHead: any;
 }
 
-export interface TableConfiguration {
-	widgetOptions: TypeWidgetOptions;
-}
-
 export interface TableProps<T> extends StyledComponent<TableStyles> {
 	data: T[];
 	fields: ITableField<T>[];
 	noDataLabel: string;
 	loading?: boolean;
 	padding?: Padding;
+	widgetOptions: TypeWidgetOptions;
 }
 
 export default function Table<T>({
@@ -82,7 +79,7 @@ export default function Table<T>({
 	className,
 	classes,
 	style
-}: TableProps<T> & TableConfiguration) {
+}: TableProps<T>) {
 	const styles = useStyles() as TableStyles;
 
 	const renderHeaderRow = useCallback(() => {

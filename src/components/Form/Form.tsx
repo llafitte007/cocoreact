@@ -45,11 +45,6 @@ export interface FormStyles {
 	submit: any;
 }
 
-export interface FormConfiguration {
-	widgetOptions: TypeWidgetOptions;
-	errorService: IFormErrorService;
-}
-
 export interface FormSubmitProps {
 	hidden?: boolean;
 	label?: string;
@@ -66,6 +61,8 @@ export interface FormProps<TInput, TResponse = any>
 	fields: IFormField<TInput>[];
 	buildMessage: (model: TInput) => IMessage;
 	sendMessage: (message: IMessage) => Promise<TResponse>;
+	widgetOptions: TypeWidgetOptions;
+	errorService: IFormErrorService;
 	onSuccess?: (response: TResponse) => void;
 	onError?: (error: any) => void;
 	submit?: FormSubmitProps;
@@ -76,17 +73,16 @@ export default function Form<TInput, TResponse = any>({
 	fields,
 	buildMessage,
 	sendMessage,
+	widgetOptions,
+	errorService,
 	onSuccess,
 	onError,
 	submit,
 
-	widgetOptions,
-	errorService,
-
 	className,
 	classes,
 	style
-}: FormProps<TInput, TResponse> & FormConfiguration) {
+}: FormProps<TInput, TResponse>) {
 	const styles = useStyles() as FormStyles;
 
 	const [loading, setLoading] = useState(false);

@@ -29,20 +29,15 @@ function useFormFieldError(
 	}, [name, errors]);
 }
 
-export interface FormWidgetConfiguration {
-	widgetOptions: TypeWidgetOptions;
-}
-
 export interface FormWidgetProps {
 	field: IFormField;
 	data: any;
 	errors: IFormError[];
 	onChange: (fieldName: string, value: any) => void;
+	widgetOptions: TypeWidgetOptions;
 }
 
-export default function FormWidget(
-	props: FormWidgetProps & FormWidgetConfiguration
-) {
+export default function FormWidget(props: FormWidgetProps) {
 	const { field, onChange, widgetOptions } = props;
 
 	const fieldData = useFormFieldValue(field.name, props.data);

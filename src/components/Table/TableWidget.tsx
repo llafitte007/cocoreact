@@ -18,18 +18,13 @@ function useTableFieldValue<T>(fieldName: string, data: any): T {
 	}, [fieldName, data]);
 }
 
-export interface TableWidgetConfiguration {
-	widgetOptions: TypeWidgetOptions;
-}
-
 export interface TableWidgetProps {
 	field: ITableField;
 	data: any;
+	widgetOptions: TypeWidgetOptions;
 }
 
-export default function TableWidget(
-	props: TableWidgetProps & TableWidgetConfiguration
-) {
+export default function TableWidget(props: TableWidgetProps) {
 	const { field, widgetOptions } = props;
 
 	const fieldData = useTableFieldValue(field.name, props.data);
