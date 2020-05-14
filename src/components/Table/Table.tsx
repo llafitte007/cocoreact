@@ -1,159 +1,53 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback } from "react";
-import clsx from "clsx";
-import {
-	Theme,
-	makeStyles,
-	createStyles,
-	Padding,
-	darken,
-	CircularProgress,
-	Table as MuiTable,
-	TableHead,
-	TableBody,
-	TableRow,
-	TableCell
-} from "@material-ui/core";
+import React from "react";
+import { Padding, Table as MuiTable } from "@material-ui/core";
 
-import { ITableField } from "../../core/TableField";
-import { TypeWidgetOptions } from "../../core/TypeWidget";
-import { StyledComponent } from "../Theme";
-import TableWidget from "./TableWidget";
-import HeaderField from "../TableWidgets/HeaderField";
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		container: {
-			position: "relative"
-		},
-		table: {
-			"& tbody tr:nth-of-type(even)": {
-				backgroundColor: theme.palette.background.default
-			}
-		},
-		loadingContainer: {
-			position: "absolute",
-			width: "100%",
-			height: "100%",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			backgroundColor: theme.palette.background.paper,
-			opacity: 0.8,
-			zIndex: theme.zIndex.appBar - 1
-		},
-		tableHead: {
-			backgroundColor: darken(theme.palette.background.default, 0.2),
-			color: theme.palette.getContrastText(
-				darken(theme.palette.background.default, 0.2)
-			)
-		}
-	} as TableStyles)
-);
+import TableHead from "./TableHead";
+import TableBody, { TableBodyProps } from "./TableBody";
+import TableBodyEmpty, { TableBodyEmptyProps } from "./TableBodyEmpty";
+import { ClassesStyledComponent } from "../Theme";
 
 export interface TableStyles {
-	container: any;
 	table: any;
-	loadingContainer: any;
 	tableHead: any;
+	tableBody: any;
 }
 
-export interface TableProps<T> extends StyledComponent<TableStyles> {
-	data: T[];
-	fields: ITableField<T>[];
-	noDataLabel: string;
-	loading?: boolean;
+export interface TableProps<T> extends ClassesStyledComponent<TableStyles> {
 	padding?: Padding;
-	widgetOptions: TypeWidgetOptions;
+	className?: string;
+	data: TableBodyProps<T>["data"];
+	fields: TableBodyProps<T>["fields"];
+	noDataLabel: TableBodyEmptyProps["noDataLabel"];
+	widgetOptions: TableBodyProps<T>["widgetOptions"];
 }
 
 export default function Table<T>({
+	padding,
 	data,
 	fields,
-	loading,
-	padding,
 	noDataLabel,
-
 	widgetOptions,
-
 	className,
-	classes,
-	style
+	classes
 }: TableProps<T>) {
-	const styles = useStyles() as TableStyles;
-
-	const renderHeaderRow = useCallback(() => {
-		return (
-			<TableRow>
-				{fields.map((field: ITableField, idx) => {
-					return <HeaderField key={idx} {...field} />;
-				})}
-			</TableRow>
-		);
-	}, [fields]);
-
-	const renderDataRow = useCallback(
-		(data: any, key: number) => {
-			return (
-				<TableRow key={key}>
-					{fields.map((field: ITableField, idx) => {
-						return (
-							<TableWidget
-								key={key * fields.length + idx}
-								field={field}
-								data={data}
-								widgetOptions={widgetOptions}
-							/>
-						);
-					})}
-				</TableRow>
-			);
-		},
-		[fields]
-	);
-
-	const renderEmptyRow = useCallback(() => {
-		return (
-			<TableRow>
-				<TableCell colSpan={fields.length} scope="row">
-					{noDataLabel}
-				</TableCell>
-			</TableRow>
-		);
-	}, [fields, noDataLabel]);
-
 	return (
-		<div
-			className={clsx(styles.container, classes?.container, className)}
-			style={style}
-		>
-			{loading ? (
-				<div
-					className={clsx(
-						styles.loadingContainer,
-						classes?.loadingContainer
-					)}
-				>
-					<CircularProgress size={28} />
-				</div>
-			) : null}
+		<MuiTable padding={padding ?? "default"} className={className}>
+			<TableHead fields={fields} className={classes?.tableHead} />
 
-			<MuiTable
-				className={clsx(styles.table, classes?.table)}
-				padding={padding ?? "default"}
-			>
-				<TableHead
-					className={clsx(styles.tableHead, classes?.tableHead)}
-				>
-					{renderHeaderRow()}
-				</TableHead>
-
-				<TableBody>
-					{data.length === 0
-						? renderEmptyRow()
-						: data.map((d, idx) => renderDataRow(d, idx))}
-				</TableBody>
-			</MuiTable>
-		</div>
+			{data.length > 0 ? (
+				<TableBody<T>
+					data={data}
+					fields={fields}
+					widgetOptions={widgetOptions}
+					className={classes?.tableBody}
+				/>
+			) : (
+				<TableBodyEmpty
+					noDataLabel={noDataLabel}
+					nbField={fields.length}
+				/>
+			)}
+		</MuiTable>
 	);
 }

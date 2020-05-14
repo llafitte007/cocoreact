@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { TableCell, makeStyles, createStyles, Theme } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { ITableFieldBase } from "../../core/TableField";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,20 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface HeaderFieldProps extends ITableFieldBase {}
 
-export default function HeaderField({
-	align,
-	padding,
-	icon,
-	label
-}: HeaderFieldProps) {
+export default function HeaderField({ icon, label }: HeaderFieldProps) {
 	const styles = useStyles();
 
 	return (
-		<TableCell align={align} padding={padding} scope="col">
-			<span className={styles.cell}>
-				{icon && <span className={styles.icon}>{icon}</span>}
-				<span className={styles.title}>{label || null}</span>
-			</span>
-		</TableCell>
+		<span className={styles.cell}>
+			{icon && <span className={styles.icon}>{icon}</span>}
+			<span className={styles.title}>{label || null}</span>
+		</span>
 	);
 }

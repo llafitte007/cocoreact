@@ -1,27 +1,28 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
-import { TableCell, IconButton, PropTypes, Button } from "@material-ui/core";
+import {
+	TableCell,
+	IconButton,
+	PropTypes,
+	Button,
+	ButtonTypeMap
+} from "@material-ui/core";
 
 export interface ButtonFieldProps<T = any> extends ITableWidgetPropsBase<T> {
 	title?: string;
 	href?: string | ((data: T) => string);
 	onClick?: (data: T) => void;
 	color?: PropTypes.Color;
+	variant?: ButtonTypeMap["props"]["variant"];
 }
 
 export default function ButtonField({
-	align,
-	padding,
-	scope,
 	icon,
 	label,
 	value,
-
-	title,
 	href,
-	onClick,
-	color
+	...props
 }: ButtonFieldProps) {
 	const _href = useMemo(() => {
 		if (href !== undefined) {
@@ -30,24 +31,16 @@ export default function ButtonField({
 		return undefined;
 	}, [href, value]);
 
-	const btnProps = useMemo(() => {
-		return {
-			title,
-			href: _href,
-			onClick,
-			color: color ?? "default"
-		} as any;
-	}, [title, _href, value, onClick, color]);
-
+	if (label === undefined || label === "") {
+		return (
+			<IconButton {...(props as any)} href={_href}>
+				{icon}
+			</IconButton>
+		);
+	}
 	return (
-		<TableCell align={align} padding={padding ?? "checkbox"} scope={scope}>
-			{label === undefined || label === "" ? (
-				<IconButton {...btnProps}>{icon}</IconButton>
-			) : (
-				<Button {...btnProps} startIcon={icon}>
-					{label}
-				</Button>
-			)}
-		</TableCell>
+		<Button {...(props as any)} href={_href} startIcon={icon}>
+			{label}
+		</Button>
 	);
 }

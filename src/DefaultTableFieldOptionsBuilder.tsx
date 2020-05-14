@@ -20,6 +20,7 @@ export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {
 	href?: ButtonFieldProps<T>["href"];
 	onClick?: ButtonFieldProps<T>["onClick"];
 	color?: ButtonFieldProps<T>["color"];
+	variant?: ButtonFieldProps<T>["variant"];
 }
 
 export function defaultTableFieldOptionsInitializer<T>(
@@ -37,11 +38,19 @@ export function defaultTableFieldOptionsInitializer<T>(
 	if (padding === undefined) {
 		padding = field.type === "button" ? "checkbox" : "default";
 	}
+	let color = field.color;
+	let variant = field.variant;
+	if (field.type === "button") {
+		color = color ?? "default";
+		variant = variant ?? "contained";
+	}
 	return {
 		...field,
 		label,
 		padding,
-		align
+		align,
+		color,
+		variant
 	} as ITableWidgetFieldOptions<T>;
 }
 
