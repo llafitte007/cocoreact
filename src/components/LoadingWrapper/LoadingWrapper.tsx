@@ -39,13 +39,13 @@ export interface LoadingWrapperStyles {
 export interface LoadingWrapperProps
 	extends ClassesStyledComponent<LoadingWrapperStyles> {
 	loading: boolean;
-	size?: number;
+	loaderSize?: number;
 	children: React.ReactNode | React.ReactNode[];
 }
 
 export default function LoadingWrapper({
 	loading,
-	size,
+	loaderSize,
 	children,
 	classes
 }: LoadingWrapperProps) {
@@ -55,7 +55,7 @@ export default function LoadingWrapper({
 		<div className={clsx(styles.container, classes?.container)}>
 			{loading ? (
 				<div className={clsx(styles.loader, classes?.loader)}>
-					<CircularProgress size={size ?? 28} />
+					<CircularProgress size={loaderSize ?? 28} />
 				</div>
 			) : null}
 			{children}

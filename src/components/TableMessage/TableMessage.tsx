@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo, useCallback, Fragment, useRef } from "react";
+import React, { useMemo, useCallback, useRef } from "react";
 
 import { Table, TableProps } from "../Table";
-import { IMessage, useMessage } from "../../core/Message";
-import { ISerializer } from "../../core/Serializer";
-import { IHttpClient } from "../../core/HttpClient";
+import { LoadingWrapper, LoadingWrapperProps } from "../LoadingWrapper";
+import { IMessage, useMessage, ISerializer, IHttpClient } from "../../core";
 
 export interface TableMessageProps<T> {
 	fields: TableProps<T>["fields"];
-	noDataLabel: TableProps<T>["noDataLabel"];
-	loading?: TableProps<T>["loading"];
-	padding?: TableProps<T>["padding"];
-	className?: TableProps<T>["className"];
-	classes?: TableProps<T>["classes"];
-	style?: TableProps<T>["style"];
 	widgetOptions: TableProps<T>["widgetOptions"];
+	noDataLabel: TableProps<T>["noDataLabel"];
+	padding?: TableProps<T>["padding"];
+	classes?: {
+		table?: TableProps<T>["classes"];
+		loader?: LoadingWrapperProps["classes"];
+	};
+	loaderSize?: LoadingWrapperProps["loaderSize"];
 
 	buildMessage: () => IMessage;
 	serializer: ISerializer;
@@ -40,6 +40,8 @@ export default function TableMessage<T>({
 	updateRef,
 	fetchDataLabel,
 	noDataLabel,
+	loaderSize,
+	classes,
 	...props
 }: TableMessageProps<T>) {
 	const message = useMemo(() => buildMessage(), [buildMessage]);
@@ -54,18 +56,22 @@ export default function TableMessage<T>({
 	const updateHandle = useCallback(updateData, [updateData]);
 
 	return (
-		<Fragment>
+		<LoadingWrapper
+			loading={loading}
+			loaderSize={loaderSize}
+			classes={classes?.loader}
+		>
 			<Table
 				data={error ? [] : data}
-				loading={loading}
 				{...props}
 				noDataLabel={error ? fetchDataLabel : noDataLabel}
+				classes={classes?.table}
 			/>
 			<button
 				onClick={updateHandle}
 				style={{ display: "none" }}
 				ref={updateRef}
 			/>
-		</Fragment>
+		</LoadingWrapper>
 	);
 }
