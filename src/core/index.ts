@@ -3,6 +3,7 @@ export * from "./FormField";
 export * from "./HttpClient";
 export * from "./IField";
 export * from "./Message";
+export * from "./OData";
 export * from "./Request";
 export * from "./Serializer";
 export * from "./TableField";
