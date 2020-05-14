@@ -7,38 +7,26 @@ export type ODataFilterOperator =
 	| "gt"
 	| "ge";
 
-export class ODataFilterItem {
+export interface IODataFilterItem {
 	name: string;
 	operator: ODataFilterOperator;
 	value: any;
-
-	constructor(
-		name: string,
-		operator: ODataFilterOperator,
-		value: any = undefined
-	) {
-		this.name = name;
-		this.operator = operator;
-		this.value = value;
-	}
 }
 
 export default class ODataFilter {
-	filters: Map<string, ODataFilterItem>;
+	filters: Record<string, IODataFilterItem>;
 
 	constructor() {
-		this.filters = new Map<string, ODataFilterItem>();
+		this.filters = {};
 	}
 
 	public set(name: string, operator: ODataFilterOperator, value: any) {
-		const filter = new ODataFilterItem(name, operator, value);
-		this.filters.set(name, filter);
+		this.filters[name] = { name, operator, value } as IODataFilterItem;
 	}
 
 	public setValue(name: string, value: any) {
-		const filter = this.filters.get(name);
-		if (filter) {
-			filter.value = value;
+		if (this.filters[name] !== undefined) {
+			this.filters[name].value = value;
 		} else {
 			console.error(`undefined filter named "${name}"`);
 		}
@@ -46,12 +34,27 @@ export default class ODataFilter {
 	}
 
 	public setOperator(name: string, operator: ODataFilterOperator) {
-		const filter = this.filters.get(name);
-		if (filter) {
-			filter.operator = operator;
+		if (this.filters[name] !== undefined) {
+			this.filters[name].operator = operator;
 		} else {
 			console.error(`undefined filter named "${name}"`);
 		}
 		return this;
+	}
+
+	public getValues() {
+		const values = {} as Record<string, any>;
+		for (const k in this.filters) {
+			values[k] = this.filters[k].value;
+		}
+		return values;
+	}
+
+	public getOperators() {
+		const operators = {} as Record<string, ODataFilterOperator>;
+		for (const k in this.filters) {
+			operators[k] = this.filters[k].operator;
+		}
+		return operators;
 	}
 }

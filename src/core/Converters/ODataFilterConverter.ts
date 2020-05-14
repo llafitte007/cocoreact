@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { IConverter } from "./IConverter";
-import { ODataFilter, ODataFilterItem } from "../OData";
+import { ODataFilter, IODataFilterItem } from "../OData";
 import DateConverter from "./DateConverter";
 import { capitalize } from "../../StringExtension";
 
@@ -23,7 +23,7 @@ export default class ODataSelectConverter implements IConverter {
 		return data instanceof ODataFilter;
 	}
 
-	convertItem(item: ODataFilterItem): string | undefined {
+	convertItem(item: IODataFilterItem): string | undefined {
 		if (!item.operator || !item.value === undefined) {
 			return undefined;
 		}
@@ -49,12 +49,13 @@ export default class ODataSelectConverter implements IConverter {
 
 	write(data: ODataFilter) {
 		const parts = [] as string[];
-		data.filters.forEach((filter) => {
+		for (const k in data.filters) {
+			const filter = data.filters[k];
 			const filterStr = this.convertItem(filter);
 			if (filterStr) {
 				parts.push(filterStr);
 			}
-		});
+		}
 		return parts.length > 0 ? parts.join(" and ") : "";
 	}
 }
