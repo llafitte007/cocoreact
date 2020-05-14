@@ -1,11 +1,38 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Padding, Table as MuiTable } from "@material-ui/core";
+import clsx from "clsx";
+import {
+	Padding,
+	Table as MuiTable,
+	TableHead as MuiTableHead,
+	TableBody as MuiTableBody,
+	makeStyles,
+	createStyles,
+	Theme,
+	darken
+} from "@material-ui/core";
 
-import TableHead from "./TableHead";
-import TableBody, { TableBodyProps } from "./TableBody";
-import TableBodyEmpty, { TableBodyEmptyProps } from "./TableBodyEmpty";
-import { ClassesStyledComponent } from "../Theme";
+import TableRowFields, { TableRowFieldsProps } from "./TableRowFields";
+import TableRowData, { TableRowDataProps } from "./TableRowData";
+import TableRowEmpty, { TableRowEmptyProps } from "./TableRowEmpty";
+import { StyledComponent } from "../Theme";
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		table: {},
+		tableHead: {
+			backgroundColor: darken(theme.palette.background.default, 0.2),
+			color: theme.palette.getContrastText(
+				darken(theme.palette.background.default, 0.2)
+			)
+		},
+		tableBody: {
+			"& tr:nth-of-type(even)": {
+				backgroundColor: theme.palette.background.default
+			}
+		}
+	} as TableStyles)
+);
 
 export interface TableStyles {
 	table: any;
@@ -13,13 +40,13 @@ export interface TableStyles {
 	tableBody: any;
 }
 
-export interface TableProps<T> extends ClassesStyledComponent<TableStyles> {
+export interface TableProps<T> extends StyledComponent<TableStyles> {
 	padding?: Padding;
 	className?: string;
-	data: TableBodyProps<T>["data"];
-	fields: TableBodyProps<T>["fields"];
-	noDataLabel: TableBodyEmptyProps["noDataLabel"];
-	widgetOptions: TableBodyProps<T>["widgetOptions"];
+	data: T[];
+	fields: TableRowFieldsProps<T>["fields"];
+	noDataLabel: TableRowEmptyProps["noDataLabel"];
+	widgetOptions: TableRowDataProps<T>["widgetOptions"];
 }
 
 export default function Table<T>({
@@ -29,25 +56,43 @@ export default function Table<T>({
 	noDataLabel,
 	widgetOptions,
 	className,
-	classes
+	classes,
+	style
 }: TableProps<T>) {
-	return (
-		<MuiTable padding={padding ?? "default"} className={className}>
-			<TableHead fields={fields} className={classes?.tableHead} />
+	const styles = useStyles() as TableStyles;
 
-			{data.length > 0 ? (
-				<TableBody<T>
-					data={data}
-					fields={fields}
-					widgetOptions={widgetOptions}
-					className={classes?.tableBody}
-				/>
-			) : (
-				<TableBodyEmpty
-					noDataLabel={noDataLabel}
-					nbField={fields.length}
-				/>
-			)}
+	return (
+		<MuiTable
+			padding={padding ?? "default"}
+			className={className}
+			style={style}
+		>
+			<MuiTableHead
+				className={clsx(styles.tableHead, classes?.tableHead)}
+			>
+				<TableRowFields fields={fields} />
+			</MuiTableHead>
+
+			<MuiTableBody
+				className={clsx(styles.tableBody, classes?.tableBody)}
+			>
+				{data.length === 0 && (
+					<TableRowEmpty
+						noDataLabel={noDataLabel}
+						colSpan={fields.length}
+					/>
+				)}
+
+				{data.length > 0 &&
+					data.map((dataRow, idx) => (
+						<TableRowData<T>
+							key={idx}
+							data={dataRow}
+							fields={fields}
+							widgetOptions={widgetOptions}
+						/>
+					))}
+			</MuiTableBody>
 		</MuiTable>
 	);
 }

@@ -5,19 +5,19 @@ import {
 	TableCell
 } from "@material-ui/core";
 
-export interface TableBodyEmptyProps {
-	nbField: number;
+export interface TableRowEmptyProps {
+	colSpan: number;
 	noDataLabel: string;
 }
 
-export default function TableBodyEmpty({
-	nbField,
+export default function TableRowEmpty({
+	colSpan,
 	noDataLabel
-}: TableBodyEmptyProps) {
+}: TableRowEmptyProps) {
 	return (
 		<MuiTableBody>
 			<TableRow>
-				<TableCell colSpan={nbField} scope="row">
+				<TableCell colSpan={colSpan} scope="row">
 					{noDataLabel}
 				</TableCell>
 			</TableRow>
