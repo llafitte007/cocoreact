@@ -14,6 +14,7 @@ import {
 	darken
 } from "@material-ui/core";
 import TableRowFields, { TableRowFieldsProps } from "./TableRowFields";
+import TableRowFilters, { TableRowFiltersProps } from "./TableRowFilters";
 import TableRowPagination, {
 	TableRowPaginationProps
 } from "./TableRowPagination";
@@ -29,7 +30,8 @@ import {
 	ISerializer,
 	IHttpClient,
 	IODataMessage,
-	IODataResponse
+	IODataResponse,
+	ODataFilterOperator
 } from "../../core";
 import { ClassesStyledComponent } from "../Theme";
 
@@ -64,10 +66,11 @@ export interface TableODataProps<T>
 	extends ClassesStyledComponent<TableODataStyles> {
 	padding?: Padding;
 	errorDataLabel: string;
+	loaderSize?: LoadingWrapperProps["loaderSize"];
 	fields: TableRowFieldsProps<T>["fields"];
+	filterWdigetOptions: TableRowFiltersProps<T>["widgetOptions"];
 	bodyWidgetOptions: TableRowDataProps<T>["widgetOptions"];
 	noDataLabel: TableRowEmptyProps["noDataLabel"];
-	loaderSize?: LoadingWrapperProps["loaderSize"];
 	rowsPerPageOptions: TableRowPaginationProps["rowsPerPageOptions"];
 	rowsPerPageLabel: TableRowPaginationProps["rowsPerPageLabel"];
 	displayedRowLabel: TableRowPaginationProps["displayedRowLabel"];
@@ -93,6 +96,7 @@ export default function TableOData<T>({
 	padding,
 	errorDataLabel,
 	fields,
+	filterWdigetOptions,
 	bodyWidgetOptions,
 	noDataLabel,
 	loaderSize,
@@ -121,7 +125,18 @@ export default function TableOData<T>({
 	);
 
 	const sortHandle = useCallback(
-		(fieldname: string) => message.orderBy.set(fieldname),
+		(fieldname: string) => {
+			message.orderBy.set(fieldname);
+			updateData();
+		},
+		[message, updateData]
+	);
+
+	const filterHandle = useCallback(
+		(name: string, operator: ODataFilterOperator, value: any) => {
+			message.filter.set(name, operator, value);
+			updateData();
+		},
 		[message, updateData]
 	);
 
@@ -153,6 +168,13 @@ export default function TableOData<T>({
 						sortName={message.orderBy.member}
 						sortDirection={message.orderBy.direction}
 						onChange={sortHandle}
+					/>
+					<TableRowFilters
+						fields={fields}
+						filtersValue={message.filter.getValues()}
+						filtersOperator={message.filter.getOperators()}
+						widgetOptions={filterWdigetOptions}
+						onChange={filterHandle}
 					/>
 				</MuiTableHead>
 
