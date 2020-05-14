@@ -1,25 +1,12 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import JsonSerializer from "./JsonSerializer";
 import { createEmptyGuid } from "./core";
-import {
-	GuidConverter,
-	DateConverter,
-	ODataFilterConverter,
-	ODataSelectConverter,
-	ODataOrderByConverter
-} from "./core/Converters";
 import { ODataOrderBy, ODataSelect, ODataFilter } from "./core/OData";
 import { IMessage } from "./core/Message";
 import { RequestMethod } from "./core/Request";
+import defaultJsonSerializer from "./defaultJsonSerializer";
 
-const serializer = new JsonSerializer([
-	new GuidConverter(),
-	new DateConverter(),
-	new ODataFilterConverter(),
-	new ODataSelectConverter(),
-	new ODataOrderByConverter()
-]);
+const serializer = defaultJsonSerializer;
 
 test("serialize single value", () => {
 	expect(serializer.serialize(undefined)).toBe(undefined);
