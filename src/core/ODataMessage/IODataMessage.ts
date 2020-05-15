@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { IMessage } from "../Message";
-import ODataOrderBy from "./ODataOrderBy";
-import ODataSelect from "./ODataSelect";
-import ODataFilter from "./ODataFilter";
+import { ODataOrderBy, ODataFilter, ODataSelect } from "../OData";
 
 export interface IODataMessage extends IMessage {
 	top: number;
