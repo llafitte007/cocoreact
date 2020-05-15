@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useCallback } from "react";
+import React, { Fragment, useState, useCallback } from "react";
 
 import {
 	IconButton,
@@ -81,7 +81,7 @@ export default function HeaderFilterOperator({
 	const menuCloseHandle = useCallback(() => setAnchorEl(null), []);
 
 	return (
-		<>
+		<Fragment>
 			<IconButton
 				size="small"
 				aria-controls="filter-operator"
@@ -122,6 +122,6 @@ export default function HeaderFilterOperator({
 					);
 				})}
 			</Menu>
-		</>
+		</Fragment>
 	);
 }

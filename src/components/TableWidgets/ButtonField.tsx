@@ -2,7 +2,6 @@
 import React, { useMemo } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import {
-	TableCell,
 	IconButton,
 	PropTypes,
 	Button,
