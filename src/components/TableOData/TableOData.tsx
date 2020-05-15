@@ -26,12 +26,12 @@ import {
 	TableRowEmptyProps
 } from "../Table";
 import {
-	useMessage,
 	ISerializer,
 	IHttpClient,
 	IODataMessage,
 	IODataResponse,
-	ODataFilterOperator
+	ODataFilterOperator,
+	useODataMessage
 } from "../../core";
 import { ClassesStyledComponent } from "../Theme";
 
@@ -82,16 +82,6 @@ export interface TableODataProps<T>
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
-export function useUpdateTableOData() {
-	const ref = useRef<HTMLButtonElement>(null);
-	const updateHandle = useCallback(() => {
-		if (ref.current) {
-			ref.current.click();
-		}
-	}, [ref]);
-	return [ref, updateHandle];
-}
-
 export default function TableOData<T>({
 	padding,
 	errorDataLabel,
@@ -113,11 +103,13 @@ export default function TableOData<T>({
 	const styles = useStyles() as TableODataStyles;
 
 	const initialData = useMemo(() => {
-		return { count: 0, results: [] } as IODataResponse<T>;
+		return ({
+			d: { __count: 0, results: [] }
+		} as unknown) as IODataResponse<T>;
 	}, []);
 	const message = useMemo(() => buildMessage(), [buildMessage]);
 
-	const [loading, data, updateData, error] = useMessage<IODataResponse<T>>(
+	const [loading, data, dataCount, updateData, error] = useODataMessage<T>(
 		message,
 		initialData,
 		serializer,
@@ -181,16 +173,16 @@ export default function TableOData<T>({
 				<MuiTableBody
 					className={clsx(styles.tableBody, classes?.tableBody)}
 				>
-					{(data.results.length === 0 || error) && (
+					{(data.length === 0 || error) && (
 						<TableRowEmpty
 							noDataLabel={error ? errorDataLabel : noDataLabel}
 							colSpan={fields.length}
 						/>
 					)}
 
-					{data.results.length > 0 &&
+					{data.length > 0 &&
 						!error &&
-						data.results.map((dataRow, idx) => (
+						data.map((dataRow, idx) => (
 							<TableRowData<T>
 								key={idx}
 								data={dataRow}
@@ -205,7 +197,7 @@ export default function TableOData<T>({
 				>
 					<TableRowPagination
 						colSpan={fields.length}
-						count={data.count}
+						count={dataCount}
 						page={message.skip / message.top}
 						rowsPerPage={message.top}
 						rowsPerPageLabel={rowsPerPageLabel}

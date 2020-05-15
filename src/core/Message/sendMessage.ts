@@ -13,5 +13,5 @@ export default async function sendMessage<TResponse>(
 
 	const data = await sendRequest<IRequest>(request, httpClient);
 
-	return serializer.deserialize<TResponse>(JSON.stringify(data));
+	return serializer.deserialize<TResponse>(data);
 }

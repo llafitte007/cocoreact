@@ -19,18 +19,8 @@ export interface TableMessageProps<T> {
 	buildMessage: () => IMessage;
 	serializer: ISerializer;
 	httpClient: IHttpClient;
-	fetchDataLabel: string;
+	errorDataLabel: string;
 	updateRef?: React.RefObject<HTMLButtonElement>;
-}
-
-export function useUpdateTableMessage() {
-	const ref = useRef<HTMLButtonElement>(null);
-	const updateHandle = useCallback(() => {
-		if (ref.current) {
-			ref.current.click();
-		}
-	}, [ref]);
-	return [ref, updateHandle];
 }
 
 export default function TableMessage<T>({
@@ -38,7 +28,7 @@ export default function TableMessage<T>({
 	serializer,
 	httpClient,
 	updateRef,
-	fetchDataLabel,
+	errorDataLabel,
 	noDataLabel,
 	loaderSize,
 	classes,
@@ -64,7 +54,7 @@ export default function TableMessage<T>({
 			<Table
 				data={error ? [] : data}
 				{...props}
-				noDataLabel={error ? fetchDataLabel : noDataLabel}
+				noDataLabel={error ? errorDataLabel : noDataLabel}
 				classes={classes?.table}
 			/>
 			<button
