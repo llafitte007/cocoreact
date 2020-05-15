@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { TableRow, TableCell, TableSortLabel } from "@material-ui/core";
+import { TableRow, TableCell } from "@material-ui/core";
 
 import { IODataTableField, OrderDirection } from "../../core";
 import HeaderField from "../TableWidgets/HeaderField";
+import HeaderFieldSortable from "../TableWidgets/HeaderFieldSortable";
 
 export interface TableRowFieldsProps<T> {
 	fields: IODataTableField<T>[];
@@ -21,24 +22,6 @@ export default function TableRowFields<T>({
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {
-				if (field.sortable) {
-					return (
-						<TableCell
-							key={idx}
-							align={field.align}
-							padding={field.padding}
-							scope="col"
-						>
-							<TableSortLabel
-								active={field.name === sortName}
-								direction={sortDirection}
-								onClick={() => onChange(field.name)}
-							>
-								<HeaderField {...field} />
-							</TableSortLabel>
-						</TableCell>
-					);
-				}
 				return (
 					<TableCell
 						key={idx}
@@ -46,7 +29,15 @@ export default function TableRowFields<T>({
 						padding={field.padding}
 						scope="col"
 					>
-						<HeaderField {...field} />
+						{field.sortable && (
+							<HeaderFieldSortable
+								field={field}
+								active={field.name === sortName}
+								direction={sortDirection}
+								onClick={onChange}
+							/>
+						)}
+						{!field.sortable && <HeaderField {...field} />}
 					</TableCell>
 				);
 			})}

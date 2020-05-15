@@ -7,14 +7,14 @@ import {
 	ODataFilterOperator,
 	TypeWidgetOptions
 } from "../../core";
-import { FormWidget } from "../Form";
+import HeaderFilter, { HeaderFilterProps } from "../TableWidgets/HeaderFilter";
 
 export interface TableRowFiltersProps<T> {
 	fields: IODataTableField<T>[];
 	filtersValue: Record<string, any>;
 	filtersOperator: Record<string, ODataFilterOperator>;
 	widgetOptions: TypeWidgetOptions;
-	onChange: (name: string, operator: ODataFilterOperator, value: any) => void;
+	onChange: HeaderFilterProps["onChange"];
 }
 
 export default function TableRowFilters<T>({
@@ -35,22 +35,12 @@ export default function TableRowFilters<T>({
 						scope="col"
 					>
 						{field.filterable && (
-							<FormWidget
+							<HeaderFilter
+								field={field}
 								widgetOptions={widgetOptions}
-								field={{
-									...field.filterField,
-									startAdornment: (
-										<CellFilterOperator
-											fieldName={field.name}
-											operators={field.filterOperators}
-											filter={filtersOperator[field.name]}
-											onChange={handleOperatorChange}
-										/>
-									)
-								}}
-								errors={[]}
-								data={filtersValue[field.name]}
-								onChange={handleValueChange}
+								value={filtersValue[field.name]}
+								operator={filtersOperator[field.name]}
+								onChange={onChange}
 							/>
 						)}
 					</TableCell>

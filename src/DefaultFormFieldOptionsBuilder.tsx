@@ -26,7 +26,10 @@ export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 	minutesStep?: TimeFieldProps["minutesStep"];
 	groupBy?: AutoCompleteFieldProps["groupBy"];
 	noOptionsText?: AutoCompleteFieldProps["noOptionsText"];
-	startAdornment?: SelectFieldProps["startAdornment"];
+	startAdornment?:
+		| TextFieldProps["startAdornment"]
+		| SelectFieldProps["startAdornment"]
+		| DateFieldProps["startAdornment"];
 }
 
 export function defaultFormFieldOptionsInitializer<T>(
