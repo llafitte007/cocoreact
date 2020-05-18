@@ -78,7 +78,6 @@ export interface TableODataProps<T>
 	buildMessage: () => IODataMessage;
 	serializer: ISerializer;
 	httpClient: IHttpClient;
-	fetchDataLabel: string;
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
