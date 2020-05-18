@@ -43,8 +43,6 @@ export default function TableMessage<T>({
 		httpClient
 	);
 
-	const updateHandle = useCallback(updateData, [updateData]);
-
 	return (
 		<LoadingWrapper
 			loading={loading}
@@ -58,7 +56,7 @@ export default function TableMessage<T>({
 				classes={classes?.table}
 			/>
 			<button
-				onClick={updateHandle}
+				onClick={updateData}
 				style={{ display: "none" }}
 				ref={updateRef}
 			/>
