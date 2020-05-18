@@ -9,6 +9,5 @@ export * from "./ODataMessage";
 export * from "./Request";
 export * from "./Serializer";
 export * from "./TableField";
-export * from "./types/Guid";
 export * from "./TypeWidget";
 export * from "./Url";

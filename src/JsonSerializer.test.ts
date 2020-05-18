@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import { createEmptyGuid } from "./core";
 import { ODataOrderBy, ODataSelect, ODataFilter } from "./core/OData";
 import { IMessage } from "./core/Message";
 import { RequestMethod } from "./core/Request";
@@ -27,30 +26,22 @@ test("serialize single value", () => {
 
 	const date = new Date(1986, 11, 9);
 	expect(serializer.serialize(date)).toBe('"1986-12-09T00:00:00.000Z"');
-
-	const id = createEmptyGuid();
-	expect(serializer.serialize(id)).toBe(
-		'"0000000-0000-0000-0000-000000000000"'
-	);
 });
 
 test("serialize object", () => {
 	const date = new Date(1986, 11, 9);
-	const id = createEmptyGuid();
 
 	const obj = {
 		count: 10,
 		enabled: true,
-		date: date,
-		id: id
+		date: date
 	};
 
 	const serialized = serializer.serialize(obj);
 
 	expect(serialized).toContain('{"count":10,');
 	expect(serialized).toContain('"enabled":true,');
-	expect(serialized).toContain('"date":"1986-12-09T00:00:00.000Z",');
-	expect(serialized).toContain('"0000000-0000-0000-0000-000000000000"}');
+	expect(serialized).toContain('"date":"1986-12-09T00:00:00.000Z"}');
 });
 
 test("serialize array", () => {
@@ -64,12 +55,6 @@ test("serialize array", () => {
 	const dateArr = [date, date];
 	expect(serializer.serialize(dateArr)).toBe(
 		'["1986-12-09T00:00:00.000Z","1986-12-09T00:00:00.000Z"]'
-	);
-
-	const id = createEmptyGuid();
-	const idArr = [id, id];
-	expect(serializer.serialize(idArr)).toBe(
-		'["0000000-0000-0000-0000-000000000000","0000000-0000-0000-0000-000000000000"]'
 	);
 });
 
@@ -152,7 +137,6 @@ test("serialize message with body", () => {
 			str: "str",
 			count: 10,
 			flag: true,
-			id: createEmptyGuid(),
 			createdAt: new Date(1986, 11, 9, 16, 0, 0)
 		}
 	});
@@ -160,7 +144,6 @@ test("serialize message with body", () => {
 	expect(data.body).toContain(`"str":"str"`);
 	expect(data.body).toContain(`"count":10`);
 	expect(data.body).toContain(`"flag":true`);
-	expect(data.body).toContain(`"id":"0000000-0000-0000-0000-000000000000"`);
 	expect(data.body).toContain(`"createdAt":"1986-12-09T16:00:00.000Z"`);
 });
 
