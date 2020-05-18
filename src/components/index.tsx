@@ -1,6 +1,7 @@
 export * from "./Auth";
 export * from "./ErrorBoundary";
 export * from "./Form";
+export * from "./LoadingWrapper";
 export * from "./Notification";
 export * from "./Table";
 export * from "./TableMessage";
