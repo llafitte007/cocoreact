@@ -1,6 +1,10 @@
 {
   "name": "cocoreact",
+<<<<<<< HEAD
   "version": "1.0.15",
+=======
+  "version": "1.0.14",
+>>>>>>> 0a960839e07fb0cd9b9f4e2c7f16df8a9f41fdf1
   "description": "CocoReact is a set of tools and material-ui components",
   "author": "llafitte007",
   "repository": {
