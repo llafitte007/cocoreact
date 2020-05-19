@@ -17,7 +17,7 @@ export default class DefaultFormErrorService implements IFormErrorService {
 	}
 
 	parse(response: any): string | IFormError[] | undefined {
-		const data = this._serializer.deserialize<any>(response);
+		const data = this._serializer.deserialize<any>(response.data);
 		if (Array.isArray(data)) {
 			return data as IFormError[];
 		} else if (data.message) {
