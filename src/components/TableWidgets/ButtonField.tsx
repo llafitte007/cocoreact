@@ -19,21 +19,23 @@ export interface ButtonFieldProps<T = any> extends ITableWidgetPropsBase<T> {
 export default function ButtonField({
 	icon,
 	label,
-	value,
+	data,
 	href,
 	...props
 }: ButtonFieldProps) {
 	const _href = useMemo(() => {
 		if (href !== undefined) {
-			return typeof href === "string" ? href : href(value);
+			return typeof href === "string" ? href : href(data);
 		}
 		return undefined;
-	}, [href, value]);
+	}, [href, data]);
+
+	console.log(_href);
 
 	if (label === undefined || label === "") {
 		return (
 			<IconButton {...(props as any)} href={_href}>
-				{icon}
+				{icon ?? null}
 			</IconButton>
 		);
 	}

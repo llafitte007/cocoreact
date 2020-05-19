@@ -3,6 +3,6 @@ import { ITableFieldBase } from "../../core/TableField";
 import { CSSProperties } from "@material-ui/styles";
 
 export interface ITableWidgetPropsBase<T = any> extends ITableFieldBase {
-	value: T;
+	data: T;
 	style?: CSSProperties;
 }

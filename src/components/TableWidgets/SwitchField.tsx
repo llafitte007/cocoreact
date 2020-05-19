@@ -9,12 +9,12 @@ export interface SwitchFieldProps extends ITableWidgetPropsBase<boolean> {
 }
 
 export default function SwitchField({
-	value,
+	data,
 	labelOn,
 	labelOff
 }: SwitchFieldProps) {
 	const content = useMemo(() => {
-		return value === true ? (
+		return data === true ? (
 			<ToggleOnIcon color="inherit" titleAccess={labelOn} />
 		) : (
 			<ToggleOffIcon color="disabled" titleAccess={labelOff} />

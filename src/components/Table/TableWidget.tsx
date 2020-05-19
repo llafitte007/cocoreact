@@ -24,15 +24,17 @@ export interface TableWidgetProps {
 	widgetOptions: TypeWidgetOptions;
 }
 
-export default function TableWidget(props: TableWidgetProps) {
-	const { field, widgetOptions } = props;
-
-	const fieldData = useTableFieldValue(field.name, props.data);
+export default function TableWidget({
+	field,
+	data,
+	widgetOptions
+}: TableWidgetProps) {
+	const fieldData = useTableFieldValue(field.name, data);
 
 	if (field.render !== undefined) {
 		return field.render({
 			fieldProps: field,
-			data: props.data
+			data: data
 		});
 	}
 
