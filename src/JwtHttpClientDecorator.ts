@@ -23,13 +23,7 @@ export default class JwtHttpClientDecorator implements IHttpClient {
 		request: TRequest
 	): Promise<any> {
 		try {
-			if (request.needAuthentication === true) {
-				request.headers = {
-					...request.headers,
-					Authorization: "Bearer " + this._jwtService.getToken()
-				};
-			}
-			return this._decorator.sendRequest(request);
+			return await this._sendRequest(request);
 		} catch (e) {
 			if (
 				e.response &&
@@ -49,9 +43,21 @@ export default class JwtHttpClientDecorator implements IHttpClient {
 				this._jwtService.setToken(token);
 
 				// reply request
-				return this._decorator.sendRequest(request);
+				return await this._sendRequest(request);
 			}
 			throw e;
 		}
+	}
+
+	private _sendRequest<TRequest extends IRequest>(
+		request: TRequest
+	): Promise<any> {
+		if (request.needAuthentication === true) {
+			request.headers = {
+				...request.headers,
+				Authorization: "Bearer " + this._jwtService.getToken()
+			};
+		}
+		return this._decorator.sendRequest(request);
 	}
 }
