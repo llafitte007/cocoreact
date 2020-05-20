@@ -30,8 +30,6 @@ export default function ButtonField({
 		return undefined;
 	}, [href, data]);
 
-	console.log(_href);
-
 	if (label === undefined || label === "") {
 		return (
 			<IconButton {...(props as any)} href={_href}>
