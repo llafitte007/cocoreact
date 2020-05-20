@@ -21,6 +21,7 @@ export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {
 	onClick?: ButtonFieldProps<T>["onClick"];
 	color?: ButtonFieldProps<T>["color"];
 	variant?: ButtonFieldProps<T>["variant"];
+	size?: ButtonFieldProps<T>["size"];
 }
 
 export function defaultTableFieldOptionsInitializer<T>(

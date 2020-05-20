@@ -95,6 +95,7 @@ test("button", () => {
 	fieldsBuilder.set("", {
 		type: "button",
 		icon: <EditIcon />,
+		size: "medium",
 		href: "https://www.example.com"
 	});
 

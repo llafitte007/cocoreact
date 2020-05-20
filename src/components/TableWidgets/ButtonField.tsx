@@ -14,6 +14,7 @@ export interface ButtonFieldProps<T = any> extends ITableWidgetPropsBase<T> {
 	onClick?: (data: T) => void;
 	color?: PropTypes.Color;
 	variant?: ButtonTypeMap["props"]["variant"];
+	size?: ButtonTypeMap["props"]["size"];
 }
 
 export default function ButtonField({
