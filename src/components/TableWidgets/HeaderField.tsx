@@ -27,10 +27,14 @@ export interface HeaderFieldProps extends ITableFieldBase {}
 export default function HeaderField({ icon, label }: HeaderFieldProps) {
 	const styles = useStyles();
 
+	if (!label) {
+		return null;
+	}
+
 	return (
 		<span className={styles.cell}>
 			{icon && <span className={styles.icon}>{icon}</span>}
-			<span className={styles.title}>{label || null}</span>
+			<span className={styles.title}>{label}</span>
 		</span>
 	);
 }

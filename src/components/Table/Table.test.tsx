@@ -7,6 +7,7 @@ import Table from "./Table";
 import { IField } from "../../core";
 import DefaultTableFieldOptionsBuilder from "../../DefaultTableFieldOptionsBuilder";
 import defaultTableWidgetOptionsBuilder from "../../defaultTableWidgetOptionsBuilder";
+import { EditIcon } from "../Theme";
 
 configure({ adapter: new Adapter() });
 
@@ -93,7 +94,7 @@ test("simple data table", () => {
 test("button", () => {
 	fieldsBuilder.set("", {
 		type: "button",
-		label: " example",
+		icon: <EditIcon />,
 		href: "https://www.example.com"
 	});
 
