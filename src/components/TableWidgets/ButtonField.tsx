@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import {
 	IconButton,
@@ -22,6 +22,7 @@ export default function ButtonField({
 	label,
 	data,
 	href,
+	onClick,
 	...props
 }: ButtonFieldProps) {
 	const _href = useMemo(() => {
@@ -31,15 +32,30 @@ export default function ButtonField({
 		return undefined;
 	}, [href, data]);
 
+	const clickHandle = useCallback(
+		(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+			if (onClick) {
+				event.preventDefault();
+				onClick && onClick(data);
+			}
+		},
+		[onClick, data]
+	);
+
 	if (label === undefined || label === "") {
 		return (
-			<IconButton {...(props as any)} href={_href}>
+			<IconButton {...(props as any)} href={_href} onClick={clickHandle}>
 				{icon ?? null}
 			</IconButton>
 		);
 	}
 	return (
-		<Button {...(props as any)} href={_href} startIcon={icon}>
+		<Button
+			{...(props as any)}
+			href={_href}
+			startIcon={icon}
+			onClick={clickHandle}
+		>
 			{label}
 		</Button>
 	);

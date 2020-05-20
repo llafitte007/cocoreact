@@ -23,6 +23,7 @@ export interface ITableODataWidgetFieldOptions<T = any>
 	onClick?: ButtonFieldProps<T>["onClick"];
 	color?: ButtonFieldProps<T>["color"];
 	variant?: ButtonFieldProps<T>["variant"];
+	size?: ButtonFieldProps<T>["size"];
 }
 
 export function defaultTableODataFieldOptionsInitializer<T>(
