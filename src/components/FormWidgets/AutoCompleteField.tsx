@@ -80,7 +80,6 @@ export default function AutoCompleteField(props: AutoCompleteFieldProps) {
 					required={props.required}
 					fullWidth={props.fullWidth}
 					margin={props.margin}
-					disabled={props.disabled}
 					autoComplete={props.autoComplete}
 					autoFocus={props.autoFocus}
 					placeholder={props.placeholder}
