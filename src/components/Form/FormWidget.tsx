@@ -46,7 +46,7 @@ export default function FormWidget(props: FormWidgetProps) {
 	if (field.render !== undefined) {
 		return field.render({
 			fieldProps: field,
-			data: props.data,
+			value: props.data,
 			errors: props.errors
 		});
 	}
@@ -57,7 +57,7 @@ export default function FormWidget(props: FormWidgetProps) {
 		<Component
 			{...field}
 			onChange={onChange}
-			data={fieldData}
+			value={fieldData}
 			error={fieldError}
 		/>
 	);

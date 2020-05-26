@@ -19,6 +19,6 @@ export interface IFormField<T = any> extends IFormFieldBase {
 
 export interface IFormFieldRenderer<T> {
 	fieldProps: IFormField<T>;
-	data: T;
+	value: T;
 	errors: IFormError[];
 }
