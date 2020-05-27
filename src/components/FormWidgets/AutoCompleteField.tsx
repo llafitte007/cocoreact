@@ -78,7 +78,6 @@ export default function AutoCompleteField(props: AutoCompleteFieldProps) {
 			renderInput={(params) => (
 				<TextField
 					required={props.required}
-					fullWidth={props.fullWidth}
 					margin={props.margin}
 					autoComplete={props.autoComplete}
 					autoFocus={props.autoFocus}
