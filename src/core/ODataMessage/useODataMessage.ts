@@ -6,17 +6,17 @@ import { useRequest, IRequest } from "../Request";
 import { ISerializer } from "../Serializer";
 import { IHttpClient } from "../HttpClient";
 
-export default function useMessage<TResponse>(
+export default function useODataMessage<TResponse>(
 	message: IODataMessage,
 	initialValue: IODataResponse<TResponse>,
 	serializer: ISerializer,
 	httpClient: IHttpClient
-): [boolean, TResponse[], number, () => void, Error | null] {
+): [boolean, TResponse[], number, () => void] {
 	const request = useMemo(() => {
 		return serializer.serializeMessage(message);
 	}, [message, serializer]);
 
-	const [loading, data, updateData, error] = useRequest<IRequest>(
+	const [loading, data, updateData] = useRequest<IRequest>(
 		request,
 		initialValue,
 		httpClient
@@ -28,7 +28,6 @@ export default function useMessage<TResponse>(
 		loading,
 		response.d.results,
 		parseInt(response.d.__count),
-		updateData,
-		error
+		updateData
 	];
 }

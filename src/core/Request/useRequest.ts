@@ -8,8 +8,8 @@ export default function useRequest<TRequest extends IRequest>(
 	request: TRequest,
 	initialValue: any,
 	httpClient: IHttpClient
-): [boolean, any, () => void, Error | null] {
-	const [_state, _setState] = useState({
+): [boolean, any, () => void] {
+	const [state, setState] = useState({
 		loading: true,
 		data: initialValue,
 		error: null as Error | null
@@ -24,16 +24,16 @@ export default function useRequest<TRequest extends IRequest>(
 
 	const _updateData = useCallback(async () => {
 		try {
-			_setState((s) => {
+			setState((s) => {
 				return { ...s, loading: true };
 			});
 
 			const data = await httpClient.sendRequest<TRequest>(request);
 			if (_isMounted.current) {
-				_setState({ data, loading: false, error: null });
+				setState({ data, loading: false, error: null });
 			}
 		} catch (e) {
-			_setState((s) => {
+			setState((s) => {
 				return { ...s, loading: false, error: e };
 			});
 		}
@@ -47,5 +47,9 @@ export default function useRequest<TRequest extends IRequest>(
 		_updateData();
 	}, [_updateData]);
 
-	return [_state.loading, _state.data, updateData, _state.error];
+	if (state.error !== null) {
+		throw state.error;
+	}
+
+	return [state.loading, state.data, updateData];
 }

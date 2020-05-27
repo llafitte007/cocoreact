@@ -65,7 +65,6 @@ export interface TableODataStyles {
 export interface TableODataProps<T>
 	extends ClassesStyledComponent<TableODataStyles> {
 	padding?: Padding;
-	errorDataLabel: string;
 	loaderSize?: LoadingWrapperProps["loaderSize"];
 	fields: TableRowFieldsProps<T>["fields"];
 	filterWdigetOptions: TableRowFiltersProps<T>["widgetOptions"];
@@ -83,7 +82,6 @@ export interface TableODataProps<T>
 
 export default function TableOData<T>({
 	padding,
-	errorDataLabel,
 	fields,
 	filterWdigetOptions,
 	bodyWidgetOptions,
@@ -108,7 +106,7 @@ export default function TableOData<T>({
 	}, []);
 	const message = useMemo(() => buildMessage(), [buildMessage]);
 
-	const [loading, data, dataCount, updateData, error] = useODataMessage<T>(
+	const [loading, data, dataCount, updateData] = useODataMessage<T>(
 		message,
 		initialData,
 		serializer,
@@ -172,15 +170,14 @@ export default function TableOData<T>({
 				<MuiTableBody
 					className={clsx(styles.tableBody, classes?.tableBody)}
 				>
-					{(data.length === 0 || error) && (
+					{data.length === 0 && (
 						<TableRowEmpty
-							noDataLabel={error ? errorDataLabel : noDataLabel}
+							noDataLabel={noDataLabel}
 							colSpan={fields.length}
 						/>
 					)}
 
 					{data.length > 0 &&
-						!error &&
 						data.map((dataRow, idx) => (
 							<TableRowData<T>
 								key={idx}

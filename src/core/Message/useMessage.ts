@@ -10,21 +10,16 @@ export default function useMessage<TResponse>(
 	initialValue: TResponse,
 	serializer: ISerializer,
 	httpClient: IHttpClient
-): [boolean, TResponse, () => void, Error | null] {
+): [boolean, TResponse, () => void] {
 	const request = useMemo(() => {
 		return serializer.serializeMessage(message);
 	}, [message, serializer]);
 
-	const [loading, data, updateData, error] = useRequest<IRequest>(
+	const [loading, data, updateData] = useRequest<IRequest>(
 		request,
 		initialValue,
 		httpClient
 	);
 
-	return [
-		loading,
-		serializer.deserialize<TResponse>(data),
-		updateData,
-		error
-	];
+	return [loading, serializer.deserialize<TResponse>(data), updateData];
 }

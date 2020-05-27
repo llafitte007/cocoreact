@@ -19,7 +19,6 @@ export interface TableMessageProps<T> {
 	buildMessage: () => IMessage;
 	serializer: ISerializer;
 	httpClient: IHttpClient;
-	errorDataLabel: string;
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
@@ -28,7 +27,6 @@ export default function TableMessage<T>({
 	serializer,
 	httpClient,
 	updateRef,
-	errorDataLabel,
 	noDataLabel,
 	loaderSize,
 	classes,
@@ -36,7 +34,7 @@ export default function TableMessage<T>({
 }: TableMessageProps<T>) {
 	const message = useMemo(() => buildMessage(), [buildMessage]);
 
-	const [loading, data, updateData, error] = useMessage<T[]>(
+	const [loading, data, updateData] = useMessage<T[]>(
 		message,
 		[],
 		serializer,
@@ -50,9 +48,9 @@ export default function TableMessage<T>({
 			classes={classes?.loader}
 		>
 			<Table
-				data={error ? [] : data}
+				data={data}
 				{...props}
-				noDataLabel={error ? errorDataLabel : noDataLabel}
+				noDataLabel={noDataLabel}
 				classes={classes?.table}
 			/>
 			<button
