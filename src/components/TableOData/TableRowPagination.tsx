@@ -23,6 +23,7 @@ export default function TableRowPagination({
 	page,
 	rowsPerPage,
 	displayedRowLabel,
+	rowsPerPageLabel,
 	onChange,
 	...props
 }: TableRowPaginationProps) {
@@ -44,6 +45,7 @@ export default function TableRowPagination({
 			<TablePagination
 				{...props}
 				page={page}
+				labelRowsPerPage={rowsPerPageLabel}
 				rowsPerPage={rowsPerPage}
 				labelDisplayedRows={displayedRowLabel}
 				onChangePage={handlePageChange}
