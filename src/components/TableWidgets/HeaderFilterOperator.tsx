@@ -113,7 +113,10 @@ export default function HeaderFilterOperator({
 							key={idx}
 							selected={value === op}
 							className={styles.item}
-							onClick={() => onChange(op)}
+							onClick={() => {
+								onChange(op);
+								menuCloseHandle();
+							}}
 						>
 							<ListItemIcon className={styles.itemIcon}>
 								{OPERATORS_ICON[op]}
