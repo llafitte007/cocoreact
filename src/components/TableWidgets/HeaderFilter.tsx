@@ -41,6 +41,7 @@ export default function HeaderFilter({
 			field={
 				{
 					...field,
+					label: "",
 					startAdornment: (
 						<HeaderFilterOperator
 							value={operator}
