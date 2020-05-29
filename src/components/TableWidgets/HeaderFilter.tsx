@@ -51,7 +51,7 @@ export default function HeaderFilter({
 				} as any
 			}
 			errors={[]}
-			data={value}
+			data={{ [field.name]: value }}
 			onChange={valueHandle}
 		/>
 	);
