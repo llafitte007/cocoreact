@@ -13,11 +13,15 @@ import {
 	Theme,
 	darken
 } from "@material-ui/core";
-import TableRowFields, { TableRowFieldsProps } from "./TableRowFields";
-import TableRowFilters, { TableRowFiltersProps } from "./TableRowFilters";
-import TableRowPagination, {
-	TableRowPaginationProps
-} from "./TableRowPagination";
+import TableODataRowFields, {
+	TableODataRowFieldsProps
+} from "./TableODataRowFields";
+import TableODataRowFilters, {
+	TableODataRowFiltersProps
+} from "./TableODataRowFilters";
+import TableODataRowPagination, {
+	TableODataRowPaginationProps
+} from "./TableODataRowPagination";
 import { LoadingWrapper, LoadingWrapperProps } from "../LoadingWrapper";
 import {
 	TableRowData,
@@ -66,13 +70,13 @@ export interface TableODataProps<T>
 	extends ClassesStyledComponent<TableODataStyles> {
 	padding?: Padding;
 	loaderSize?: LoadingWrapperProps["loaderSize"];
-	fields: TableRowFieldsProps<T>["fields"];
-	filterWdigetOptions: TableRowFiltersProps<T>["widgetOptions"];
+	fields: TableODataRowFieldsProps<T>["fields"];
+	filterWdigetOptions: TableODataRowFiltersProps<T>["widgetOptions"];
 	bodyWidgetOptions: TableRowDataProps<T>["widgetOptions"];
 	noDataLabel: TableRowEmptyProps["noDataLabel"];
-	rowsPerPageOptions: TableRowPaginationProps["rowsPerPageOptions"];
-	rowsPerPageLabel: TableRowPaginationProps["rowsPerPageLabel"];
-	displayedRowLabel: TableRowPaginationProps["displayedRowLabel"];
+	rowsPerPageOptions: TableODataRowPaginationProps["rowsPerPageOptions"];
+	rowsPerPageLabel: TableODataRowPaginationProps["rowsPerPageLabel"];
+	displayedRowLabel: TableODataRowPaginationProps["displayedRowLabel"];
 
 	buildMessage: () => IODataMessage;
 	serializer: ISerializer;
@@ -152,13 +156,13 @@ export default function TableOData<T>({
 				<MuiTableHead
 					className={clsx(styles.tableHead, classes?.tableHead)}
 				>
-					<TableRowFields
+					<TableODataRowFields
 						fields={fields}
 						sortName={message.orderBy.member}
 						sortDirection={message.orderBy.direction}
 						onChange={sortHandle}
 					/>
-					<TableRowFilters
+					<TableODataRowFilters
 						fields={fields}
 						filtersValue={message.filter.getValues()}
 						filtersOperator={message.filter.getOperators()}
@@ -191,7 +195,7 @@ export default function TableOData<T>({
 				<MuiTableFooter
 					className={clsx(styles.tableFooter, classes?.tableFooter)}
 				>
-					<TableRowPagination
+					<TableODataRowPagination
 						colSpan={fields.length}
 						count={dataCount}
 						page={message.skip / message.top}

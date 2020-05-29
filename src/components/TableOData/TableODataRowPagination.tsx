@@ -8,7 +8,7 @@ import {
 
 import ODataPaginationActions from "./PaginationActions";
 
-export interface TableRowPaginationProps {
+export interface TableODataRowPaginationProps {
 	colSpan: number;
 	count: number;
 	page: number;
@@ -19,14 +19,14 @@ export interface TableRowPaginationProps {
 	onChange: (page: number, rowPerPage: number) => void;
 }
 
-export default function TableRowPagination({
+export default function TableODataRowPagination({
 	page,
 	rowsPerPage,
 	displayedRowLabel,
 	rowsPerPageLabel,
 	onChange,
 	...props
-}: TableRowPaginationProps) {
+}: TableODataRowPaginationProps) {
 	const handlePageChange = useCallback(
 		(_e: any, page: number) => onChange(page, rowsPerPage),
 		[onChange, rowsPerPage]

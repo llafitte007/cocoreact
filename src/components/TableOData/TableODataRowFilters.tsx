@@ -9,7 +9,7 @@ import {
 } from "../../core";
 import HeaderFilter, { HeaderFilterProps } from "../TableWidgets/HeaderFilter";
 
-export interface TableRowFiltersProps<T> {
+export interface TableODataRowFiltersProps<T> {
 	fields: IODataTableField<T>[];
 	filtersValue: Record<string, any>;
 	filtersOperator: Record<string, ODataFilterOperator>;
@@ -17,13 +17,13 @@ export interface TableRowFiltersProps<T> {
 	onChange: HeaderFilterProps["onChange"];
 }
 
-export default function TableRowFilters<T>({
+export default function TableODataRowFilters<T>({
 	fields,
 	filtersValue,
 	filtersOperator,
 	widgetOptions,
 	onChange
-}: TableRowFiltersProps<T>) {
+}: TableODataRowFiltersProps<T>) {
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {

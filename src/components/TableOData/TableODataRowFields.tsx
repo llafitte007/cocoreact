@@ -6,19 +6,19 @@ import { IODataTableField, OrderDirection } from "../../core";
 import HeaderField from "../TableWidgets/HeaderField";
 import HeaderFieldSortable from "../TableWidgets/HeaderFieldSortable";
 
-export interface TableRowFieldsProps<T> {
+export interface TableODataRowFieldsProps<T> {
 	fields: IODataTableField<T>[];
 	sortName?: string;
 	sortDirection?: OrderDirection;
 	onChange: (name: string) => void;
 }
 
-export default function TableRowFields<T>({
+export default function TableODataRowFields<T>({
 	fields,
 	sortName,
 	sortDirection,
 	onChange
-}: TableRowFieldsProps<T>) {
+}: TableODataRowFieldsProps<T>) {
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {

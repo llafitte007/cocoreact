@@ -1,11 +1,16 @@
 import TableOData from "./TableOData";
-import TableRowFields from "./TableRowFields";
-import TableRowFilters from "./TableRowFilters";
-import TableRowPagination from "./TableRowPagination";
+import TableODataRowFields from "./TableODataRowFields";
+import TableODataRowFilters from "./TableODataRowFilters";
+import TableODataRowPagination from "./TableODataRowPagination";
 
 export * from "./TableOData";
-export * from "./TableRowFields";
-export * from "./TableRowFilters";
-export * from "./TableRowPagination";
+export * from "./TableODataRowFields";
+export * from "./TableODataRowFilters";
+export * from "./TableODataRowPagination";
 
-export { TableOData, TableRowFields, TableRowFilters, TableRowPagination };
+export {
+	TableOData,
+	TableODataRowFields,
+	TableODataRowFilters,
+	TableODataRowPagination
+};
