@@ -4,7 +4,7 @@ import { ODataFilter, IODataFilterItem } from "../OData";
 import DateConverter from "./DateConverter";
 import { capitalize } from "../../StringExtension";
 
-export default class ODataSelectConverter implements IConverter {
+export default class ODataFilterConverter implements IConverter {
 	_dateConverter: DateConverter;
 
 	constructor() {
@@ -25,6 +25,9 @@ export default class ODataSelectConverter implements IConverter {
 
 	convertItem(item: IODataFilterItem): string | undefined {
 		if (!item.operator || !item.value === undefined) {
+			return undefined;
+		}
+		if (typeof item.value === "string" && !item.value) {
 			return undefined;
 		}
 
