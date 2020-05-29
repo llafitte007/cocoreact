@@ -5,8 +5,7 @@ import {
 	FormControlLabel,
 	Switch,
 	Typography,
-	FormHelperText,
-	InputLabel
+	FormHelperText
 } from "@material-ui/core";
 
 import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
@@ -60,15 +59,11 @@ export default function SwitchField(props: SwitchFieldProps) {
 				value={props.name}
 				label={
 					<Fragment>
-						{/* <Typography variant="subtitle1">
-							{props.label ?? ""}
-							{props.required ? " *" : ""}
-						</Typography> */}
-						{/* TODO test */}
 						{props.label && (
-							<InputLabel htmlFor={props.name}>
-								{props.label}
-							</InputLabel>
+							<Typography variant="subtitle1">
+								{props.label ?? ""}
+								{props.required ? " *" : ""}
+							</Typography>
 						)}
 						{props.placeholder && (
 							<Typography
