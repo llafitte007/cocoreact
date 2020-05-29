@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { IODataMessage } from "./IODataMessage";
 import { IODataResponse } from "./IODataResponse";
 import { useRequest, IRequest } from "../Request";
@@ -12,9 +12,9 @@ export default function useODataMessage<TResponse>(
 	serializer: ISerializer,
 	httpClient: IHttpClient
 ): [boolean, TResponse[], number, () => void] {
-	const request = useMemo(() => {
-		return serializer.serializeMessage(message);
-	}, [message, serializer]);
+	const [request, setRequest] = useState(
+		serializer.serializeMessage(message)
+	);
 
 	const [loading, data, updateData] = useRequest<IRequest>(
 		request,
@@ -22,12 +22,20 @@ export default function useODataMessage<TResponse>(
 		httpClient
 	);
 
+	const updateRequestAndData = useCallback(() => {
+		setRequest(serializer.serializeMessage(message));
+	}, [message, serializer]);
+
+	useEffect(() => {
+		updateData();
+	}, [updateData, request]);
+
 	const response = serializer.deserialize<IODataResponse<TResponse>>(data);
 
 	return [
 		loading,
 		response.d.results,
 		parseInt(response.d.__count),
-		updateData
+		updateRequestAndData
 	];
 }
