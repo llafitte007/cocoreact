@@ -13,13 +13,11 @@ export default function SwitchField({
 	labelOn,
 	labelOff
 }: SwitchFieldProps) {
-	const content = useMemo(() => {
+	return useMemo(() => {
 		return data === true ? (
 			<ToggleOnIcon color="inherit" titleAccess={labelOn} />
 		) : (
 			<ToggleOffIcon color="disabled" titleAccess={labelOff} />
 		);
-	}, []);
-
-	return content;
+	}, [data]);
 }
