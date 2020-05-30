@@ -47,22 +47,24 @@ export function defaultTableODataFieldOptionsInitializer<T>(
 		color = color ?? "default";
 		variant = variant ?? "contained";
 	}
-	let filterDelay = field.filterDelay;
-	if (
-		filterDelay === undefined &&
-		["string", "number", "email"].includes(field.type)
-	) {
-		filterDelay = 400;
-	}
-	return {
+
+	const options = {
 		...field,
 		label,
 		padding,
 		align,
 		color,
-		variant,
-		filterDelay
+		variant
 	} as ITableODataWidgetFieldOptions<T>;
+
+	if (
+		options.filterDelay === undefined &&
+		["string", "number", "email"].includes(field.type)
+	) {
+		options.filterDelay = 400;
+	}
+
+	return options;
 }
 
 export default class DefaultTableODataFieldOptionsBuilder<
@@ -76,9 +78,9 @@ export default class DefaultTableODataFieldOptionsBuilder<
 		fields:
 			| ITableODataWidgetFieldOptions<T>[]
 			| Record<
-					string,
-					ITableODataWidgetFieldOptions<T> & IFieldOptionsBase
-			  >
+				string,
+				ITableODataWidgetFieldOptions<T> & IFieldOptionsBase
+			>
 	) {
 		super.initialize(fields);
 		return this;
