@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useRef, useState } from "react";
 import clsx from "clsx";
 
 import {
@@ -108,7 +108,16 @@ export default function TableOData<T>({
 			d: { __count: 0, results: [] }
 		} as unknown) as IODataResponse<T>;
 	}, []);
+
 	const message = useMemo(() => buildMessage(), [buildMessage]);
+
+	const timer = useRef<NodeJS.Timeout | null>(null);
+	const [filtersValues, setFiltersValues] = useState(
+		message.filter.getValues()
+	);
+	const [fitlersOperators, setFitlersOperators] = useState(
+		message.filter.getOperators()
+	);
 
 	const [loading, data, dataCount, updateData] = useODataMessage<T>(
 		message,
@@ -127,10 +136,24 @@ export default function TableOData<T>({
 
 	const filterHandle = useCallback(
 		(name: string, operator: ODataFilterOperator, value: any) => {
+			message.skip = 0;
 			message.filter.set(name, operator, value);
-			updateData();
+			setFiltersValues(message.filter.getValues());
+			setFitlersOperators(message.filter.getOperators());
+
+			const field = fields.find((x) => x.name === name);
+			if (field && field.filterDelay && field.filterDelay > 0) {
+				if (timer.current) {
+					clearTimeout(timer.current);
+				}
+				timer.current = setTimeout(() => {
+					updateData();
+				}, field.filterDelay);
+			} else {
+				updateData();
+			}
 		},
-		[message, updateData]
+		[fields, message.filter, message.skip, updateData]
 	);
 
 	const paginationHandle = useCallback(
@@ -164,8 +187,8 @@ export default function TableOData<T>({
 					/>
 					<TableODataRowFilters
 						fields={fields}
-						filtersValue={message.filter.getValues()}
-						filtersOperator={message.filter.getOperators()}
+						filtersValues={filtersValues}
+						filtersOperators={fitlersOperators}
 						widgetOptions={filterWdigetOptions}
 						onChange={filterHandle}
 					/>

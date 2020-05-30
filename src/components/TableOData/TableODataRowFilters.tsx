@@ -11,16 +11,16 @@ import HeaderFilter, { HeaderFilterProps } from "../TableWidgets/HeaderFilter";
 
 export interface TableODataRowFiltersProps<T> {
 	fields: IODataTableField<T>[];
-	filtersValue: Record<string, any>;
-	filtersOperator: Record<string, ODataFilterOperator>;
+	filtersValues: Record<string, any>;
+	filtersOperators: Record<string, ODataFilterOperator>;
 	widgetOptions: TypeWidgetOptions;
 	onChange: HeaderFilterProps["onChange"];
 }
 
 export default function TableODataRowFilters<T>({
 	fields,
-	filtersValue,
-	filtersOperator,
+	filtersValues,
+	filtersOperators,
 	widgetOptions,
 	onChange
 }: TableODataRowFiltersProps<T>) {
@@ -38,8 +38,8 @@ export default function TableODataRowFilters<T>({
 							<HeaderFilter
 								field={field}
 								widgetOptions={widgetOptions}
-								value={filtersValue[field.name]}
-								operator={filtersOperator[field.name]}
+								value={filtersValues[field.name]}
+								operator={filtersOperators[field.name]}
 								onChange={onChange}
 							/>
 						)}

@@ -5,6 +5,7 @@ import { ITableField } from "../TableField";
 export interface IODataTableField<T = any> extends ITableField<T> {
 	sortable?: boolean;
 	filterable?: boolean;
+	filterDelay?: number;
 	filterOperators: ODataFilterOperator[];
 }
 

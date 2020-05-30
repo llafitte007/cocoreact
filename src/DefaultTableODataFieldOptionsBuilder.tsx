@@ -47,13 +47,21 @@ export function defaultTableODataFieldOptionsInitializer<T>(
 		color = color ?? "default";
 		variant = variant ?? "contained";
 	}
+	let filterDelay = field.filterDelay;
+	if (
+		filterDelay === undefined &&
+		["string", "number", "email"].includes(field.type)
+	) {
+		filterDelay = 400;
+	}
 	return {
 		...field,
 		label,
 		padding,
 		align,
 		color,
-		variant
+		variant,
+		filterDelay
 	} as ITableODataWidgetFieldOptions<T>;
 }
 
