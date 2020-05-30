@@ -10,7 +10,7 @@ import { TypeWidgetOptionsBuilder } from "./core/TypeWidget";
 const defaultTableWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
 	.set("string", TextField)
 	.set("number", TextField)
-	.set("date", DateField)
+	.set("Date", DateField)
 	.set("boolean", SwitchField)
 	.set("button", ButtonField);
 
