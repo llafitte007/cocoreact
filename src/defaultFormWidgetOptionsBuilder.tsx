@@ -16,7 +16,7 @@ const defaultFormWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
 	.set("password", TextField)
 	.set("select", SelectField)
 	.set("boolean", SwitchField)
-	.set("date", DateField)
+	.set("Date", DateField)
 	.set("time", TimeField)
 	.set("autocomplete", AutoCompleteField);
 
