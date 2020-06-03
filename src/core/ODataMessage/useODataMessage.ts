@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { IODataMessage } from "./IODataMessage";
 import { IODataResponse } from "./IODataResponse";
 import { useRequest, IRequest } from "../Request";
@@ -12,6 +12,8 @@ export default function useODataMessage<TResponse>(
 	serializer: ISerializer,
 	httpClient: IHttpClient
 ): [boolean, TResponse[], number, () => void] {
+	const firstUpdate = useRef(true);
+
 	const [request, setRequest] = useState(
 		serializer.serializeMessage(message)
 	);
@@ -27,7 +29,11 @@ export default function useODataMessage<TResponse>(
 	}, [message, serializer]);
 
 	useEffect(() => {
-		updateData();
+		if (!firstUpdate.current) {
+			updateData();
+		} else {
+			firstUpdate.current = false;
+		}
 	}, [updateData, request]);
 
 	const response = serializer.deserialize<IODataResponse<TResponse>>(data);
