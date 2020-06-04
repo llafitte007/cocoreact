@@ -79,6 +79,11 @@ export default class DefaultTableFieldOptionsBuilder<
 		return this;
 	}
 
+	custom(options: Partial<ITableWidgetFieldOptions<T> & IFieldOptionsBase>) {
+		super.custom(options);
+		return this;
+	}
+
 	hidden(field: IField | string) {
 		super.hidden(field);
 		return this;

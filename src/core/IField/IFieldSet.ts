@@ -3,9 +3,11 @@ import { IField, IFieldOptionsBase } from "./IField";
 
 export default class IFieldSet<TField extends IField = IField> {
 	protected _fields: Record<string, TField & IFieldOptionsBase>;
+	private _cutomId: number;
 
 	constructor() {
 		this._fields = {};
+		this._cutomId = 0;
 	}
 
 	initialize(
@@ -24,6 +26,11 @@ export default class IFieldSet<TField extends IField = IField> {
 
 	set(field: IField | string, options: Partial<TField & IFieldOptionsBase>) {
 		const fieldName = typeof field === "string" ? field : field.name;
+		if (fieldName === "") {
+			throw new Error(
+				`you can't set a field using an empty name. Set a name or use custom() method instead`
+			);
+		}
 		let fieldOptions = {
 			name: fieldName
 		};
@@ -39,6 +46,16 @@ export default class IFieldSet<TField extends IField = IField> {
 			...options
 		};
 		this._fields[fieldName] = fieldOptions as TField & IFieldOptionsBase;
+	}
+
+	custom(options: Partial<TField & IFieldOptionsBase>) {
+		const fieldOptions = {
+			name: "",
+			...options
+		};
+		this._fields[`custom_${this._cutomId}`] = fieldOptions as TField &
+			IFieldOptionsBase;
+		this._cutomId++;
 	}
 
 	get(field: IField | string) {

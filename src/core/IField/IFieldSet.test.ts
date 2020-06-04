@@ -92,7 +92,7 @@ test("set field options (with own type)", () => {
 	expect(set.get("enabled").color).toBe(undefined);
 });
 
-test("change position ", () => {
+test("change position", () => {
 	const set = new IFieldSet();
 	set.initialize(Test.FieldsObj);
 	set.set(Test.FieldsObj.enabled, { position: 0 });
@@ -106,7 +106,7 @@ test("change position ", () => {
 	expect(fields[2].name).toBe("content");
 });
 
-test("remove using hidden ", () => {
+test("remove using hidden", () => {
 	const set = new IFieldSet();
 	set.initialize(Test.FieldsObj);
 	set.set(Test.FieldsObj.count, { hidden: true });
@@ -118,11 +118,38 @@ test("remove using hidden ", () => {
 	expect(fields[0].name).toBe("content");
 });
 
-test("throw error if field name not exists ", () => {
+test("throw error if field name not exists", () => {
 	const set = new IFieldSet();
 	set.initialize(Test.FieldsObj);
 
 	expect(() => {
 		set.get("test");
 	}).toThrow();
+});
+
+test("add custom field using set forbidden", () => {
+	const set = new IFieldSet();
+	set.initialize(Test.FieldsObj);
+
+	expect(() => {
+		set.set("", { type: "string" });
+	}).toThrow();
+});
+
+test("add custom field", () => {
+	const set = new IFieldSet();
+	set.initialize(Test.FieldsObj);
+
+	set.custom({ type: "richtext", position: 1 });
+	set.custom({
+		type: "slider",
+		name: Test.FieldsObj.count.name,
+		position: 0
+	});
+
+	const fields = set.toList();
+
+	expect(fields.length).toBe(5);
+	expect(fields[0].type).toBe("slider");
+	expect(fields[1].type).toBe("richtext");
 });

@@ -27,9 +27,9 @@ export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 	groupBy?: AutoCompleteFieldProps["groupBy"];
 	noOptionsText?: AutoCompleteFieldProps["noOptionsText"];
 	startAdornment?:
-		| TextFieldProps["startAdornment"]
-		| SelectFieldProps["startAdornment"]
-		| DateFieldProps["startAdornment"];
+	| TextFieldProps["startAdornment"]
+	| SelectFieldProps["startAdornment"]
+	| DateFieldProps["startAdornment"];
 }
 
 export function defaultFormFieldOptionsInitializer<T>(
@@ -76,6 +76,11 @@ export default class DefaultFormFieldOptionsBuilder<
 		options: Partial<IFormWidgetFieldOptions<T> & IFieldOptionsBase>
 	) {
 		super.set(field, options);
+		return this;
+	}
+
+	custom(options: Partial<IFormWidgetFieldOptions<T> & IFieldOptionsBase>) {
+		super.custom(options);
 		return this;
 	}
 

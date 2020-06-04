@@ -78,9 +78,9 @@ export default class DefaultTableODataFieldOptionsBuilder<
 		fields:
 			| ITableODataWidgetFieldOptions<T>[]
 			| Record<
-				string,
-				ITableODataWidgetFieldOptions<T> & IFieldOptionsBase
-			>
+					string,
+					ITableODataWidgetFieldOptions<T> & IFieldOptionsBase
+			  >
 	) {
 		super.initialize(fields);
 		return this;
@@ -91,6 +91,13 @@ export default class DefaultTableODataFieldOptionsBuilder<
 		options: Partial<ITableODataWidgetFieldOptions<T> & IFieldOptionsBase>
 	) {
 		super.set(field, options);
+		return this;
+	}
+
+	custom(
+		options: Partial<ITableODataWidgetFieldOptions<T> & IFieldOptionsBase>
+	) {
+		super.custom(options);
 		return this;
 	}
 

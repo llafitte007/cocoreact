@@ -31,6 +31,11 @@ export default class FormFieldOptionsBuilder<TFormField extends IFormField> {
 		return this;
 	}
 
+	custom(options: Partial<TFormField & IFieldOptionsBase>) {
+		this._fieldset.custom(options);
+		return this;
+	}
+
 	hidden(field: IField | string) {
 		this._fieldset.hidden(field);
 		return this;

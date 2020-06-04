@@ -7,14 +7,8 @@ import Table from "./Table";
 import { IField } from "../../core";
 import DefaultTableFieldOptionsBuilder from "../../DefaultTableFieldOptionsBuilder";
 import defaultTableWidgetOptionsBuilder from "../../defaultTableWidgetOptionsBuilder";
-import { EditIcon } from "../Theme";
 
 configure({ adapter: new Adapter() });
-
-// data: T[];
-// fields: TableRowFieldsProps<T>["fields"];
-// noDataLabel: TableRowEmptyProps["noDataLabel"];
-// widgetOptions: TableRowDataProps<T>["widgetOptions"];
 
 class TestResponse {
 	id: number;
@@ -33,7 +27,7 @@ class TestResponse {
 		id: { name: "id", type: "number" },
 		name: { name: "name", type: "string" },
 		enabled: { name: "enabled", type: "boolean" },
-		createdAt: { name: "createdAt", type: "date" }
+		createdAt: { name: "createdAt", type: "Date" }
 	} as Record<"id" | "name" | "enabled" | "createdAt", IField>;
 }
 
@@ -45,7 +39,14 @@ const fieldsBuilder = new DefaultTableFieldOptionsBuilder<TestResponse>()
 		label: "créer le"
 	});
 
-const widgetBuilder = defaultTableWidgetOptionsBuilder;
+function ButtonWidget({ label, href }: any) {
+	return <a href={href}>{label}</a>;
+}
+
+const widgetBuilder = defaultTableWidgetOptionsBuilder.set(
+	"link",
+	ButtonWidget
+);
 
 test("empty data table", () => {
 	const container = shallow(
@@ -91,11 +92,10 @@ test("simple data table", () => {
 	});
 });
 
-test("button", () => {
-	fieldsBuilder.set("", {
-		type: "button",
-		icon: <EditIcon />,
-		size: "medium",
+test("custom type", () => {
+	fieldsBuilder.custom({
+		type: "link",
+		label: "test",
 		href: "https://www.example.com"
 	});
 
@@ -112,6 +112,5 @@ test("button", () => {
 	);
 
 	const table = container.html();
-	expect(table).toContain("<a");
-	expect(table).toContain('href="https://www.example.com"');
+	expect(table).toContain('<a href="https://www.example.com">Test</a>');
 });

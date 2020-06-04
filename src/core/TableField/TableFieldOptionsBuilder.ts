@@ -28,6 +28,11 @@ export default class TableFieldOptionsBuilder<TTableField extends ITableField> {
 		return this;
 	}
 
+	custom(options: Partial<TTableField & IFieldOptionsBase>) {
+		this._fieldset.custom(options);
+		return this;
+	}
+
 	hidden(field: IField | string) {
 		this._fieldset.hidden(field);
 		return this;
