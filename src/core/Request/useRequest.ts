@@ -8,7 +8,7 @@ export default function useRequest<TRequest extends IRequest>(
 	request: TRequest,
 	initialValue: any,
 	httpClient: IHttpClient
-): [boolean, any, () => void] {
+): [boolean, any] {
 	const [state, setState] = useState({
 		loading: true,
 		data: initialValue,
@@ -41,15 +41,11 @@ export default function useRequest<TRequest extends IRequest>(
 
 	useEffect(() => {
 		_updateData();
-	}, []);
-
-	const updateData = useCallback(() => {
-		_updateData();
 	}, [_updateData]);
 
 	if (state.error !== null) {
 		throw state.error;
 	}
 
-	return [state.loading, state.data, updateData];
+	return [state.loading, state.data];
 }

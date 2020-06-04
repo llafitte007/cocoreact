@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useMemo } from "react";
+import { useCallback, useState } from "react";
 import { IMessage } from "./IMessage";
 import { useRequest, IRequest } from "../Request";
 import { ISerializer } from "../Serializer";
@@ -11,11 +11,15 @@ export default function useMessage<TResponse>(
 	serializer: ISerializer,
 	httpClient: IHttpClient
 ): [boolean, TResponse, () => void] {
-	const request = useMemo(() => {
-		return serializer.serializeMessage(message);
+	const [request, setRequest] = useState(
+		serializer.serializeMessage(message)
+	);
+
+	const updateData = useCallback(() => {
+		setRequest(serializer.serializeMessage(message));
 	}, [message, serializer]);
 
-	const [loading, data, updateData] = useRequest<IRequest>(
+	const [loading, data] = useRequest<IRequest>(
 		request,
 		initialValue,
 		httpClient

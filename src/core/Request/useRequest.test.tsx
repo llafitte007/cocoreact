@@ -26,7 +26,7 @@ function FakeComponent({ defaultValue }: { defaultValue: number }) {
 		defaultValue
 	]);
 
-	const [loading, counter, update] = useRequest(
+	const [loading, counter] = useRequest(
 		{} as IRequest,
 		defaultValue,
 		httpClient
@@ -35,9 +35,7 @@ function FakeComponent({ defaultValue }: { defaultValue: number }) {
 	return (
 		<div>
 			<input id="counter" value={counter} />
-			<button id="btn" onClick={() => update()} disabled={loading}>
-				update
-			</button>
+			<input id="loading" value={"" + loading} />
 		</div>
 	);
 }
@@ -46,16 +44,7 @@ test("testing initial loading, initial value & update", async () => {
 	const container = shallow(<FakeComponent defaultValue={666} />);
 
 	waitingRefresh(() => {
-		expect(container.find("#btn").prop("disabled")).toBeTruthy();
 		expect(container.find("#counter").prop("value")).toBe(666);
-	});
-
-	container.find("#btn").simulate("click");
-	expect(container.find("#btn").prop("disabled")).toBe(true);
-
-	waitingRefresh(() => {
-		expect(container.find("#btn").prop("disabled")).toBeTruthy();
-		expect(container.find("#counter").prop("value")).toBe(667);
 	});
 });
 
