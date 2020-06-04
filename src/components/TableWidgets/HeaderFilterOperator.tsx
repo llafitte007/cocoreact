@@ -80,6 +80,13 @@ export default function HeaderFilterOperator({
 	);
 	const menuCloseHandle = useCallback(() => setAnchorEl(null), []);
 
+	if (!operators.includes(value)) {
+		const operatorsStr = operators.join(", ");
+		throw new Error(
+			`The filter operator '${value}' must be include in [${operatorsStr}]`
+		);
+	}
+
 	return (
 		<Fragment>
 			<IconButton
