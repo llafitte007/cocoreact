@@ -165,7 +165,7 @@ export default function Form<TInput, TResponse>({
 			)}
 
 			{fields.map((field, idx) => (
-				<FormWidget
+				<FormWidget<TInput>
 					key={idx}
 					field={field}
 					data={data}

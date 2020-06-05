@@ -2,7 +2,10 @@
 import { IFormField } from "./IFormField";
 import { IFieldSet, IField, IFieldOptionsBase } from "../IField";
 
-export default class FormFieldOptionsBuilder<TFormField extends IFormField> {
+export default class FormFieldOptionsBuilder<
+	T,
+	TFormField extends IFormField<T>
+> {
 	private _fieldset: IFieldSet<TFormField & IFieldOptionsBase>;
 	private _defaultAutoFocus: boolean;
 	private _defaultOptionsInitializer?: (options: TFormField) => TFormField;

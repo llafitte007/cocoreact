@@ -61,7 +61,7 @@ export function defaultFormFieldOptionsInitializer<T>(
 
 export default class DefaultFormFieldOptionsBuilder<
 	T
-> extends FormFieldOptionsBuilder<IFormWidgetFieldOptions<T>> {
+> extends FormFieldOptionsBuilder<T, IFormWidgetFieldOptions<T>> {
 	constructor() {
 		super(true, defaultFormFieldOptionsInitializer);
 	}
