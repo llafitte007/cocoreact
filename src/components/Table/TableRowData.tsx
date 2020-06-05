@@ -22,7 +22,7 @@ export default function TableRowData<T>({
 }: TableRowDataProps<T>) {
 	return (
 		<TableRow>
-			{fields.map((field: ITableField, fieldIdx) => {
+			{fields.map((field: ITableField<T>, fieldIdx) => {
 				return (
 					<TableCell
 						align={field.align}
@@ -30,7 +30,7 @@ export default function TableRowData<T>({
 						scope={field.scope}
 						key={fieldIdx}
 					>
-						<TableWidget
+						<TableWidget<T>
 							field={field}
 							data={data}
 							widgetOptions={widgetOptions}
