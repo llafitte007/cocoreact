@@ -42,7 +42,7 @@ export default function HeaderFilterTableWidget<TFormField, T>({
 			widgetOptions={widgetOptions}
 			field={
 				{
-					...field,
+					...field.filter,
 					label: "",
 					startAdornment: (
 						<HeaderFilterOperator
