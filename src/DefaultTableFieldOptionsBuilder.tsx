@@ -1,27 +1,29 @@
 /* eslint-disable no-unused-vars */
-import { DateFieldProps } from "./components/TableWidgets/DateField";
-import { SwitchFieldProps } from "./components/TableWidgets/SwitchField";
-import { ButtonFieldProps } from "./components/TableWidgets/ButtonField";
+import {
+	DateTableWidgetProps,
+	SwitchTableWidgetProps,
+	ButtonTableWidgetProps,
+	ITableWidgetPropsBase
+} from "./components/TableWidgets";
 
 import { IFieldOptionsBase, IField } from "./core/IField";
 import { TableFieldOptionsBuilder, ITableField } from "./core/TableField";
-import { ITableWidgetPropsBase } from "./components/TableWidgets/ITableWidgetPropsBase";
 import { capitalize } from "./StringExtension";
 
 export interface ITableWidgetFieldOptions<T> extends ITableField<T> {
 	scope?: ITableWidgetPropsBase<T>["scope"];
 	style?: ITableWidgetPropsBase<T>["style"];
 
-	labelOn?: SwitchFieldProps["labelOn"];
-	labelOff?: SwitchFieldProps["labelOff"];
-	format?: DateFieldProps["format"];
-	formatter?: DateFieldProps["formatter"];
-	title?: ButtonFieldProps<T>["title"];
-	href?: ButtonFieldProps<T>["href"];
-	onClick?: ButtonFieldProps<T>["onClick"];
-	color?: ButtonFieldProps<T>["color"];
-	variant?: ButtonFieldProps<T>["variant"];
-	size?: ButtonFieldProps<T>["size"];
+	labelOn?: SwitchTableWidgetProps["labelOn"];
+	labelOff?: SwitchTableWidgetProps["labelOff"];
+	format?: DateTableWidgetProps["format"];
+	formatter?: DateTableWidgetProps["formatter"];
+	title?: ButtonTableWidgetProps<T>["title"];
+	href?: ButtonTableWidgetProps<T>["href"];
+	onClick?: ButtonTableWidgetProps<T>["onClick"];
+	color?: ButtonTableWidgetProps<T>["color"];
+	variant?: ButtonTableWidgetProps<T>["variant"];
+	size?: ButtonTableWidgetProps<T>["size"];
 }
 
 export function defaultTableFieldOptionsInitializer<T>(

@@ -7,23 +7,26 @@ import {
 	ODataFilterOperator,
 	TypeWidgetOptions
 } from "../../core";
-import HeaderFilter, { HeaderFilterProps } from "../TableWidgets/HeaderFilter";
+import {
+	HeaderFilterTableWidget,
+	HeaderFilterTableWidgetProps
+} from "../TableWidgets";
 
-export interface TableODataRowFiltersProps<T> {
-	fields: IODataTableField<T>[];
+export interface TableODataRowFiltersProps<TFormField, T> {
+	fields: IODataTableField<TFormField, T>[];
 	filtersValues: Record<string, any>;
 	filtersOperators: Record<string, ODataFilterOperator>;
 	widgetOptions: TypeWidgetOptions;
-	onChange: HeaderFilterProps["onChange"];
+	onChange: HeaderFilterTableWidgetProps<TFormField, T>["onChange"];
 }
 
-export default function TableODataRowFilters<T>({
+export default function TableODataRowFilters<TFormField, T>({
 	fields,
 	filtersValues,
 	filtersOperators,
 	widgetOptions,
 	onChange
-}: TableODataRowFiltersProps<T>) {
+}: TableODataRowFiltersProps<TFormField, T>) {
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {
@@ -35,7 +38,7 @@ export default function TableODataRowFilters<T>({
 						scope="col"
 					>
 						{field.filterable && (
-							<HeaderFilter
+							<HeaderFilterTableWidget
 								field={field}
 								widgetOptions={widgetOptions}
 								value={filtersValues[field.name]}

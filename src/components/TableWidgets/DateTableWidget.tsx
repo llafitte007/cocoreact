@@ -2,19 +2,19 @@
 import { useMemo } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 
-export interface DateFieldProps extends ITableWidgetPropsBase<Date> {
+export interface DateTableWidgetProps extends ITableWidgetPropsBase<Date> {
 	formatter: (d: Date, format: string) => string;
 	format?: string;
 }
 
-export default function DateField({
+export default function DateTableWidget({
 	formatter,
 	format,
 	align,
 	padding,
 	scope,
 	...props
-}: DateFieldProps) {
+}: DateTableWidgetProps) {
 	const value = useMemo(() => {
 		return formatter(props.data, format ?? "dddd Do MMMM");
 	}, [props.data, format, formatter]);

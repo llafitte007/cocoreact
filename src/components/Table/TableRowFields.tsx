@@ -3,7 +3,7 @@ import React from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 
 import { ITableField } from "../../core/TableField";
-import HeaderField from "../TableWidgets/HeaderField";
+import { HeaderTableWidget } from "../TableWidgets";
 
 export interface TableRowFieldsProps<T> {
 	fields: ITableField<T>[];
@@ -20,7 +20,7 @@ export default function TableRowFields<T>({ fields }: TableRowFieldsProps<T>) {
 						padding={field.padding}
 						scope="col"
 					>
-						<HeaderField {...field} />
+						<HeaderTableWidget {...field} />
 					</TableCell>
 				);
 			})}

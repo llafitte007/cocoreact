@@ -2,9 +2,9 @@
 import { useMemo } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 
-export interface TextFieldProps extends ITableWidgetPropsBase<any> {}
+export interface TextTableWidgetProps extends ITableWidgetPropsBase<any> {}
 
-export default function TextField({ data }: TextFieldProps) {
+export default function TextTableWidget({ data }: TextTableWidgetProps) {
 	return useMemo(() => {
 		return "" + data;
 	}, [data]);

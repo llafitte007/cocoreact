@@ -5,16 +5,13 @@ import MuiTextField from "@material-ui/core/TextField";
 import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 import { CloseIcon } from "../Theme";
 
-export interface TextFieldProps extends IFormWidgetPropsBase<string> {
+export interface TextFormWidgetProps extends IFormWidgetPropsBase<string> {
 	autoClearAdornment?: boolean;
 	autoClearIcon?: React.ReactElement<SvgIconProps>;
 	startAdornment?: React.ReactNode;
 }
 
-// export type TextFieldPropsKeys = keyof TextFieldProps;
-
-export default function TextField(props: TextFieldProps) {
-	// TODO test force all props respect TextFieldProps !!! > use a function/hook to re-use in all widget
+export default function TextFormWidget(props: TextFormWidgetProps) {
 	return (
 		<MuiTextField
 			required={props.required}

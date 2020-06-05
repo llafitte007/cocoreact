@@ -26,9 +26,9 @@ export interface SwitchFieldStyles {
 	labelContainer: any;
 }
 
-export interface SwitchFieldProps extends IFormWidgetPropsBase<boolean> {}
+export interface SwitchFormWidgetProps extends IFormWidgetPropsBase<boolean> {}
 
-export default function SwitchField(props: SwitchFieldProps) {
+export default function SwitchFormWidget(props: SwitchFormWidgetProps) {
 	const styles = useStyles() as SwitchFieldStyles;
 
 	return (

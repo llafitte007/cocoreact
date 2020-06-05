@@ -22,9 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-export interface HeaderFieldProps extends ITableFieldBase {}
+export interface HeaderTableWidgetProps extends ITableFieldBase {}
 
-export default function HeaderField({ icon, label }: HeaderFieldProps) {
+export default function HeaderTableWidget({
+	icon,
+	label
+}: HeaderTableWidgetProps) {
 	const styles = useStyles();
 
 	if (!label) {

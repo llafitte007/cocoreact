@@ -5,14 +5,14 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import MomentUtils from "@date-io/moment";
 import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
-export interface DateFieldProps extends IFormWidgetPropsBase<Date> {
+export interface DateFormWidgetProps extends IFormWidgetPropsBase<Date> {
 	format?: string;
 	minDate?: Date;
 	maxDate?: Date;
 	startAdornment?: React.ReactNode;
 }
 
-export default function DateField(props: DateFieldProps) {
+export default function DateFormWidget(props: DateFormWidgetProps) {
 	const handleChange = useCallback(
 		(d: MaterialUiPickersDate) => {
 			if (d !== null && props.onChange) {

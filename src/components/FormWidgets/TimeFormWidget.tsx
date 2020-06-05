@@ -6,11 +6,11 @@ import MomentUtils from "@date-io/moment";
 
 import { IFormWidgetPropsBase } from "./IFormWidgetPropsBase";
 
-export interface TimeFieldProps extends IFormWidgetPropsBase<string> {
+export interface TimeFormWidgetProps extends IFormWidgetPropsBase<string> {
 	minutesStep?: number;
 }
 
-export default function TimeField(props: TimeFieldProps) {
+export default function TimeFormWidget(props: TimeFormWidgetProps) {
 	const handleChange = useCallback(
 		(d: MaterialUiPickersDate) => {
 			if (d && props.onChange) {

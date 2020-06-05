@@ -9,21 +9,21 @@ import {
 } from "../../core";
 import HeaderFilterOperator from "./HeaderFilterOperator";
 
-export interface HeaderFilterProps {
-	field: IODataTableField;
+export interface HeaderFilterTableWidgetProps<TFormField, T> {
+	field: IODataTableField<TFormField, T>;
 	widgetOptions: TypeWidgetOptions;
 	value: any;
 	operator: ODataFilterOperator;
 	onChange: (name: string, operator: ODataFilterOperator, value: any) => void;
 }
 
-export default function HeaderFilter({
+export default function HeaderFilterTableWidget<TFormField, T>({
 	widgetOptions,
 	field,
 	value,
 	operator,
 	onChange
-}: HeaderFilterProps) {
+}: HeaderFilterTableWidgetProps<TFormField, T>) {
 	const operatorHandle = useCallback(
 		(newOperator: ODataFilterOperator) =>
 			onChange(field.name, newOperator, value),
@@ -35,6 +35,8 @@ export default function HeaderFilter({
 		[onChange, operator]
 	);
 
+	const operators = field.filter?.availableOperators ?? [];
+
 	return (
 		<FormWidget
 			widgetOptions={widgetOptions}
@@ -45,7 +47,7 @@ export default function HeaderFilter({
 					startAdornment: (
 						<HeaderFilterOperator
 							value={operator}
-							operators={field.filterOperators}
+							operators={operators}
 							onChange={operatorHandle}
 						/>
 					)

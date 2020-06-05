@@ -18,14 +18,14 @@ export interface SelectOption {
 	enabled?: boolean;
 }
 
-export interface SelectFieldProps extends IFormWidgetPropsBase<any> {
+export interface SelectFormWidgetProps extends IFormWidgetPropsBase<any> {
 	options?: SelectOption[];
 	renderValue?: (value: SelectProps["value"]) => React.ReactNode;
 	startAdornment?: React.ReactNode;
 	MenuProps?: Partial<defaultMenuProps>;
 }
 
-export default function SelectField(props: SelectFieldProps) {
+export default function SelectFormWidget(props: SelectFormWidgetProps) {
 	return (
 		<FormControl
 			required={props.required}

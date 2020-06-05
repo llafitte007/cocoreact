@@ -31,7 +31,7 @@ export interface AutoCompleteOption {
 	value: any;
 }
 
-export interface AutoCompleteFieldProps extends IFormWidgetPropsBase<any> {
+export interface AutoCompleteFormWidgetProps extends IFormWidgetPropsBase<any> {
 	options: AutoCompleteOption[];
 	noOptionsText?: string;
 	groupBy?: (option: AutoCompleteOption) => string;
@@ -41,7 +41,9 @@ const filterOptions = createFilterOptions({
 	stringify: (option: AutoCompleteOption) => option.label
 });
 
-export default function AutoCompleteField(props: AutoCompleteFieldProps) {
+export default function AutoCompleteFormWidget(
+	props: AutoCompleteFormWidgetProps
+) {
 	const classes = useStyles() as AutoCompleteStyles;
 
 	const value =

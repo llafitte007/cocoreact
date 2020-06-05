@@ -3,22 +3,21 @@ import React from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 
 import { IODataTableField, OrderDirection } from "../../core";
-import HeaderField from "../TableWidgets/HeaderField";
-import HeaderFieldSortable from "../TableWidgets/HeaderFieldSortable";
+import { HeaderTableWidget, HeaderSortableTableWidget } from "../TableWidgets";
 
-export interface TableODataRowFieldsProps<TFormFIeld, T> {
-	fields: IODataTableField<TFormFIeld, T>[];
+export interface TableODataRowFieldsProps<TFormField, T> {
+	fields: IODataTableField<TFormField, T>[];
 	sortName?: string;
 	sortDirection?: OrderDirection;
 	onChange: (name: string) => void;
 }
 
-export default function TableODataRowFields<TFormFIeld, T>({
+export default function TableODataRowFields<TFormField, T>({
 	fields,
 	sortName,
 	sortDirection,
 	onChange
-}: TableODataRowFieldsProps<TFormFIeld, T>) {
+}: TableODataRowFieldsProps<TFormField, T>) {
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {
@@ -30,14 +29,14 @@ export default function TableODataRowFields<TFormFIeld, T>({
 						scope="col"
 					>
 						{field.sortable && (
-							<HeaderFieldSortable
+							<HeaderSortableTableWidget
 								field={field}
 								active={field.name === sortName}
 								direction={sortDirection}
 								onClick={onChange}
 							/>
 						)}
-						{!field.sortable && <HeaderField {...field} />}
+						{!field.sortable && <HeaderTableWidget {...field} />}
 					</TableCell>
 				);
 			})}

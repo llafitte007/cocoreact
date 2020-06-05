@@ -3,16 +3,16 @@ import React, { useMemo } from "react";
 import { ITableWidgetPropsBase } from "./ITableWidgetPropsBase";
 import { ToggleOnIcon, ToggleOffIcon } from "../Theme";
 
-export interface SwitchFieldProps extends ITableWidgetPropsBase<boolean> {
+export interface SwitchTableWidgetProps extends ITableWidgetPropsBase<boolean> {
 	labelOn?: string;
 	labelOff?: string;
 }
 
-export default function SwitchField({
+export default function SwitchTableWidget({
 	data,
 	labelOn,
 	labelOff
-}: SwitchFieldProps) {
+}: SwitchTableWidgetProps) {
 	return useMemo(() => {
 		return data === true ? (
 			<ToggleOnIcon color="inherit" titleAccess={labelOn} />

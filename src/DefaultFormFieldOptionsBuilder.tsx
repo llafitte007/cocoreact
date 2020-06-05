@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { TextFieldProps } from "./components/FormWidgets/TextField";
-import { SelectFieldProps } from "./components/FormWidgets/SelectField";
-import { DateFieldProps } from "./components/FormWidgets/DateField";
-import { TimeFieldProps } from "./components/FormWidgets/TimeField";
-import { AutoCompleteFieldProps } from "./components/FormWidgets/AutoCompleteField";
+import {
+	TextFormWidgetProps,
+	SelectFormWidgetProps,
+	DateFormWidgetProps,
+	TimeFormWidgetProps,
+	AutoCompleteFormWidgetProps,
+	IFormWidgetPropsBase
+} from "./components/FormWidgets";
 
 import { IFieldOptionsBase, IField } from "./core/IField";
 import { FormFieldOptionsBuilder, IFormField } from "./core/FormField";
-import { IFormWidgetPropsBase } from "./components/FormWidgets/IFormWidgetPropsBase";
 import { slugify, capitalize } from "./StringExtension";
 
 export interface IFormWidgetFieldOptions<T> extends IFormField<T> {
@@ -16,20 +18,22 @@ export interface IFormWidgetFieldOptions<T> extends IFormField<T> {
 	margin?: IFormWidgetPropsBase<T>["margin"];
 	style?: IFormWidgetPropsBase<T>["style"];
 
-	autoClearAdornment?: TextFieldProps["autoClearAdornment"];
-	autoClearIcon?: TextFieldProps["autoClearIcon"];
-	options?: SelectFieldProps["options"] | AutoCompleteFieldProps["options"];
-	MenuProps?: SelectFieldProps["MenuProps"];
-	format?: DateFieldProps["format"];
-	minDate?: DateFieldProps["minDate"];
-	maxDate?: DateFieldProps["maxDate"];
-	minutesStep?: TimeFieldProps["minutesStep"];
-	groupBy?: AutoCompleteFieldProps["groupBy"];
-	noOptionsText?: AutoCompleteFieldProps["noOptionsText"];
+	autoClearAdornment?: TextFormWidgetProps["autoClearAdornment"];
+	autoClearIcon?: TextFormWidgetProps["autoClearIcon"];
+	options?:
+		| SelectFormWidgetProps["options"]
+		| AutoCompleteFormWidgetProps["options"];
+	MenuProps?: SelectFormWidgetProps["MenuProps"];
+	format?: DateFormWidgetProps["format"];
+	minDate?: DateFormWidgetProps["minDate"];
+	maxDate?: DateFormWidgetProps["maxDate"];
+	minutesStep?: TimeFormWidgetProps["minutesStep"];
+	groupBy?: AutoCompleteFormWidgetProps["groupBy"];
+	noOptionsText?: AutoCompleteFormWidgetProps["noOptionsText"];
 	startAdornment?:
-		| TextFieldProps["startAdornment"]
-		| SelectFieldProps["startAdornment"]
-		| DateFieldProps["startAdornment"];
+		| TextFormWidgetProps["startAdornment"]
+		| SelectFormWidgetProps["startAdornment"]
+		| DateFormWidgetProps["startAdornment"];
 }
 
 export function defaultFormFieldOptionsInitializer<T>(

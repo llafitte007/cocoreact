@@ -1,23 +1,25 @@
 /* eslint-disable no-unused-vars */
-import TextField from "./components/FormWidgets/TextField";
-import SelectField from "./components/FormWidgets/SelectField";
-import SwitchField from "./components/FormWidgets/SwitchField";
-import DateField from "./components/FormWidgets/DateField";
-import TimeField from "./components/FormWidgets/TimeField";
-import AutoCompleteField from "./components/FormWidgets/AutoCompleteField";
+import {
+	TextFormWidget,
+	SelectFormWidget,
+	SwitchFormWidget,
+	DateFormWidget,
+	TimeFormWidget,
+	AutoCompleteFormWidget
+} from "./components/FormWidgets";
 
 import { TypeWidgetOptionsBuilder } from "./core/TypeWidget";
 
 // changer add en set
 const defaultFormWidgetOptionsBuilder = new TypeWidgetOptionsBuilder()
-	.set("string", TextField)
-	.set("number", TextField)
-	.set("email", TextField)
-	.set("password", TextField)
-	.set("select", SelectField)
-	.set("boolean", SwitchField)
-	.set("Date", DateField)
-	.set("time", TimeField)
-	.set("autocomplete", AutoCompleteField);
+	.set("string", TextFormWidget)
+	.set("number", TextFormWidget)
+	.set("email", TextFormWidget)
+	.set("password", TextFormWidget)
+	.set("select", SelectFormWidget)
+	.set("boolean", SwitchFormWidget)
+	.set("Date", DateFormWidget)
+	.set("time", TimeFormWidget)
+	.set("autocomplete", AutoCompleteFormWidget);
 
 export default defaultFormWidgetOptionsBuilder;

@@ -66,12 +66,12 @@ export interface TableODataStyles {
 	loader: any;
 }
 
-export interface TableODataProps<TFormFIeld, T>
+export interface TableODataProps<TFormField, T>
 	extends ClassesStyledComponent<TableODataStyles> {
 	padding?: Padding;
 	loaderSize?: LoadingWrapperProps["loaderSize"];
-	fields: TableODataRowFieldsProps<TFormFIeld, T>["fields"];
-	filterWdigetOptions: TableODataRowFiltersProps<T>["widgetOptions"];
+	fields: TableODataRowFieldsProps<TFormField, T>["fields"];
+	filterWdigetOptions: TableODataRowFiltersProps<TFormField, T>["widgetOptions"];
 	bodyWidgetOptions: TableRowDataProps<T>["widgetOptions"];
 	noDataLabel: TableRowEmptyProps["noDataLabel"];
 	rowsPerPageOptions: TableODataRowPaginationProps["rowsPerPageOptions"];
@@ -84,7 +84,7 @@ export interface TableODataProps<TFormFIeld, T>
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
-export default function TableOData<TFormFIeld, T>({
+export default function TableOData<TFormField, T>({
 	padding,
 	fields,
 	filterWdigetOptions,
@@ -100,7 +100,7 @@ export default function TableOData<TFormFIeld, T>({
 	httpClient,
 	updateRef,
 	classes
-}: TableODataProps<TFormFIeld, T>) {
+}: TableODataProps<TFormField, T>) {
 	const styles = useStyles() as TableODataStyles;
 
 	const initialData = useMemo(() => {

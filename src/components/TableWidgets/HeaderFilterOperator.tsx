@@ -80,6 +80,10 @@ export default function HeaderFilterOperator({
 	);
 	const menuCloseHandle = useCallback(() => setAnchorEl(null), []);
 
+	if (!operators) {
+		throw new Error("You must provide at least one operators");
+	}
+
 	if (!operators.includes(value)) {
 		const operatorsStr = operators.join(", ");
 		throw new Error(

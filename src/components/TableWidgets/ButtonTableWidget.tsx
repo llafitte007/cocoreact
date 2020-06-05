@@ -8,7 +8,7 @@ import {
 	ButtonTypeMap
 } from "@material-ui/core";
 
-export interface ButtonFieldProps<T> extends ITableWidgetPropsBase<T> {
+export interface ButtonTableWidgetProps<T> extends ITableWidgetPropsBase<T> {
 	title?: string;
 	href?: string | ((data: T) => string);
 	onClick?: (data: T) => void;
@@ -17,14 +17,14 @@ export interface ButtonFieldProps<T> extends ITableWidgetPropsBase<T> {
 	size?: ButtonTypeMap["props"]["size"];
 }
 
-export default function ButtonField({
+export default function ButtonTableWidget<T>({
 	icon,
 	label,
 	data,
 	href,
 	onClick,
 	...props
-}: ButtonFieldProps) {
+}: ButtonTableWidgetProps<T>) {
 	const _href = useMemo(() => {
 		if (href !== undefined) {
 			return typeof href === "string" ? href : href(data);

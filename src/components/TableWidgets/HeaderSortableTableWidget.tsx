@@ -2,22 +2,22 @@
 import React, { useCallback } from "react";
 import { TableSortLabel } from "@material-ui/core";
 
-import HeaderField, { HeaderFieldProps } from "./HeaderField";
+import HeaderTableWidget, { HeaderTableWidgetProps } from "./HeaderTableWidget";
 import { OrderDirection } from "../../core";
 
-export interface HeaderFieldSortableProps {
-	field: HeaderFieldProps;
+export interface HeaderSortableTableWidgetProps {
+	field: HeaderTableWidgetProps;
 	active: boolean;
 	direction?: OrderDirection;
 	onClick: (name: string) => void;
 }
 
-export default function HeaderFieldSortable({
+export default function HeaderSortableTableWidget({
 	field,
 	active,
 	direction,
 	onClick
-}: HeaderFieldSortableProps) {
+}: HeaderSortableTableWidgetProps) {
 	const clickHandle = useCallback(() => onClick(field.name), [
 		onClick,
 		field.name
@@ -29,7 +29,7 @@ export default function HeaderFieldSortable({
 			direction={direction}
 			onClick={clickHandle}
 		>
-			<HeaderField {...field} />
+			<HeaderTableWidget {...field} />
 		</TableSortLabel>
 	);
 }
