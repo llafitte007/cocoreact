@@ -6,7 +6,7 @@ export interface IODataTableField<T = any> extends ITableField<T> {
 	sortable?: boolean;
 	filterable?: boolean;
 	filterDelay?: number;
-	filterOperators: ODataFilterOperator[];
+	filterOperators?: ODataFilterOperator[];
 }
 
 export interface IODataTableFieldRenderer<T> {
