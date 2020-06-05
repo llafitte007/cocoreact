@@ -8,9 +8,9 @@ import { TableFieldOptionsBuilder, ITableField } from "./core/TableField";
 import { ITableWidgetPropsBase } from "./components/TableWidgets/ITableWidgetPropsBase";
 import { capitalize } from "./StringExtension";
 
-export interface ITableWidgetFieldOptions<T = any> extends ITableField<T> {
-	scope?: ITableWidgetPropsBase["scope"];
-	style?: ITableWidgetPropsBase["style"];
+export interface ITableWidgetFieldOptions<T> extends ITableField<T> {
+	scope?: ITableWidgetPropsBase<T>["scope"];
+	style?: ITableWidgetPropsBase<T>["style"];
 
 	labelOn?: SwitchFieldProps["labelOn"];
 	labelOff?: SwitchFieldProps["labelOff"];

@@ -6,7 +6,7 @@ import AuthContext from "./AuthContext";
 export interface IAuthService {
 	getToken: () => string | null;
 	setToken: (token: string | null) => void;
-	getPayload<T = any>(token: string): T;
+	getPayload<T>(token: string): T;
 }
 
 export interface AuthContextProviderProps {

@@ -69,7 +69,7 @@ export default class JsonSerializer implements ISerializer {
 		return results.join("&");
 	}
 
-	public deserialize<TResponse = any>(data: any): TResponse {
+	public deserialize<TResponse>(data: any): TResponse {
 		if (typeof data !== "string") {
 			data = JSON.stringify(data);
 		}

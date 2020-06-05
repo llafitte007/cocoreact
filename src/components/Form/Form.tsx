@@ -55,7 +55,7 @@ export interface FormSubmitProps {
 	variant?: "text" | "outlined" | "contained";
 }
 
-export interface FormProps<TInput, TResponse = any>
+export interface FormProps<TInput, TResponse>
 	extends StyledComponent<FormStyles> {
 	initial: TInput;
 	fields: IFormField<TInput>[];
@@ -68,7 +68,7 @@ export interface FormProps<TInput, TResponse = any>
 	submit?: FormSubmitProps;
 }
 
-export default function Form<TInput, TResponse = any>({
+export default function Form<TInput, TResponse>({
 	initial,
 	fields,
 	buildMessage,

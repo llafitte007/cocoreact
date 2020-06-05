@@ -10,11 +10,11 @@ import { FormFieldOptionsBuilder, IFormField } from "./core/FormField";
 import { IFormWidgetPropsBase } from "./components/FormWidgets/IFormWidgetPropsBase";
 import { slugify, capitalize } from "./StringExtension";
 
-export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
-	fullWidth?: IFormWidgetPropsBase["fullWidth"];
-	color?: IFormWidgetPropsBase["color"];
-	margin?: IFormWidgetPropsBase["margin"];
-	style?: IFormWidgetPropsBase["style"];
+export interface IFormWidgetFieldOptions<T> extends IFormField<T> {
+	fullWidth?: IFormWidgetPropsBase<T>["fullWidth"];
+	color?: IFormWidgetPropsBase<T>["color"];
+	margin?: IFormWidgetPropsBase<T>["margin"];
+	style?: IFormWidgetPropsBase<T>["style"];
 
 	autoClearAdornment?: TextFieldProps["autoClearAdornment"];
 	autoClearIcon?: TextFieldProps["autoClearIcon"];
@@ -27,9 +27,9 @@ export interface IFormWidgetFieldOptions<T = any> extends IFormField<T> {
 	groupBy?: AutoCompleteFieldProps["groupBy"];
 	noOptionsText?: AutoCompleteFieldProps["noOptionsText"];
 	startAdornment?:
-	| TextFieldProps["startAdornment"]
-	| SelectFieldProps["startAdornment"]
-	| DateFieldProps["startAdornment"];
+		| TextFieldProps["startAdornment"]
+		| SelectFieldProps["startAdornment"]
+		| DateFieldProps["startAdornment"];
 }
 
 export function defaultFormFieldOptionsInitializer<T>(
@@ -110,11 +110,11 @@ export default class DefaultFormFieldOptionsBuilder<
 				item[slugName] = slugify(item[srcName]);
 				return item;
 			}
-		} as IFormWidgetFieldOptions);
+		} as IFormWidgetFieldOptions<T>);
 
 		this.set(slugFormField, {
 			disabled: true
-		} as IFormWidgetFieldOptions);
+		} as IFormWidgetFieldOptions<T>);
 
 		return this;
 	}

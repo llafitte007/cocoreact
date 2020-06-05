@@ -12,7 +12,7 @@ export interface IFormFieldBase extends IField {
 	className?: string;
 }
 
-export interface IFormField<T = any> extends IFormFieldBase {
+export interface IFormField<T> extends IFormFieldBase {
 	render?: (fieldProps: IFormFieldRenderer<T>) => JSX.Element;
 	onChange?: (d: T) => T;
 }

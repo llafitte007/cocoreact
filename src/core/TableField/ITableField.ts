@@ -13,7 +13,7 @@ export interface ITableFieldBase extends IField {
 	className?: string;
 }
 
-export interface ITableField<T = any> extends ITableFieldBase {
+export interface ITableField<T> extends ITableFieldBase {
 	render?: (fieldProps: ITableFieldRenderer<T>) => JSX.Element;
 }
 

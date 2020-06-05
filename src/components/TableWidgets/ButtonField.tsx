@@ -8,7 +8,7 @@ import {
 	ButtonTypeMap
 } from "@material-ui/core";
 
-export interface ButtonFieldProps<T = any> extends ITableWidgetPropsBase<T> {
+export interface ButtonFieldProps<T> extends ITableWidgetPropsBase<T> {
 	title?: string;
 	href?: string | ((data: T) => string);
 	onClick?: (data: T) => void;

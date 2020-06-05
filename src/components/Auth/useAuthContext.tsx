@@ -3,8 +3,6 @@ import { useContext } from "react";
 
 import AuthContext, { IAuthContext } from "./AuthContext";
 
-export default function useAuthContext<TPayload = any>(): IAuthContext<
-	TPayload
-> {
+export default function useAuthContext<TPayload>(): IAuthContext<TPayload> {
 	return useContext(AuthContext);
 }

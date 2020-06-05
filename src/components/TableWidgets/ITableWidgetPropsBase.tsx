@@ -2,7 +2,7 @@
 import { ITableFieldBase } from "../../core/TableField";
 import { CSSProperties } from "@material-ui/styles";
 
-export interface ITableWidgetPropsBase<T = any> extends ITableFieldBase {
+export interface ITableWidgetPropsBase<T> extends ITableFieldBase {
 	data: T;
 	style?: CSSProperties;
 }
