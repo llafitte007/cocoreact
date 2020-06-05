@@ -1,15 +1,26 @@
 /* eslint-disable no-unused-vars */
 import { ODataFilterOperator } from "./ODataFilter";
-import { ITableField } from "../TableField";
+import { ITableFieldBase } from "../TableField";
 
-export interface IODataTableField<T = any> extends ITableField<T> {
-	sortable?: boolean;
-	filterable?: boolean;
-	filterDelay?: number;
-	filterOperators?: ODataFilterOperator[];
+export interface IODataFilterFieldBase {
+	delayAfterChange?: number;
+	availableOperators?: ODataFilterOperator[];
 }
 
-export interface IODataTableFieldRenderer<T> {
-	fieldProps: IODataTableField<T>;
+export interface IODataTableFieldBase<TFormField> extends ITableFieldBase {
+	sortable?: boolean;
+	filterable?: boolean;
+	filter?: Partial<IODataFilterFieldBase & TFormField>;
+}
+
+export interface IODataTableField<TFormField, T>
+	extends IODataTableFieldBase<TFormField> {
+	render?: (
+		fieldProps: IODataTableFieldRenderer<TFormField, T>
+	) => JSX.Element;
+}
+
+export interface IODataTableFieldRenderer<TFormField, T> {
+	fieldProps: IODataTableField<TFormField, T>;
 	data: T;
 }

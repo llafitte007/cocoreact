@@ -8,11 +8,12 @@ import { TableFieldOptionsBuilder } from "./core/TableField";
 import { ITableWidgetPropsBase } from "./components/TableWidgets/ITableWidgetPropsBase";
 import { IODataTableField } from "./core/OData";
 import { capitalize } from "./StringExtension";
+import { IFormWidgetFieldOptions } from "./DefaultFormFieldOptionsBuilder";
 
-export interface ITableODataWidgetFieldOptions<T = any>
-	extends IODataTableField<T> {
-	scope?: ITableWidgetPropsBase["scope"];
-	style?: ITableWidgetPropsBase["style"];
+export interface ITableODataWidgetFieldOptions<TFormField, T>
+	extends IODataTableField<TFormField, T> {
+	scope?: ITableWidgetPropsBase<T>["scope"];
+	style?: ITableWidgetPropsBase<T>["style"];
 
 	labelOn?: SwitchFieldProps["labelOn"];
 	labelOff?: SwitchFieldProps["labelOff"];
@@ -27,7 +28,7 @@ export interface ITableODataWidgetFieldOptions<T = any>
 }
 
 export function defaultTableODataFieldOptionsInitializer<T>(
-	field: ITableODataWidgetFieldOptions<T>
+	field: ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T>
 ) {
 	let label = field.label;
 	if (label !== "") {
@@ -55,13 +56,32 @@ export function defaultTableODataFieldOptionsInitializer<T>(
 		align,
 		color,
 		variant
-	} as ITableODataWidgetFieldOptions<T>;
+	} as ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T>;
+
+	if (!field.filterable) {
+		return options;
+	}
+
+	let filter = field.filter;
+	if (filter === undefined) {
+		filter = {};
+	}
+
+	if (!filter.availableOperators) {
+		throw new Error(
+			"You must provide at least one operators in filter.availableOperators"
+		);
+	}
+
+	filter.type = filter.type ?? field.type;
+	filter.name = filter.name ?? field.name;
+	filter.autoComplete = filter.autoComplete ?? "off";
 
 	if (
-		options.filterDelay === undefined &&
-		["string", "number", "email"].includes(field.type)
+		["string", "number", "email"].includes(filter.type) &&
+		filter.delayAfterChange === undefined
 	) {
-		options.filterDelay = 400;
+		filter.delayAfterChange = 400;
 	}
 
 	return options;
@@ -69,17 +89,23 @@ export function defaultTableODataFieldOptionsInitializer<T>(
 
 export default class DefaultTableODataFieldOptionsBuilder<
 	T
-> extends TableFieldOptionsBuilder<ITableODataWidgetFieldOptions<T>> {
+> extends TableFieldOptionsBuilder<
+	ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T>
+> {
 	constructor() {
 		super(defaultTableODataFieldOptionsInitializer);
 	}
 
 	initialize(
 		fields:
-			| ITableODataWidgetFieldOptions<T>[]
+			| ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T>[]
 			| Record<
 					string,
-					ITableODataWidgetFieldOptions<T> & IFieldOptionsBase
+					ITableODataWidgetFieldOptions<
+						IFormWidgetFieldOptions<T>,
+						T
+					> &
+						IFieldOptionsBase
 			  >
 	) {
 		super.initialize(fields);
@@ -88,14 +114,20 @@ export default class DefaultTableODataFieldOptionsBuilder<
 
 	set(
 		field: IField | string,
-		options: Partial<ITableODataWidgetFieldOptions<T> & IFieldOptionsBase>
+		options: Partial<
+			ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T> &
+				IFieldOptionsBase
+		>
 	) {
 		super.set(field, options);
 		return this;
 	}
 
 	custom(
-		options: Partial<ITableODataWidgetFieldOptions<T> & IFieldOptionsBase>
+		options: Partial<
+			ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T> &
+				IFieldOptionsBase
+		>
 	) {
 		super.custom(options);
 		return this;

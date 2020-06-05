@@ -66,11 +66,11 @@ export interface TableODataStyles {
 	loader: any;
 }
 
-export interface TableODataProps<T>
+export interface TableODataProps<TFormFIeld, T>
 	extends ClassesStyledComponent<TableODataStyles> {
 	padding?: Padding;
 	loaderSize?: LoadingWrapperProps["loaderSize"];
-	fields: TableODataRowFieldsProps<T>["fields"];
+	fields: TableODataRowFieldsProps<TFormFIeld, T>["fields"];
 	filterWdigetOptions: TableODataRowFiltersProps<T>["widgetOptions"];
 	bodyWidgetOptions: TableRowDataProps<T>["widgetOptions"];
 	noDataLabel: TableRowEmptyProps["noDataLabel"];
@@ -84,7 +84,7 @@ export interface TableODataProps<T>
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
-export default function TableOData<T>({
+export default function TableOData<TFormFIeld, T>({
 	padding,
 	fields,
 	filterWdigetOptions,
@@ -100,7 +100,7 @@ export default function TableOData<T>({
 	httpClient,
 	updateRef,
 	classes
-}: TableODataProps<T>) {
+}: TableODataProps<TFormFIeld, T>) {
 	const styles = useStyles() as TableODataStyles;
 
 	const initialData = useMemo(() => {
@@ -142,13 +142,18 @@ export default function TableOData<T>({
 			setFitlersOperators(message.filter.getOperators());
 
 			const field = fields.find((x) => x.name === name);
-			if (field && field.filterDelay && field.filterDelay > 0) {
+			if (
+				field &&
+				field.filter &&
+				field.filter.delayAfterChange &&
+				field.filter.delayAfterChange > 0
+			) {
 				if (timer.current) {
 					clearTimeout(timer.current);
 				}
 				timer.current = setTimeout(() => {
 					updateData();
-				}, field.filterDelay);
+				}, field.filter.delayAfterChange as number);
 			} else {
 				updateData();
 			}
