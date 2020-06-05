@@ -59,7 +59,7 @@ export function defaultTableFieldOptionsInitializer<T>(
 
 export default class DefaultTableFieldOptionsBuilder<
 	T
-> extends TableFieldOptionsBuilder<ITableWidgetFieldOptions<T>> {
+> extends TableFieldOptionsBuilder<T, ITableWidgetFieldOptions<T>> {
 	constructor() {
 		super(defaultTableFieldOptionsInitializer);
 	}

@@ -2,7 +2,10 @@
 import { ITableField } from "./ITableField";
 import { IFieldSet, IField, IFieldOptionsBase } from "../IField";
 
-export default class TableFieldOptionsBuilder<TTableField extends ITableField> {
+export default class TableFieldOptionsBuilder<
+	T,
+	TTableField extends ITableField<T>
+> {
 	private _fieldset: IFieldSet<TTableField & IFieldOptionsBase>;
 	private _defaultOptionsInitializer?: (options: TTableField) => TTableField;
 

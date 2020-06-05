@@ -86,6 +86,7 @@ export function defaultTableODataFieldOptionsInitializer<T>(
 export default class DefaultTableODataFieldOptionsBuilder<
 	T
 > extends TableFieldOptionsBuilder<
+	T,
 	ITableODataWidgetFieldOptions<IFormWidgetFieldOptions<T>, T>
 > {
 	constructor() {

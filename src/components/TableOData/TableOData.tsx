@@ -71,7 +71,10 @@ export interface TableODataProps<TFormField, T>
 	padding?: Padding;
 	loaderSize?: LoadingWrapperProps["loaderSize"];
 	fields: TableODataRowFieldsProps<TFormField, T>["fields"];
-	filterWdigetOptions: TableODataRowFiltersProps<TFormField, T>["widgetOptions"];
+	filterWdigetOptions: TableODataRowFiltersProps<
+		TFormField,
+		T
+	>["widgetOptions"];
 	bodyWidgetOptions: TableRowDataProps<T>["widgetOptions"];
 	noDataLabel: TableRowEmptyProps["noDataLabel"];
 	rowsPerPageOptions: TableODataRowPaginationProps["rowsPerPageOptions"];
