@@ -2,7 +2,7 @@
 import { IConverter } from "./IConverter";
 import { ODataFilter, IODataFilterItem } from "../OData";
 import DateConverter from "./DateConverter";
-import { capitalize } from "../../StringExtension";
+import { capitalize } from "@material-ui/core";
 
 export default class ODataFilterConverter implements IConverter {
 	_dateConverter: DateConverter;

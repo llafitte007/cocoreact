@@ -2,7 +2,7 @@
 import { ITableField } from "./ITableField";
 import TableFieldOptionsBuilder from "./TableFieldOptionsBuilder";
 import { IField } from "../IField";
-import { capitalize } from "../../StringExtension";
+import { capitalize } from "@material-ui/core";
 
 class Test {
 	content!: string;

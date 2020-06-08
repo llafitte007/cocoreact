@@ -81,7 +81,6 @@
     "@material-ui/styles": "^4.10.0",
     "@types/axios": "^0.14.0",
     "axios": "^0.19.2",
-    "clsx": "^1.1.1",
-    "slugify": "^1.4.0"
+    "clsx": "^1.1.1"
   }
 }

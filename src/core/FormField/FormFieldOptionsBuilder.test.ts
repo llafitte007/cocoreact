@@ -2,7 +2,7 @@
 import { IFormField } from "./IFormField";
 import FormFieldOptionsBuilder from "./FormFieldOptionsBuilder";
 import { IField } from "../IField";
-import { capitalize } from "../../StringExtension";
+import { capitalize } from "@material-ui/core";
 
 class Test {
 	content!: string;

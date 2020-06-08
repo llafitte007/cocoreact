@@ -9,7 +9,6 @@ export * from "./DefaultFormErrorService";
 export * from "./JsonSerializer";
 export * from "./JwtHttpClientDecorator";
 export * from "./ThemeLocalStorage";
-export * from "./StringExtension";
 
 export * from "./components";
 export * from "./core";
