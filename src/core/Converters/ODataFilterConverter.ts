@@ -24,10 +24,13 @@ export default class ODataFilterConverter implements IConverter {
 	}
 
 	convertItem(item: IODataFilterItem): string | undefined {
-		if (!item.operator || !item.value === undefined) {
+		if (!item.operator || item.value === undefined) {
 			return undefined;
 		}
-		if (typeof item.value === "string" && !item.value) {
+		if (
+			typeof item.value === "string" &&
+			(!item.value || item.value === "" + undefined)
+		) {
 			return undefined;
 		}
 
