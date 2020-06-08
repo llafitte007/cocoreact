@@ -46,8 +46,11 @@ export default function AutoCompleteFormWidget(
 ) {
 	const classes = useStyles() as AutoCompleteStyles;
 
-	const value =
+	let value =
 		props.options && props.options.find((x) => x.value === props.value);
+	if (value === undefined && props.options && props.options.length > 0) {
+		value = props.options[0];
+	}
 
 	const handleChange = useCallback(
 		(_e: any, v: AutoCompleteOption | null) => {
@@ -55,7 +58,7 @@ export default function AutoCompleteFormWidget(
 				props.onChange && props.onChange(props.name, v.value);
 			}
 		},
-		[props.name, props.onChange]
+		[props]
 	);
 
 	return (
