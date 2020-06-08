@@ -34,7 +34,7 @@ function buildDefaultOptions(field: IFormField<any>) {
 }
 
 test("initialize from IField record", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 
 	const fields = builder.build();
@@ -45,7 +45,7 @@ test("initialize from IField record", () => {
 });
 
 test("can set parameter", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.set("content", { label: "content label" });
 
@@ -56,7 +56,7 @@ test("can set parameter", () => {
 });
 
 test("remove and change position", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.set("count", { position: 1 });
 	builder.hidden(Test.FieldsObj.enabled);
@@ -68,7 +68,7 @@ test("remove and change position", () => {
 });
 
 test("use defined default options", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>(
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>(
 		true,
 		buildDefaultOptions
 	);
@@ -86,7 +86,7 @@ test("use defined default options", () => {
 });
 
 test("first field as autofocus if no other is", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 
 	const fields = builder.build();
@@ -97,7 +97,7 @@ test("first field as autofocus if no other is", () => {
 });
 
 test("no field with autofocus", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.setDefaultAutoFocusEnabled(false);
 
@@ -108,7 +108,7 @@ test("no field with autofocus", () => {
 });
 
 test("asked field with autofocus", () => {
-	const builder = new FormFieldOptionsBuilder<IFormField<any>>();
+	const builder = new FormFieldOptionsBuilder<any, IFormField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.set(Test.FieldsObj.count, { autoFocus: true });
 

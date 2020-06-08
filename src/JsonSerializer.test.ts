@@ -3,9 +3,20 @@
 import { ODataOrderBy, ODataSelect, ODataFilter } from "./core/OData";
 import { IMessage } from "./core/Message";
 import { RequestMethod } from "./core/Request";
-import defaultJsonSerializer from "./defaultJsonSerializer";
+import JsonSerializer from "./JsonSerializer";
+import {
+	DateConverter,
+	ODataFilterConverter,
+	ODataSelectConverter,
+	ODataOrderByConverter
+} from "./core/Converters";
 
-const serializer = defaultJsonSerializer;
+const serializer = new JsonSerializer([
+	new DateConverter(),
+	new ODataFilterConverter(),
+	new ODataSelectConverter(),
+	new ODataOrderByConverter()
+]);
 
 test("serialize single value", () => {
 	expect(serializer.serialize(undefined)).toBe(undefined);

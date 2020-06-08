@@ -4,9 +4,19 @@ import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Table from "./Table";
-import { IField } from "../../core";
-import DefaultTableFieldOptionsBuilder from "../../DefaultTableFieldOptionsBuilder";
-import defaultTableWidgetOptionsBuilder from "../../defaultTableWidgetOptionsBuilder";
+import {
+	IField,
+	TypeWidgetOptionsBuilder,
+	TableFieldOptionsBuilder,
+	ITableField
+} from "../../core";
+import {
+	TextTableWidget,
+	DateTableWidget,
+	SwitchTableWidget,
+	DateTableWidgetProps
+} from "../TableWidgets";
+import { capitalize } from "@material-ui/core";
 
 configure({ adapter: new Adapter() });
 
@@ -31,22 +41,39 @@ class TestResponse {
 	} as Record<"id" | "name" | "enabled" | "createdAt", IField>;
 }
 
-const fieldsBuilder = new DefaultTableFieldOptionsBuilder<TestResponse>()
-	.initialize(TestResponse.Fields)
-	.set(TestResponse.Fields.createdAt, {
-		format: "dddd Do",
-		formatter: (d, _format) => d.toISOString(),
-		label: "créer le"
-	});
-
-function ButtonWidget({ label, href }: any) {
-	return <a href={href}>{label}</a>;
+interface TestTableField<T> extends ITableField<T> {
+	href?: string;
+	format?: DateTableWidgetProps["format"];
+	formatter?: DateTableWidgetProps["formatter"];
 }
 
-const widgetBuilder = defaultTableWidgetOptionsBuilder.set(
-	"link",
-	ButtonWidget
-);
+class TestTableFieldOptionsBuilder<T> extends TableFieldOptionsBuilder<
+	T,
+	TestTableField<T>
+> {
+	constructor() {
+		super((field) => {
+			field.label = field.label
+				? capitalize(field.label)
+				: capitalize(field.name);
+			field.format = field.format ? field.format : "dddd Do";
+			field.formatter = field.formatter
+				? field.formatter
+				: (d, _f) => "" + d;
+			return field;
+		});
+	}
+}
+
+const fieldsBuilder = new TestTableFieldOptionsBuilder<
+	TestResponse
+>().initialize(TestResponse.Fields);
+
+const widgetBuilder = new TypeWidgetOptionsBuilder()
+	.set("string", TextTableWidget)
+	.set("number", TextTableWidget)
+	.set("Date", DateTableWidget)
+	.set("boolean", SwitchTableWidget);
 
 test("empty data table", () => {
 	const container = shallow(
@@ -62,7 +89,6 @@ test("empty data table", () => {
 	expect(table).toContain("Id");
 	expect(table).toContain("Name");
 	expect(table).toContain("Enabled");
-	expect(table).toContain("Créer le");
 
 	expect(table).toContain("no provided data");
 });
@@ -88,9 +114,12 @@ test("simple data table", () => {
 	data.forEach((d) => {
 		expect(table).toContain(d.id);
 		expect(table).toContain(d.name);
-		expect(table).toContain(d.createdAt.toISOString());
 	});
 });
+
+function ButtonWidget({ label, href }: any) {
+	return <a href={href}>{label}</a>;
+}
 
 test("custom type", () => {
 	fieldsBuilder.custom({
@@ -101,6 +130,7 @@ test("custom type", () => {
 
 	const data = [new TestResponse(1)];
 	const fields = fieldsBuilder.build();
+	widgetBuilder.set("link", ButtonWidget);
 
 	const container = shallow(
 		<Table<TestResponse>

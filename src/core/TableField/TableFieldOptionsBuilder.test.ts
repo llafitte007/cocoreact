@@ -34,7 +34,7 @@ function buildDefaultOptions(field: ITableField<any>) {
 }
 
 test("initialize from IField record", () => {
-	const builder = new TableFieldOptionsBuilder<ITableField<any>>();
+	const builder = new TableFieldOptionsBuilder<any, ITableField<any>>();
 	builder.initialize(Test.FieldsObj);
 
 	const fields = builder.build();
@@ -45,7 +45,7 @@ test("initialize from IField record", () => {
 });
 
 test("can set parameter", () => {
-	const builder = new TableFieldOptionsBuilder<ITableField<any>>();
+	const builder = new TableFieldOptionsBuilder<any, ITableField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.set("content", { label: "content label" });
 
@@ -56,7 +56,7 @@ test("can set parameter", () => {
 });
 
 test("remove and change position", () => {
-	const builder = new TableFieldOptionsBuilder<ITableField<any>>();
+	const builder = new TableFieldOptionsBuilder<any, ITableField<any>>();
 	builder.initialize(Test.FieldsObj);
 	builder.set("count", { position: 1 });
 	builder.hidden(Test.FieldsObj.enabled);
@@ -68,7 +68,7 @@ test("remove and change position", () => {
 });
 
 test("use defined default options", () => {
-	const builder = new TableFieldOptionsBuilder<ITableField<any>>(
+	const builder = new TableFieldOptionsBuilder<any, ITableField<any>>(
 		buildDefaultOptions
 	);
 	builder.initialize(Test.FieldsObj);
