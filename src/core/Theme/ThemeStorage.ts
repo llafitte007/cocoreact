@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IThemeStorage } from "./components/Theme/types";
+import { IThemeStorage } from "./IThemeStorage";
 
 export default class ThemeStorage implements IThemeStorage {
 	_key: string;

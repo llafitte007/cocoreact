@@ -4,7 +4,7 @@ import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider, Theme } from "@material-ui/core/styles";
 
 import ThemeContext from "./ThemeContext";
-import { IThemeStorage } from "./types";
+import { IThemeStorage } from "../../core/Theme";
 
 export interface ThemeContextProviderProps {
 	defaultName: string;

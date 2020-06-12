@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import { ODataOrderBy, ODataSelect, ODataFilter } from "./core/OData";
-import { IMessage } from "./core/Message";
-import { RequestMethod } from "./core/Request";
+import { ODataOrderBy, ODataSelect, ODataFilter } from "../OData";
+import { IMessage } from "../Message";
+import { RequestMethod } from "../Request";
 import JsonSerializer from "./JsonSerializer";
 import {
 	DateConverter,
 	ODataFilterConverter,
 	ODataSelectConverter,
 	ODataOrderByConverter
-} from "./core/Converters";
+} from "../Converter";
 
 const serializer = new JsonSerializer([
 	new DateConverter(),

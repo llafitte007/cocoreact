@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import AxiosHttpClient from "./AxiosHttpClient";
-import { IRequest } from "./core/Request";
+import { IRequest } from "../Request";
 
 interface ITestTodo {
 	userId: number;

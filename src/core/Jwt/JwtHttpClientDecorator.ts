@@ -1,14 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { IHttpClient } from "./core/HttpClient";
-import { IRequest } from "./core/Request";
-
-export interface IRefreshJwtService {
-	responseErrorCode: number;
-	getToken(): string;
-	setToken(token: string): void;
-	buildRefreshRequest(failedRequest: IRequest): IRequest;
-	getNewTokenFromResponse(response: any): string;
-}
+import { IHttpClient } from "../HttpClient";
+import { IRequest } from "../Request";
+import { IRefreshJwtService } from "./IRefreshJwtService";
 
 export default class JwtHttpClientDecorator implements IHttpClient {
 	_decorator: IHttpClient;

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { ISerializer } from "./core/Serializer";
-import { IMessage } from "./core/Message";
-import { IRequest } from "./core/Request";
-import { IConverter } from "./core/Converters/IConverter";
+import { ISerializer } from "./ISerializer";
+import { IMessage } from "../Message";
+import { IRequest } from "../Request";
+import { IConverter } from "../Converter";
 
 export default class JsonSerializer implements ISerializer {
 	_converters: IConverter[];

@@ -10,8 +10,3 @@ export interface StyledComponent<ClassMap>
 	className?: string;
 	style?: CSSProperties;
 }
-
-export interface IThemeStorage {
-	get: () => string | undefined;
-	set: (themeName: string) => void;
-}

@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { IFormError, IFormErrorService, ISerializer } from "./core";
+import { IFormErrorService } from "./IFormErrorService";
+import { ISerializer } from "../Serializer";
+import { IFormError } from "./IFormError";
 
-export default class DefaultFormErrorService implements IFormErrorService {
+export default class FormErrorService implements IFormErrorService {
 	_errorStatus: number;
 	_serializer: ISerializer;
 
