@@ -20,6 +20,7 @@ Main features & descriptions :
 - message : hooks and functions overcoating previous request sender to add a customized serializer for the data sent and the response.
 - form builder : manage your form fields options to create fast and reusable form with your own widget.
 - table builder : same as form builder but to manage your table fields options.
+- odata : tools for odata grid (order, filter & pagination) and builder to manage table fields options.
 - url : a tools to manage all you route (with parameters) and rapid access.
 
 ## components
@@ -31,6 +32,7 @@ All components & descriptions :
 - Form : display all form field using core/form options, and manage submit using core/message.
 - Notification : a notification system (widget, context, provider, hook) to easy display different types of notification.
 - Table : display all table field using core/table options.
+- TableOData : display an odata table using core/odata options and manage column order & filter and pagination.
 - Theme : a complete theme system (context, provider, hook) to use and hot swap your app theming.
 
 A set of form and table widget to quickly start dev of your app.

@@ -17,7 +17,8 @@
     "table",
     "theme",
     "fetch",
-    "http client"
+    "http client",
+    "odata"
   ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
