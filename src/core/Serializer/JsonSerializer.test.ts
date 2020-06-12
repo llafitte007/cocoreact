@@ -90,13 +90,13 @@ test("serialize odata parts [orderBy, select, fitler]", () => {
 	const filter = new ODataFilter();
 	expect(serializer.serialize(filter)).toBe('""');
 	filter.set("test", "eq", "toto");
-	expect(serializer.serialize(filter)).toBe(`"(Test eq 'toto')"`);
+	expect(serializer.serialize(filter)).toBe(`"(test eq 'toto')"`);
 	filter.setOperator("test", "contains");
 	filter.setValue("test", "tutu");
-	expect(serializer.serialize(filter)).toBe(`"contains(Test, 'tutu')"`);
+	expect(serializer.serialize(filter)).toBe(`"contains(test, 'tutu')"`);
 	filter.set("test2", "eq", "toto");
 	expect(serializer.serialize(filter)).toBe(
-		`"contains(Test, 'tutu') and (Test2 eq 'toto')"`
+		`"contains(test, 'tutu') and (test2 eq 'toto')"`
 	);
 });
 
@@ -180,6 +180,6 @@ test("serialize message with odata", () => {
 	);
 	message.queryString?.filter.set("code", "lt", 40);
 	expect(serializer.serializeMessage(message).queryString).toBe(
-		`orderBy="name asc"&select="id,name"&filter="(Code lt '40')"&limit=10`
+		`orderBy="name asc"&select="id,name"&filter="(code lt '40')"&limit=10`
 	);
 });

@@ -2,7 +2,6 @@
 import { IConverter } from "./IConverter";
 import { ODataFilter, IODataFilterItem } from "../OData";
 import DateConverter from "./DateConverter";
-import { capitalize } from "@material-ui/core";
 
 export default class ODataFilterConverter implements IConverter {
 	_dateConverter: DateConverter;
@@ -45,12 +44,10 @@ export default class ODataFilterConverter implements IConverter {
 			valueStr = `'${item.value.toString()}'`;
 		}
 
-		const name = capitalize(item.name);
-
 		if (item.operator === "contains") {
-			return `${item.operator}(${name}, ${valueStr})`;
+			return `${item.operator}(${item.name}, ${valueStr})`;
 		}
-		return `(${name} ${item.operator} ${valueStr})`;
+		return `(${item.name} ${item.operator} ${valueStr})`;
 	}
 
 	write(data: ODataFilter) {

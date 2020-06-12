@@ -2,7 +2,6 @@
 import { IFormField } from "./IFormField";
 import FormFieldOptionsBuilder from "./FormFieldOptionsBuilder";
 import { IField } from "../IField";
-import { capitalize } from "@material-ui/core";
 
 class Test {
 	content!: string;
@@ -23,9 +22,7 @@ class Test {
 }
 
 function buildDefaultOptions(field: IFormField<any>) {
-	const label = field.label
-		? capitalize(field.label)
-		: capitalize(field.name);
+	const label = field.label ? field.label : field.name;
 	return {
 		...field,
 		label,
@@ -77,11 +74,11 @@ test("use defined default options", () => {
 
 	const fields = builder.build();
 	expect(fields.length).toBe(3);
-	expect(fields[0].label).toBe("Contenu");
+	expect(fields[0].label).toBe("contenu");
 	expect(fields[0].required).toBe(true);
-	expect(fields[1].label).toBe("Count");
+	expect(fields[1].label).toBe("count");
 	expect(fields[1].required).toBe(true);
-	expect(fields[2].label).toBe("Enabled");
+	expect(fields[2].label).toBe("enabled");
 	expect(fields[2].required).toBe(true);
 });
 
