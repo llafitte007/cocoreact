@@ -73,6 +73,9 @@ export default class JsonSerializer implements ISerializer {
 	}
 
 	public deserialize<TResponse>(data: any): TResponse {
+		if (!data) {
+			return (undefined as unknown) as TResponse;
+		}
 		if (typeof data !== "string") {
 			data = JSON.stringify(data);
 		}
