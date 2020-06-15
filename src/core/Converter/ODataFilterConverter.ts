@@ -28,7 +28,7 @@ export default class ODataFilterConverter implements IConverter {
 		}
 		if (
 			typeof item.value === "string" &&
-			(!item.value || item.value === "" + undefined)
+			(!item.value || item.value === "undefined")
 		) {
 			return undefined;
 		}
@@ -41,7 +41,7 @@ export default class ODataFilterConverter implements IConverter {
 		} else if (item.value === true || item.value === false) {
 			valueStr = item.value === true ? "true" : "false";
 		} else {
-			valueStr = `'${item.value.toString()}'`;
+			valueStr = `'${item.value.toString().replace(/'/g, "''")}'`;
 		}
 
 		if (item.operator === "contains") {

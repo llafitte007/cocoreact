@@ -29,14 +29,14 @@ test("serialize single value", () => {
 	expect(serializer.serialize(false)).toBe("false");
 
 	expect(serializer.serialize("string to serialize")).toBe(
-		'"string to serialize"'
+		"string to serialize"
 	);
 
 	expect(serializer.serialize(1)).toBe("1");
 	expect(serializer.serialize(3.14)).toBe("3.14");
 
 	const date = new Date(1986, 11, 9);
-	expect(serializer.serialize(date)).toBe('"1986-12-09T00:00:00.000Z"');
+	expect(serializer.serialize(date)).toBe("1986-12-09T00:00:00.000Z");
 });
 
 test("serialize object", () => {
@@ -71,32 +71,32 @@ test("serialize array", () => {
 
 test("serialize odata parts [orderBy, select, fitler]", () => {
 	const orderBy = new ODataOrderBy();
-	expect(serializer.serialize(orderBy)).toBe('""');
+	expect(serializer.serialize(orderBy)).toBe("");
 	orderBy.set("test");
-	expect(serializer.serialize(orderBy)).toBe('"test asc"');
+	expect(serializer.serialize(orderBy)).toBe("test asc");
 	orderBy.set("test");
-	expect(serializer.serialize(orderBy)).toBe('"test desc"');
+	expect(serializer.serialize(orderBy)).toBe("test desc");
 	orderBy.set("toto");
-	expect(serializer.serialize(orderBy)).toBe('"toto asc"');
+	expect(serializer.serialize(orderBy)).toBe("toto asc");
 
 	const select = new ODataSelect();
-	expect(serializer.serialize(select)).toBe('""');
+	expect(serializer.serialize(select)).toBe("");
 	select.members.push("test");
-	expect(serializer.serialize(select)).toBe('"test"');
+	expect(serializer.serialize(select)).toBe("test");
 	select.members.push("toto");
 	select.members.push("tutu");
-	expect(serializer.serialize(select)).toBe('"test,toto,tutu"');
+	expect(serializer.serialize(select)).toBe("test,toto,tutu");
 
 	const filter = new ODataFilter();
-	expect(serializer.serialize(filter)).toBe('""');
+	expect(serializer.serialize(filter)).toBe("");
 	filter.set("test", "eq", "toto");
-	expect(serializer.serialize(filter)).toBe(`"(test eq 'toto')"`);
+	expect(serializer.serialize(filter)).toBe("(test eq 'toto')");
 	filter.setOperator("test", "contains");
 	filter.setValue("test", "tutu");
-	expect(serializer.serialize(filter)).toBe(`"contains(test, 'tutu')"`);
-	filter.set("test2", "eq", "toto");
+	expect(serializer.serialize(filter)).toBe("contains(test, 'tutu')");
+	filter.set("test2", "eq", "to'to");
 	expect(serializer.serialize(filter)).toBe(
-		`"contains(test, 'tutu') and (test2 eq 'toto')"`
+		"contains(test, 'tutu') and (test2 eq 'to''to')"
 	);
 });
 
@@ -171,15 +171,15 @@ test("serialize message with odata", () => {
 	expect(serializer.serializeMessage(message).queryString).toBe("limit=10");
 	message.queryString?.orderBy.set("name");
 	expect(serializer.serializeMessage(message).queryString).toBe(
-		`orderBy="name asc"&limit=10`
+		"orderBy=name asc&limit=10"
 	);
 	message.queryString?.select.members.push("id");
 	message.queryString?.select.members.push("name");
 	expect(serializer.serializeMessage(message).queryString).toBe(
-		`orderBy="name asc"&select="id,name"&limit=10`
+		"orderBy=name asc&select=id,name&limit=10"
 	);
 	message.queryString?.filter.set("code", "lt", 40);
 	expect(serializer.serializeMessage(message).queryString).toBe(
-		`orderBy="name asc"&select="id,name"&filter="(code lt '40')"&limit=10`
+		"orderBy=name asc&select=id,name&filter=(code lt '40')&limit=10"
 	);
 });

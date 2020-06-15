@@ -26,7 +26,12 @@ export default class JsonSerializer implements ISerializer {
 
 	public serialize(data: any): string | undefined | null {
 		if (data === undefined || data === null) return undefined;
-		return JSON.stringify(data, this._jsonStringify);
+
+		let vStr = JSON.stringify(data, this._jsonStringify);
+		if (vStr[0] === '"' && vStr[vStr.length - 1] === '"') {
+			vStr = vStr.substr(1, vStr.length - 2);
+		}
+		return vStr;
 	}
 
 	private _jsonStringify = (_key: string, value: any) => {
@@ -57,9 +62,7 @@ export default class JsonSerializer implements ISerializer {
 			}
 
 			const vStr = this.serialize(v);
-			if (!vStr || vStr === '""') {
-				return;
-			}
+			if (!vStr) return;
 
 			results.push(`${kStr}=${vStr}`);
 		});
