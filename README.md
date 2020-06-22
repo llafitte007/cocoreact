@@ -16,8 +16,8 @@ npm install --save cocoreact
 
 Main features & descriptions :
 
-- request : use hooks or/and functions to easly send a request using a specified http client.
-- message : hooks and functions overcoating previous request sender to add a customized serializer for the data sent and the response.
+- request : use hooks or/and functions to easily send a request using a specified http client.
+- message : hooks and functions overcoating previous request sender to add a custom serializer for exchange data.
 - form builder : manage your form fields options to create fast and reusable form with your own widget.
 - table builder : same as form builder but to manage your table fields options.
 - odata : tools for odata grid (order, filter & pagination) and builder to manage table fields options.
@@ -27,14 +27,14 @@ Main features & descriptions :
 
 All components & descriptions :
 
-- Auth : a complete auth system (context, provider, hook) to manage an auth token based with your personnal auth service.
-- ErrorBoundary : an error boundary to catch error and display your sepcified component.
-- Form : display all form field using core/form options, and manage submit using core/message.
+- Auth : a complete auth system (context, provider, hook) to manage an auth token based with your personal auth service.
+- ErrorBoundary : an error boundary to catch error and display your specified component.
+- Form : display all form field using core/form options, and manage submit using core/message (*).
 - Notification : a notification system (widget, context, provider, hook) to easy display different types of notification.
-- Table : display all table field using core/table options.
-- TableOData : display an odata table using core/odata options and manage column order & filter and pagination.
+- Table : display all table field using core/table options (*).
+- TableOData : display an odata table using core/odata options and manage column order & filter and pagination (*).
 - Theme : a complete theme system (context, provider, hook) to use and hot swap your app theming.
 
-A set of form and table widget to quickly start dev of your app.
+*\*a set of form and table widget to quickly start dev of your app.*
 
 ### License MIT ©
