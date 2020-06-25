@@ -9,6 +9,9 @@ export interface TextFormWidgetProps extends IFormWidgetPropsBase<string> {
 	autoClearAdornment?: boolean;
 	autoClearIcon?: React.ReactElement<SvgIconProps>;
 	startAdornment?: React.ReactNode;
+	multiline?: boolean;
+	rowsMax?: string | number;
+	rows?: string | number;
 }
 
 export default function TextFormWidget(props: TextFormWidgetProps) {
@@ -30,6 +33,9 @@ export default function TextFormWidget(props: TextFormWidgetProps) {
 			placeholder={props.placeholder}
 			autoComplete={props.autoComplete}
 			autoFocus={props.autoFocus}
+			multiline={props.multiline}
+			rowsMax={props.rowsMax}
+			rows={props.rows}
 			onChange={(e) => {
 				const value = e.target.value;
 				props.onChange && props.onChange(props.name, value);
