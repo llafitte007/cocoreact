@@ -2,11 +2,18 @@ export default class Url {
 	private _name: string;
 	private _path: string;
 	private _base: string;
+	private _hash: string | undefined;
 
-	constructor(name: string, path: string, base: string = "") {
+	constructor(
+		name: string,
+		path: string,
+		base: string = "",
+		hash: string | undefined = undefined
+	) {
 		this._name = name;
 		this._path = path;
 		this._base = base;
+		this._hash = hash;
 	}
 
 	public clone(): Url {
@@ -18,7 +25,9 @@ export default class Url {
 	}
 
 	public fullPath(): string {
-		return this._base + this._path;
+		let hash = this._hash ? `#${this._hash}` : "";
+		hash = hash.replace("##", "#"); // case where _hash start with '#'
+		return this._base + this._path + hash;
 	}
 
 	public isMatch(
@@ -56,6 +65,11 @@ export default class Url {
 			);
 		}
 
+		return this;
+	}
+
+	public setHash(hash: string | undefined): Url {
+		this._hash = hash;
 		return this;
 	}
 }
