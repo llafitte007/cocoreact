@@ -24,18 +24,14 @@ export default function useRequest<TRequest extends IRequest>(
 
 	const _updateData = useCallback(async () => {
 		try {
-			setState((s) => {
-				return { ...s, loading: true };
-			});
+			setState((s) => ({ ...s, loading: true }));
 
 			const data = await httpClient.sendRequest<TRequest>(request);
 			if (_isMounted.current) {
 				setState({ data, loading: false, error: null });
 			}
 		} catch (e) {
-			setState((s) => {
-				return { ...s, loading: false, error: e };
-			});
+			setState((s) => ({ ...s, loading: false, error: e }));
 		}
 	}, [request, httpClient]);
 
