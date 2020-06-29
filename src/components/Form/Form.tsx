@@ -200,7 +200,7 @@ export default function Form<TInput, TResponse>({
 						) : undefined
 					}
 				>
-					{submit?.label ?? "Sauvegarder"}
+					{submit?.label ?? "Save"}
 				</Button>
 			</div>
 		</form>
