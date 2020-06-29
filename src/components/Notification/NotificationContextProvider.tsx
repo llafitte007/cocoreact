@@ -34,46 +34,39 @@ export default function NotificationContextProvider({
 			clear();
 			// use timeout to waiting refresh render after clear
 			setTimeout(() => {
-				setState((_s) => {
-					return { type, message };
-				});
+				setState((_s) => ({ type, message }));
 			}, 100);
 		},
 		[clear]
 	);
 
 	const info = useCallback(
-		(message: string) => {
-			setNotification("info", message);
-		},
+		(message: string) => setNotification("info", message),
 		[setNotification]
 	);
-
 	const success = useCallback(
-		(message: string) => {
-			setNotification("success", message);
-		},
+		(message: string) => setNotification("success", message),
 		[setNotification]
 	);
-
 	const warning = useCallback(
-		(message: string) => {
-			setNotification("warning", message);
-		},
+		(message: string) => setNotification("warning", message),
+		[setNotification]
+	);
+	const error = useCallback(
+		(message: string) => setNotification("error", message),
 		[setNotification]
 	);
 
-	const error = useCallback(
-		(message: string) => {
-			setNotification("error", message);
-		},
-		[setNotification]
-	);
+	const value = useMemo(() => ({ info, success, warning, error, clear }), [
+		info,
+		success,
+		warning,
+		error,
+		clear
+	]);
 
 	return (
-		<NotificationContext.Provider
-			value={{ info, success, warning, error, clear }}
-		>
+		<NotificationContext.Provider value={value}>
 			{children}
 			{state && (
 				<Component

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 
 import AuthContext from "./AuthContext";
 
@@ -48,11 +48,12 @@ export default function AuthContextProvider<TPayload>({
 		[authService]
 	);
 
+	const value = useMemo(
+		() => ({ mounted, logged, payload, setToken: setNewToken }),
+		[mounted, logged, payload, setNewToken]
+	);
+
 	return (
-		<AuthContext.Provider
-			value={{ mounted, logged, payload, setToken: setNewToken }}
-		>
-			{children}
-		</AuthContext.Provider>
+		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 	);
 }

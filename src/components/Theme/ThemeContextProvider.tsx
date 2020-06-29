@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider, Theme } from "@material-ui/core/styles";
 
@@ -52,8 +52,10 @@ export default function ThemeContextProvider({
 		[setName, themes]
 	);
 
+	const value = useMemo(() => ({ set, name, theme }), [set, name, theme]);
+
 	return (
-		<ThemeContext.Provider value={{ set, name, theme }}>
+		<ThemeContext.Provider value={value}>
 			<MuiThemeProvider theme={theme}>
 				<CssBaseline />
 				{children}
