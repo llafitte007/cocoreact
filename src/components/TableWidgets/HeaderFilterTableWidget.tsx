@@ -44,6 +44,7 @@ export default function HeaderFilterTableWidget<TFormField, T>({
 				{
 					...field.filter,
 					label: "",
+					autoClearAdornment: true,
 					startAdornment: (
 						<HeaderFilterOperator
 							value={operator}
