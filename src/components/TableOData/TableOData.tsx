@@ -81,7 +81,7 @@ export interface TableODataProps<TFormField, T>
 	rowsPerPageLabel: TableODataRowPaginationProps["rowsPerPageLabel"];
 	displayedRowLabel: TableODataRowPaginationProps["displayedRowLabel"];
 
-	buildMessage: () => IODataMessage;
+	message: IODataMessage;
 	serializer: ISerializer;
 	httpClient: IHttpClient;
 	updateRef?: React.RefObject<HTMLButtonElement>;
@@ -98,7 +98,7 @@ export default function TableOData<TFormField, T>({
 	rowsPerPageLabel,
 	displayedRowLabel,
 
-	buildMessage,
+	message,
 	serializer,
 	httpClient,
 	updateRef,
@@ -111,8 +111,6 @@ export default function TableOData<TFormField, T>({
 			d: { __count: 0, results: [] }
 		} as unknown) as IODataResponse<T>;
 	}, []);
-
-	const message = useMemo(() => buildMessage(), [buildMessage]);
 
 	const timer = useRef<NodeJS.Timeout | null>(null);
 	const [filtersValues, setFiltersValues] = useState(

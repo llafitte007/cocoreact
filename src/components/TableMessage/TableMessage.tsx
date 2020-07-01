@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo } from "react";
+import React from "react";
 
 import { Table, TableProps } from "../Table";
 import { LoadingWrapper, LoadingWrapperProps } from "../LoadingWrapper";
@@ -16,14 +16,14 @@ export interface TableMessageProps<T> {
 	};
 	loaderSize?: LoadingWrapperProps["loaderSize"];
 
-	buildMessage: () => IMessage;
+	message: IMessage;
 	serializer: ISerializer;
 	httpClient: IHttpClient;
 	updateRef?: React.RefObject<HTMLButtonElement>;
 }
 
 export default function TableMessage<T>({
-	buildMessage,
+	message,
 	serializer,
 	httpClient,
 	updateRef,
@@ -32,8 +32,6 @@ export default function TableMessage<T>({
 	classes,
 	...props
 }: TableMessageProps<T>) {
-	const message = useMemo(() => buildMessage(), [buildMessage]);
-
 	const [loading, data, updateData] = useMessage<T[]>(
 		message,
 		[],
