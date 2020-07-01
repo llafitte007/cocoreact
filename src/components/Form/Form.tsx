@@ -1,21 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useCallback } from "react";
 import clsx from "clsx";
-import {
-	Button,
-	PropTypes,
-	Theme,
-	makeStyles,
-	createStyles,
-	SvgIconProps
-} from "@material-ui/core";
+import { Theme, makeStyles, createStyles } from "@material-ui/core";
 
 import { IMessage } from "../../core/Message";
 import { IFormField } from "../../core/FormField";
 import { IFormError, IFormErrorService } from "../../core/FormError";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
 import FormWidget from "./FormWidget";
-import { StyledComponent, CircularProgress } from "../Theme";
+import { StyledComponent } from "../Theme";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -30,10 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: theme.palette.primary.main,
 			color: theme.palette.getContrastText(theme.palette.primary.main),
 			borderRadius: theme.shape.borderRadius
-		},
-		submit: {
-			marginTop: theme.spacing(1) * 2,
-			marginLeft: "auto"
 		}
 	} as FormStyles)
 );
@@ -42,17 +31,14 @@ export interface FormStyles {
 	form: any;
 	errorContainer: any;
 	errorLabel: any;
-	submit: any;
 }
 
-export interface FormSubmitProps {
-	hidden?: boolean;
-	label?: string;
-	icon?: React.ReactElement<SvgIconProps>;
-	ref?: React.RefObject<HTMLButtonElement>;
-	classname?: string;
-	color?: PropTypes.Color;
-	variant?: "text" | "outlined" | "contained";
+export interface FormChildrenRenderProps<TInput> {
+	loading: boolean;
+	data: TInput;
+	error: string | null;
+	fieldsErrors: IFormError[];
+	updateValue: (fieldname: string, value: any) => void;
 }
 
 export interface FormProps<TInput, TResponse>
@@ -65,7 +51,10 @@ export interface FormProps<TInput, TResponse>
 	errorService: IFormErrorService;
 	onSuccess?: (response: TResponse) => void;
 	onError?: (error: any) => void;
-	submit?: FormSubmitProps;
+	onComplete?: () => void;
+	children?: (
+		props: FormChildrenRenderProps<TInput>
+	) => React.ReactNode | React.ReactNode[];
 }
 
 export default function Form<TInput, TResponse>({
@@ -77,7 +66,8 @@ export default function Form<TInput, TResponse>({
 	errorService,
 	onSuccess,
 	onError,
-	submit,
+	onComplete,
+	children,
 
 	className,
 	classes,
@@ -106,6 +96,18 @@ export default function Form<TInput, TResponse>({
 			});
 		},
 		[fields]
+	);
+
+	const childrenProps = React.useMemo(
+		() =>
+			({
+				loading,
+				data,
+				error,
+				fieldsErrors,
+				updateValue: handleChange
+			} as FormChildrenRenderProps<TInput>),
+		[loading, data, error, fieldsErrors, handleChange]
 	);
 
 	const handleSubmit = useCallback(
@@ -141,6 +143,8 @@ export default function Form<TInput, TResponse>({
 					throw err;
 				}
 			}
+
+			onComplete && onComplete();
 		},
 		[data, buildMessage, onError, onSuccess, sendMessage]
 	);
@@ -175,34 +179,7 @@ export default function Form<TInput, TResponse>({
 				/>
 			))}
 
-			<div
-				style={{
-					display: submit?.hidden === false ? "none" : "flex",
-					flexDirection: "row"
-				}}
-			>
-				<Button
-					type="submit"
-					color={submit?.color ?? "secondary"}
-					variant={submit?.variant ?? "contained"}
-					disabled={loading}
-					ref={submit?.ref}
-					className={clsx(
-						styles.submit,
-						classes?.submit,
-						submit?.classname
-					)}
-					endIcon={
-						loading && submit?.icon ? (
-							<CircularProgress size={18} />
-						) : !loading && submit?.icon ? (
-							submit.icon
-						) : undefined
-					}
-				>
-					{submit?.label ?? "Save"}
-				</Button>
-			</div>
+			{children && children(childrenProps)}
 		</form>
 	);
 }
