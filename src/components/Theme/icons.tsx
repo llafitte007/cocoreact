@@ -1,35 +1,15 @@
 import React from "react";
-import { SvgIcon, CircularProgress } from "@material-ui/core";
+import { SvgIcon } from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
 import InfoIcon from "@material-ui/icons/Info";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import SaveIcon from "@material-ui/icons/Save";
-import CloseIcon from "@material-ui/icons/Close";
-import SearchIcon from "@material-ui/icons/Search";
-import SettingsIcon from "@material-ui/icons/Settings";
-import PreviousIcon from "@material-ui/icons/ArrowBack";
-import ArchiveIcon from "@material-ui/icons/Archive";
-import UnarchiveIcon from "@material-ui/icons/Unarchive";
-import CheckedIcon from "@material-ui/icons/CheckCircle";
-import UnCheckedIcon from "@material-ui/icons/CheckCircleOutline";
-import ClockIcon from "@material-ui/icons/Alarm";
-import ClockOffIcon from "@material-ui/icons/AlarmOff";
-import AddImageIcon from "@material-ui/icons/AddPhotoAlternate";
-import TimelineIcon from "@material-ui/icons/Timeline";
-import ContactIcon from "@material-ui/icons/ContactMail";
-import SendIcon from "@material-ui/icons/Send";
-import LockIcon from "@material-ui/icons/LockOutlined";
-import AccountIcon from "@material-ui/icons/AccountCircle";
+import SuccessIcon from "@material-ui/icons/CheckCircle";
 import WarningIcon from "@material-ui/icons/Warning";
 import ErrorIcon from "@material-ui/icons/Error";
-import LogoutIcon from "@material-ui/icons/ExitToApp";
+import CloseIcon from "@material-ui/icons/Close";
+
+import ContainsIcon from "@material-ui/icons/Search";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
-import DescriptionIcon from "@material-ui/icons/Description";
-import InvertColorsIcon from "@material-ui/icons/InvertColors";
-import BrightnessIcon from "@material-ui/icons/BrightnessMedium";
 import EqualIcon from "@material-ui/icons/DragHandle";
 import LessThanIcon from "@material-ui/icons/ChevronLeft";
 import GreaterThanIcon from "@material-ui/icons/ChevronRight";
@@ -79,40 +59,15 @@ function GreaterThanOrEqualIcon(props: any) {
 	);
 }
 
-export { CircularProgress };
-
 export {
-	MenuIcon,
 	InfoIcon,
-	AddIcon,
-	SaveIcon,
-	EditIcon,
 	CloseIcon,
-	SearchIcon,
-	PreviousIcon,
-	SettingsIcon,
-	ArchiveIcon,
-	UnarchiveIcon,
-	CheckedIcon,
-	UnCheckedIcon,
-	ClockIcon,
-	ClockOffIcon,
-	AddImageIcon,
-	TimelineIcon,
-	ContactIcon,
-	SendIcon,
-	LockIcon,
-	AccountIcon,
-	CheckedIcon as SuccessIcon,
+	SuccessIcon,
 	WarningIcon,
 	ErrorIcon,
-	LogoutIcon,
 	ToggleOnIcon,
 	ToggleOffIcon,
-	DescriptionIcon,
-	InvertColorsIcon,
-	BrightnessIcon,
-	SearchIcon as ContainsIcon,
+	ContainsIcon,
 	EqualIcon,
 	NotEqualIcon,
 	LessThanIcon,
