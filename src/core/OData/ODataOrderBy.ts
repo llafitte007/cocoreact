@@ -11,8 +11,10 @@ export default class ODataOrderBy {
 		Object.assign(this, init);
 	}
 
-	set(newMember: string) {
-		if (newMember === this.member) {
+	set(newMember: string, direction: OrderDirection | undefined = undefined) {
+		if (direction) {
+			this.direction = direction;
+		} else if (newMember === this.member) {
 			this.direction = this.direction === "asc" ? "desc" : "asc";
 		} else {
 			this.direction = "asc";
