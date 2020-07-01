@@ -100,7 +100,7 @@ test("serialize odata parts [orderBy, select, fitler]", () => {
 	);
 });
 
-class CustomrMessage implements IMessage {
+class CustomMessage implements IMessage {
 	path!: string;
 	method!: RequestMethod;
 	needAuth!: boolean;
@@ -113,13 +113,13 @@ class CustomrMessage implements IMessage {
 	getQueryString = () => this.queryString;
 	getBody = () => this.body;
 
-	constructor(init: Partial<CustomrMessage>) {
+	constructor(init: Partial<CustomMessage>) {
 		Object.assign(this, init);
 	}
 }
 
 test("serialize simple message", () => {
-	const message = new CustomrMessage({
+	const message = new CustomMessage({
 		path: "/users",
 		method: "GET",
 		needAuth: false
@@ -134,7 +134,7 @@ test("serialize simple message", () => {
 });
 
 test("serialize message with authentication", () => {
-	const message = new CustomrMessage({
+	const message = new CustomMessage({
 		needAuth: true
 	});
 	const data = serializer.serializeMessage(message);
@@ -143,7 +143,7 @@ test("serialize message with authentication", () => {
 });
 
 test("serialize message with body", () => {
-	const message = new CustomrMessage({
+	const message = new CustomMessage({
 		body: {
 			str: "str",
 			count: 10,
@@ -159,7 +159,7 @@ test("serialize message with body", () => {
 });
 
 test("serialize message with odata", () => {
-	const message = new CustomrMessage({
+	const message = new CustomMessage({
 		queryString: {
 			orderBy: new ODataOrderBy(),
 			select: new ODataSelect(),
@@ -181,5 +181,13 @@ test("serialize message with odata", () => {
 	message.queryString?.filter.set("code", "lt", 40);
 	expect(serializer.serializeMessage(message).queryString).toBe(
 		"orderBy=name asc&select=id,name&filter=(code lt '40')&limit=10"
+	);
+	message.queryString?.filter.set(
+		"name",
+		"contains",
+		"test&[]='specialchar'"
+	);
+	expect(serializer.serializeMessage(message).queryString).toBe(
+		"orderBy=name asc&select=id,name&filter=(code lt '40') and contains(name, 'test%26%5B%5D%3D''specialchar''')&limit=10"
 	);
 });

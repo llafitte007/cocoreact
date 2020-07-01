@@ -64,12 +64,18 @@ export default class JsonSerializer implements ISerializer {
 			const vStr = this.serialize(v);
 			if (!vStr) return;
 
-			results.push(`${kStr}=${vStr}`);
+			results.push(`${kStr}=${this.encodeURI(vStr)}`);
 		});
 
 		if (results.length === 0) return undefined;
 
 		return results.join("&");
+	}
+
+	protected encodeURI(str: string) {
+		return encodeURIComponent(str)
+			.replace(/%20/g, " ")
+			.replace(/%2C/g, ",");
 	}
 
 	public deserialize<TResponse>(data: any): TResponse {
