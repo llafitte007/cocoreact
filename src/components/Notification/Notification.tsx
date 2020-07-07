@@ -110,7 +110,7 @@ export default function Notification({
 			autoHideDuration={autoHideDuration}
 			anchorOrigin={{
 				vertical: position?.vertical ?? "bottom",
-				horizontal: position?.horizontal ?? "left"
+				horizontal: position?.horizontal ?? "right"
 			}}
 			className={clsx(styles.snackbar, classes?.snackbar, className)}
 			style={style}
