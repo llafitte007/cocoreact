@@ -172,6 +172,12 @@ export default function TableOData<TFormField, T>({
 		[message, updateData]
 	);
 
+	const manualUpdateHandle = useCallback(() => {
+		setFiltersValues(message.filter.getValues());
+		setFitlersOperators(message.filter.getOperators());
+		updateData();
+	}, [message.filter, updateData]);
+
 	return (
 		<LoadingWrapper
 			loading={loading}
@@ -237,7 +243,7 @@ export default function TableOData<TFormField, T>({
 				</MuiTableFooter>
 			</MuiTable>
 			<button
-				onClick={updateData}
+				onClick={manualUpdateHandle}
 				style={{ display: "none" }}
 				ref={updateRef}
 			/>
