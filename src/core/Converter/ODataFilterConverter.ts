@@ -45,7 +45,7 @@ export default class ODataFilterConverter implements IConverter {
 		}
 
 		if (item.operator === "contains") {
-			return `${item.operator}(${item.name}, ${valueStr})`;
+			return `${item.operator}(toLower(${item.name}), ${valueStr})`;
 		}
 		return `(${item.name} ${item.operator} ${valueStr})`;
 	}
