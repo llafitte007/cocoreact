@@ -6,6 +6,6 @@ export interface TextTableWidgetProps extends ITableWidgetPropsBase<any> {}
 
 export default function TextTableWidget({ data }: TextTableWidgetProps) {
 	return useMemo(() => {
-		return "" + data;
+		return data ?? "";
 	}, [data]);
 }

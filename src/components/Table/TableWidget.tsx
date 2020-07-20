@@ -4,20 +4,6 @@ import React, { useMemo } from "react";
 import { ITableField } from "../../core/TableField";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
 
-function useTableFieldValue<T>(fieldName: string, data: any): T {
-	return useMemo(() => {
-		if (fieldName === "") return data;
-		if (data[fieldName] === undefined) {
-			throw new Error(
-				`invalid fieldName '${fieldName}' in data : ${JSON.stringify(
-					data
-				)}`
-			);
-		}
-		return data[fieldName] as T;
-	}, [fieldName, data]);
-}
-
 export interface TableWidgetProps<T> {
 	field: ITableField<T>;
 	data: any;
@@ -29,7 +15,10 @@ export default function TableWidget<T>({
 	data,
 	widgetOptions
 }: TableWidgetProps<T>) {
-	const fieldData = useTableFieldValue(field.name, data);
+	const fieldData = useMemo(
+		() => field.name ? data[field.name] : data,
+		[field.name, data]
+	);
 
 	if (field.render !== undefined) {
 		return field.render({
