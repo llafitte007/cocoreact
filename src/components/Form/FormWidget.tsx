@@ -31,17 +31,21 @@ export interface FormWidgetProps<T> {
 	widgetOptions: TypeWidgetOptions;
 }
 
-export default function FormWidget<T>(props: FormWidgetProps<T>) {
-	const { field, onChange, widgetOptions } = props;
-
-	const fieldValue = useFormFieldValue(field.name, props.data);
-	const fieldError = useFormFieldError(field.name, props.errors);
+export default function FormWidget<T>({
+	field,
+	data,
+	errors,
+	onChange,
+	widgetOptions
+}: FormWidgetProps<T>) {
+	const fieldValue = useFormFieldValue(field.name, data);
+	const fieldError = useFormFieldError(field.name, errors);
 
 	if (field.render !== undefined) {
 		return field.render({
 			fieldProps: field,
-			value: props.data,
-			errors: props.errors
+			value: data,
+			errors: errors
 		});
 	}
 
