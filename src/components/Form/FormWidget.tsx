@@ -5,17 +5,11 @@ import { IFormField } from "../../core/FormField";
 import { IFormError } from "../../core/FormError";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
 
-function useFormFieldValue<T>(fieldName: string, data: any): T {
-	return useMemo(() => {
-		if (data[fieldName] === undefined) {
-			throw new Error(
-				`invalid fieldName '${fieldName}' in data : ${JSON.stringify(
-					data
-				)}`
-			);
-		}
-		return data[fieldName] as T;
-	}, [fieldName, data]);
+function useFormFieldValue(fieldName: string, data: any) {
+	return useMemo(
+		() => fieldName ? data[fieldName] : data,
+		[fieldName, data]
+	);
 }
 
 function useFormFieldError(
@@ -40,7 +34,7 @@ export interface FormWidgetProps<T> {
 export default function FormWidget<T>(props: FormWidgetProps<T>) {
 	const { field, onChange, widgetOptions } = props;
 
-	const fieldData = useFormFieldValue(field.name, props.data);
+	const fieldValue = useFormFieldValue(field.name, props.data);
 	const fieldError = useFormFieldError(field.name, props.errors);
 
 	if (field.render !== undefined) {
@@ -57,7 +51,7 @@ export default function FormWidget<T>(props: FormWidgetProps<T>) {
 		<Component
 			{...field}
 			onChange={onChange}
-			value={fieldData}
+			value={fieldValue}
 			error={fieldError}
 		/>
 	);

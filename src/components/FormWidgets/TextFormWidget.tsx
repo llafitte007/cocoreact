@@ -29,7 +29,7 @@ export default function TextFormWidget(props: TextFormWidgetProps) {
 			aria-label={props.label}
 			type={props.type}
 			label={props.label}
-			value={props.value}
+			value={props.value ?? ""}
 			placeholder={props.placeholder}
 			autoComplete={props.autoComplete}
 			autoFocus={props.autoFocus}
