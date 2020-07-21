@@ -9,15 +9,15 @@ export interface SwitchTableWidgetProps extends ITableWidgetPropsBase<boolean> {
 }
 
 export default function SwitchTableWidget({
-	data,
+	value,
 	labelOn,
 	labelOff
 }: SwitchTableWidgetProps) {
 	return useMemo(() => {
-		return data === true ? (
+		return value === true ? (
 			<ToggleOnIcon color="inherit" titleAccess={labelOn} />
 		) : (
 			<ToggleOffIcon color="disabled" titleAccess={labelOff} />
 		);
-	}, [data]);
+	}, [value]);
 }

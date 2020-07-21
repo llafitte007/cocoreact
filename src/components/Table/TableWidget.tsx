@@ -15,7 +15,7 @@ export default function TableWidget<T>({
 	data,
 	widgetOptions
 }: TableWidgetProps<T>) {
-	const fieldData = useMemo(
+	const fieldValue = useMemo(
 		() => field.name ? data[field.name] : data,
 		[field.name, data]
 	);
@@ -29,5 +29,5 @@ export default function TableWidget<T>({
 
 	const Component = widgetOptions.get(field.type);
 
-	return <Component {...field} data={fieldData} />;
+	return <Component {...field} value={fieldValue} />;
 }

@@ -20,26 +20,26 @@ export interface ButtonTableWidgetProps<T> extends ITableWidgetPropsBase<T> {
 export default function ButtonTableWidget<T>({
 	icon,
 	label,
-	data,
+	value,
 	href,
 	onClick,
 	...props
 }: ButtonTableWidgetProps<T>) {
 	const _href = useMemo(() => {
 		if (href !== undefined) {
-			return typeof href === "string" ? href : href(data);
+			return typeof href === "string" ? href : href(value);
 		}
 		return undefined;
-	}, [href, data]);
+	}, [href, value]);
 
 	const clickHandle = useCallback(
 		(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 			if (onClick) {
 				event.preventDefault();
-				onClick && onClick(data);
+				onClick && onClick(value);
 			}
 		},
-		[onClick, data]
+		[onClick, value]
 	);
 
 	if (label === undefined || label === "") {

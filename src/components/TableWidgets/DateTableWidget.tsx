@@ -16,8 +16,8 @@ export default function DateTableWidget({
 	...props
 }: DateTableWidgetProps) {
 	const value = useMemo(() => {
-		return formatter(props.data, format ?? "dddd Do MMMM");
-	}, [props.data, format, formatter]);
+		return props.value ? formatter(props.value, format ?? "dddd Do MMMM") : "";
+	}, [props.value, format, formatter]);
 
 	return value;
 }
