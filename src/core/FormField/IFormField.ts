@@ -14,7 +14,7 @@ export interface IFormFieldBase extends IField {
 
 export interface IFormField<T> extends IFormFieldBase {
 	render?: (fieldProps: IFormFieldRenderer<T>) => JSX.Element;
-	onChange?: (d: T) => T;
+	onChange?: ((d: T) => T) | ((d: T) => Promise<T>);
 }
 
 export interface IFormFieldRenderer<T> {

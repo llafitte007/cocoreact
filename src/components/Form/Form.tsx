@@ -89,10 +89,20 @@ export default function Form<TInput, TResponse>({
 
 	const handleChange = useCallback(
 		(fieldName: string, value: any) => {
-			setData((d: any) => {
+			setData(async (d: any) => {
 				const dd = { ...d, [fieldName]: value };
 				const field = fields.find((f) => f.name === fieldName);
-				return field && field.onChange ? field.onChange(dd) : dd;
+				if (field && field.onChange) {
+					const rd = field.onChange(dd);
+					if (rd instanceof Promise) {
+						const pd = await rd;
+						return pd;
+					}
+					else {
+						return rd;
+					}
+				}
+				return dd;
 			});
 		},
 		[fields]
