@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { PropTypes } from "@material-ui/core";
 import { IFormFieldBase } from "../../core/FormField";
-import { CSSProperties } from "@material-ui/styles";
 
 export interface IFormWidgetPropsBase<T> extends IFormFieldBase {
 	value: T;
@@ -11,5 +10,5 @@ export interface IFormWidgetPropsBase<T> extends IFormFieldBase {
 	fullWidth?: boolean;
 	color?: PropTypes.Color;
 	margin?: PropTypes.Margin;
-	style?: CSSProperties;
+	style?: React.CSSProperties;
 }
