@@ -1,6 +1,6 @@
 {
   "name": "cocoreact",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "CocoReact is a set of tools and material-ui components",
   "author": "llafitte007",
   "repository": {
@@ -68,7 +68,7 @@
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.3"
   },
   "files": [
     "dist"
