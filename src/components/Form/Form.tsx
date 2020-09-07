@@ -36,6 +36,7 @@ export interface FormStyles {
 export interface FormChildrenRenderProps<TInput> {
 	loading: boolean;
 	data: TInput;
+	setData: React.Dispatch<TInput>;
 	error: string | null;
 	fieldsErrors: IFormError[];
 	updateValue: (fieldname: string, value: any) => void;
@@ -88,24 +89,20 @@ export default function Form<TInput, TResponse>({
 	}, [initial, setData]);
 
 	const handleChange = useCallback(
-		(fieldName: string, value: any) => {
-			setData(async (d: any) => {
-				const dd = { ...d, [fieldName]: value };
-				const field = fields.find((f) => f.name === fieldName);
-				if (field && field.onChange) {
-					const rd = field.onChange(dd);
-					if (rd instanceof Promise) {
-						const pd = await rd;
-						return pd;
-					}
-					else {
-						return rd;
-					}
+		async (fieldName: string, value: any) => {
+			let newData = { ...data, [fieldName]: value };
+			const field = fields.find((f) => f.name === fieldName);
+			if (field && field.onChange) {
+				const tmp = field.onChange(newData);
+				if (tmp instanceof Promise) {
+					newData = await tmp;
+				} else {
+					newData = tmp;
 				}
-				return dd;
-			});
+			}
+			setData(newData);
 		},
-		[fields]
+		[fields, data]
 	);
 
 	const childrenProps = React.useMemo(
@@ -113,6 +110,7 @@ export default function Form<TInput, TResponse>({
 			({
 				loading,
 				data,
+				setData,
 				error,
 				fieldsErrors,
 				updateValue: handleChange
