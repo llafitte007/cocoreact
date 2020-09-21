@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { IHttpClient } from "./IHttpClient";
 import { IRequest } from "../Request";
 
@@ -11,12 +11,18 @@ export default class AxiosHttpClient implements IHttpClient {
 	}
 
 	async sendRequest(request: IRequest): Promise<string> {
-		const axiosRequest = this._buildConfiguration(request);
-		const response = await axios.request<string>(axiosRequest);
+		const config = this.buildConfiguration(request);
+		const response = await this.fetchRequest<string>(config);
 		return response.data;
 	}
 
-	protected _buildConfiguration(request: IRequest): AxiosRequestConfig {
+	fetchRequest<T = any>(
+		configuration: AxiosRequestConfig
+	): Promise<AxiosResponse<T>> {
+		return axios.request<T>(configuration);
+	}
+
+	buildConfiguration(request: IRequest): AxiosRequestConfig {
 		const requestUrl =
 			request.path +
 			(request.queryString !== undefined

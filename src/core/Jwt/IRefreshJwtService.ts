@@ -5,6 +5,6 @@ export interface IRefreshJwtService {
 	responseErrorCode: number;
 	getToken(): string;
 	setToken(token: string): void;
-	buildRefreshRequest(failedRequest: IRequest): IRequest;
+	buildRefreshRequest(configurationFailed: any): IRequest;
 	getNewTokenFromResponse(response: any): string;
 }
