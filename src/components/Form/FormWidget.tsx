@@ -6,10 +6,10 @@ import { IFormError } from "../../core/FormError";
 import { TypeWidgetOptions } from "../../core/TypeWidget";
 
 function useFormFieldValue(fieldName: string, data: any) {
-	return useMemo(
-		() => fieldName ? data[fieldName] : data,
-		[fieldName, data]
-	);
+	return useMemo(() => (fieldName ? data[fieldName] : data), [
+		fieldName,
+		data
+	]);
 }
 
 function useFormFieldError(
@@ -18,7 +18,7 @@ function useFormFieldError(
 ): string | undefined {
 	return useMemo(() => {
 		if (errors === undefined) return undefined;
-		const error = errors.find((x) => x.fieldName === name);
+		const error = errors.find((x) => x.field === name);
 		return error === undefined ? undefined : error.message;
 	}, [name, errors]);
 }
