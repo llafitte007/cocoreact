@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { IFormErrorService } from "./IFormErrorService";
 import { ISerializer } from "../Serializer";
-import { IFormError } from "./IFormError";
+import { IFormErrorResponse } from "./IFormError";
 
 export default class FormErrorService implements IFormErrorService {
 	_errorStatus: number;
@@ -14,18 +14,19 @@ export default class FormErrorService implements IFormErrorService {
 
 	isValid(response: any): boolean {
 		return (
-			response && response.datas && response.status === this._errorStatus
+			response && response.data && response.status === this._errorStatus
 		);
 	}
 
-	parse(response: any): string | IFormError[] | undefined {
-		const errors = this._serializer.deserialize<any>(response.datas);
-		if (Array.isArray(errors)) {
-			return errors as IFormError[];
-		} else if (errors.message) {
-			return errors.message as string;
-		} else if (errors) {
-			return errors;
+	parse(response: any) {
+		const data = this._serializer.deserialize<IFormErrorResponse>(
+			response.data
+		);
+		if (data.datas && Array.isArray(data.datas)) {
+			return data.datas;
+		}
+		if (data.message) {
+			return data.message as string;
 		}
 		return undefined;
 	}
