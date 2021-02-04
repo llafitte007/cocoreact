@@ -6,6 +6,7 @@ export interface ErrorComponentProps {
 
 export interface Props {
 	component: React.ComponentType<ErrorComponentProps>;
+	renderWhen?: (error: any, errorInfo: any) => boolean;
 }
 
 export default class ErrorBoundary extends React.Component<Props> {
@@ -14,7 +15,11 @@ export default class ErrorBoundary extends React.Component<Props> {
 	};
 
 	componentDidCatch(_error: any, _errorInfo: any) {
-		this.setState({ error: true });
+		if (this.props.renderWhen) {
+			this.setState({ error: this.props.renderWhen(_error, _errorInfo) });
+		} else {
+			this.setState({ error: true });
+		}
 	}
 
 	reloadHandler = () => {
