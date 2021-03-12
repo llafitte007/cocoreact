@@ -22,7 +22,7 @@ export default class FormErrorService implements IFormErrorService {
 		const data = this._serializer.deserialize<IFormErrorResponse>(
 			response.data
 		);
-		if (data.datas && Array.isArray(data.datas)) {
+		if (data.datas && Array.isArray(data.datas) && data.datas.length > 0) {
 			return data.datas;
 		}
 		if (data.message) {
