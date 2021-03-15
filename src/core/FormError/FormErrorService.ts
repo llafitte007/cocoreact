@@ -26,7 +26,7 @@ export default class FormErrorService implements IFormErrorService {
 			return data.datas;
 		}
 		if (data.message) {
-			return data.message as string;
+			return data.message;
 		}
 		return undefined;
 	}
