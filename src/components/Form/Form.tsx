@@ -42,11 +42,15 @@ export interface FormChildrenRenderProps<TInput> {
 	updateValue: (fieldname: string, value: any) => void;
 }
 
+export type MessageBuilder<TInput> =
+	| ((model: TInput) => Promise<IMessage>)
+	| ((model: TInput) => IMessage);
+
 export interface FormProps<TInput, TResponse>
 	extends StyledComponent<FormStyles> {
 	initial: TInput;
 	fields: IFormField<TInput>[];
-	buildMessage: (model: TInput) => IMessage;
+	buildMessage: MessageBuilder<TInput>;
 	sendMessage: (message: IMessage) => Promise<TResponse>;
 	widgetOptions: TypeWidgetOptions;
 	errorService: IFormErrorService;
@@ -128,7 +132,11 @@ export default function Form<TInput, TResponse>({
 			setFieldsErrors([]);
 
 			try {
-				const message = buildMessage(data);
+				const messageTmp = buildMessage(data);
+				const message =
+					messageTmp instanceof Promise
+						? await messageTmp
+						: messageTmp;
 				const response = await sendMessage(message);
 				setLoading(false);
 				onSuccess && onSuccess(response);
