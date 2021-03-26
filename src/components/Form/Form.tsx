@@ -37,7 +37,7 @@ export interface FormChildrenRenderProps<TInput> {
 	loading: boolean;
 	data: TInput;
 	setData: React.Dispatch<TInput>;
-	error: string | null;
+	errors: string[];
 	fieldsErrors: IFormError[];
 	updateValue: (fieldname: string, value: any) => void;
 }
@@ -81,12 +81,12 @@ export default function Form<TInput, TResponse>({
 	const styles = useStyles() as FormStyles;
 
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+	const [errors, setErrors] = useState<string[]>([]);
 	const [fieldsErrors, setFieldsErrors] = useState<IFormError[]>([]);
 	const [data, setData] = useState<any>(initial);
 
 	useEffect(() => {
-		setError(null);
+		setErrors([]);
 		setFieldsErrors([]);
 		setLoading(false);
 		setData(initial);
@@ -115,11 +115,11 @@ export default function Form<TInput, TResponse>({
 				loading,
 				data,
 				setData,
-				error,
+				errors,
 				fieldsErrors,
 				updateValue: handleChange
 			} as FormChildrenRenderProps<TInput>),
-		[loading, data, error, fieldsErrors, handleChange]
+		[loading, data, errors, fieldsErrors, handleChange]
 	);
 
 	const handleSubmit = useCallback(
@@ -128,7 +128,7 @@ export default function Form<TInput, TResponse>({
 			e.stopPropagation();
 
 			setLoading(true);
-			setError(null);
+			setErrors([]);
 			setFieldsErrors([]);
 
 			try {
@@ -149,9 +149,16 @@ export default function Form<TInput, TResponse>({
 					const error = errorService.parse(err.response);
 
 					if (Array.isArray(error)) {
+						const _errors = [] as string[];
 						setFieldsErrors(error);
+						for (const err of error) {
+							if (!err.field) {
+								_errors.push(err.message);
+							}
+						}
+						setErrors(_errors);
 					} else if (error !== undefined) {
-						setError(error);
+						setErrors([error]);
 					} else {
 						console.error("undefined error : ", err.response);
 					}
@@ -171,16 +178,24 @@ export default function Form<TInput, TResponse>({
 			className={clsx(styles.form, classes?.form, className)}
 			style={style}
 		>
-			{error && (
+			{errors && (
 				<div
 					className={clsx(
 						styles.errorContainer,
 						classes?.errorContainer
 					)}
 				>
-					<p className={clsx(styles.errorLabel, classes?.errorLabel)}>
-						{error}
-					</p>
+					{errors.map((x) => (
+						// eslint-disable-next-line react/jsx-key
+						<p
+							className={clsx(
+								styles.errorLabel,
+								classes?.errorLabel
+							)}
+						>
+							{x}
+						</p>
+					))}
 				</div>
 			)}
 
