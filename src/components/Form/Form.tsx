@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		errorLabel: {
 			textAlign: "center",
 			padding: theme.spacing(0.5, 2),
-			backgroundColor: theme.palette.primary.main,
-			color: theme.palette.getContrastText(theme.palette.primary.main),
+			backgroundColor: theme.palette.error.light,
+			color: theme.palette.getContrastText(theme.palette.error.light),
 			borderRadius: theme.shape.borderRadius
 		}
 	} as FormStyles)
