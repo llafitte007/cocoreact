@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import AuthContext from "./AuthContext";
 
 export interface IAuthService<TPayload = any> {
-	getToken: () => string | null;
+	getToken: (() => string | null) | (() => Promise<string | null>);
 	setToken: (token: string | null) => void;
 	getPayload(token: string): TPayload;
 }
@@ -24,9 +24,13 @@ export default function AuthContextProvider<TPayload = any>({
 	const [payload, setPayload] = useState<TPayload | null>(null);
 
 	useEffect(() => {
-		const _token = authService.getToken();
-		setToken(_token);
-		setMounted(true);
+		const _getToken = async () => {
+			const res = authService.getToken();
+			const _token = res instanceof Promise ? await res : res;
+			setToken(_token);
+			setMounted(true);
+		};
+		_getToken();
 	}, []);
 
 	useEffect(() => {
