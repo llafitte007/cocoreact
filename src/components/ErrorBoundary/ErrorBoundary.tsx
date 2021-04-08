@@ -1,7 +1,8 @@
 import React from "react";
 
 export interface ErrorComponentProps {
-	onReload: () => void;
+	reset?: () => void;
+	children?: React.ReactNode;
 }
 
 export interface Props {
@@ -22,14 +23,19 @@ export default class ErrorBoundary extends React.Component<Props> {
 		}
 	}
 
-	reloadHandler = () => {
+	resetHandler = () => {
 		this.setState({ error: false });
 	};
 
 	render() {
 		if (this.state.error === true) {
 			const { component: Component } = this.props;
-			return <Component onReload={this.reloadHandler} />;
+			return (
+				<Component
+					reset={this.resetHandler}
+					children={this.props.children}
+				/>
+			);
 		}
 
 		return this.props.children;
