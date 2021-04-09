@@ -16,8 +16,12 @@ export default class UrlOptions {
 		throw Error(`undefined url named "${urlName}"`);
 	}
 
-	public fullPath(name: string): string {
-		return this.get(name).fullPath();
+	public fullPath(name: string, params?: Record<string, string>): string {
+		const url = this.get(name);
+		if (params) {
+			url.setParameters(params);
+		}
+		return url.fullPath();
 	}
 
 	public isMatch(
