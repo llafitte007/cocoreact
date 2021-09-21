@@ -63,7 +63,7 @@ export default function Table<T>({
 
 	return (
 		<MuiTable
-			padding={padding ?? "default"}
+			padding={padding ?? "normal"}
 			className={className}
 			style={style}
 		>

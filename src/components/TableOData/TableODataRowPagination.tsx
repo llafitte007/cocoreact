@@ -48,8 +48,8 @@ export default function TableODataRowPagination({
 				labelRowsPerPage={rowsPerPageLabel}
 				rowsPerPage={rowsPerPage}
 				labelDisplayedRows={displayedRowLabel}
-				onChangePage={handlePageChange}
-				onChangeRowsPerPage={handleRowsPerPageChange}
+				onPageChange={handlePageChange}
+				onRowsPerPageChange={handleRowsPerPageChange}
 				ActionsComponent={ODataPaginationActions}
 			/>
 		</TableRow>

@@ -185,7 +185,7 @@ export default function TableOData<TFormField, T>({
 			className={clsx(styles.loader, classes?.loader)}
 		>
 			<MuiTable
-				padding={padding ?? "default"}
+				padding={padding ?? "normal"}
 				className={clsx(styles.table, classes?.table)}
 			>
 				<MuiTableHead

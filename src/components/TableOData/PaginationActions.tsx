@@ -23,24 +23,24 @@ export default function ODataPaginationActions({
 	count,
 	page,
 	rowsPerPage,
-	onChangePage
+	onPageChange
 }: TablePaginationActionsProps) {
 	const classes = useStyles();
 
 	const handleFirstPageButtonClick = (event: any) => {
-		onChangePage(event, 0);
+		onPageChange(event, 0);
 	};
 
 	const handleBackButtonClick = (event: any) => {
-		onChangePage(event, page - 1);
+		onPageChange(event, page - 1);
 	};
 
 	const handleNextButtonClick = (event: any) => {
-		onChangePage(event, page + 1);
+		onPageChange(event, page + 1);
 	};
 
 	const handleLastPageButtonClick = (event: any) => {
-		onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+		onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
 	};
 
 	return (
