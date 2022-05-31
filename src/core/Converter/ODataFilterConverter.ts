@@ -44,21 +44,31 @@ export default class ODataFilterConverter implements IConverter {
 			valueStr = `'${item.value.toString().replace(/'/g, "''")}'`;
 		}
 
+		let result = "";
 		if (item.operator === "contains") {
-			return `${item.operator}(toLower(${item.name}), ${valueStr})`;
+			result = item.fields
+				.map(
+					(field) =>
+						`${item.operator}(toLower(${field}), ${valueStr})`
+				)
+				.join(` ${item.join} `);
+		} else {
+			result = item.fields
+				.map((field) => `(${field} ${item.operator} ${valueStr})`)
+				.join(` ${item.join} `);
 		}
-		return `(${item.name} ${item.operator} ${valueStr})`;
+
+		return item.fields.length > 1 ? `(${result})` : result;
 	}
 
-	write(data: ODataFilter) {
+	write(filter: ODataFilter) {
 		const parts = [] as string[];
-		for (const k in data.filters) {
-			const filter = data.filters[k];
-			const filterStr = this.convertItem(filter);
-			if (filterStr) {
-				parts.push(filterStr);
+		for (const item of Object.values(filter.filters)) {
+			const str = this.convertItem(item);
+			if (str) {
+				parts.push(str);
 			}
 		}
-		return parts.length > 0 ? parts.join(" and ") : "";
+		return parts.length > 0 ? parts.join(` ${filter.join} `) : "";
 	}
 }

@@ -7,37 +7,49 @@ export type ODataFilterOperator =
 	| "gt"
 	| "ge";
 
+export type ODataFilterJoin = "or" | "and";
+
 export interface IODataFilterItem {
-	name: string;
+	fields: string[];
 	operator: ODataFilterOperator;
 	value: any;
+	join: ODataFilterJoin;
 }
 
 export default class ODataFilter {
 	filters: Record<string, IODataFilterItem>;
+	join: ODataFilterJoin;
 
 	constructor() {
 		this.filters = {};
+		this.join = "and";
 	}
 
-	public set(name: string, operator: ODataFilterOperator, value: any) {
-		this.filters[name] = { name, operator, value } as IODataFilterItem;
+	public set(
+		key: string,
+		fields: string | string[],
+		operator: ODataFilterOperator,
+		value: any,
+		join = "or" as ODataFilterJoin
+	) {
+		const fieldsArr = Array.isArray(fields) ? fields : [fields];
+		this.filters[key] = { fields: fieldsArr, operator, value, join };
 	}
 
-	public setValue(name: string, value: any) {
-		if (this.filters[name] !== undefined) {
-			this.filters[name].value = value;
+	public setValue(key: string, value: any) {
+		if (this.filters[key] !== undefined) {
+			this.filters[key].value = value;
 		} else {
-			console.error(`undefined filter named "${name}"`);
+			console.error(`undefined filter named "${key}"`);
 		}
 		return this;
 	}
 
-	public setOperator(name: string, operator: ODataFilterOperator) {
-		if (this.filters[name] !== undefined) {
-			this.filters[name].operator = operator;
+	public setOperator(key: string, operator: ODataFilterOperator) {
+		if (this.filters[key] !== undefined) {
+			this.filters[key].operator = operator;
 		} else {
-			console.error(`undefined filter named "${name}"`);
+			console.error(`undefined filter named "${key}"`);
 		}
 		return this;
 	}
