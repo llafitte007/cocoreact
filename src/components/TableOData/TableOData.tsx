@@ -138,7 +138,7 @@ export default function TableOData<TFormField, T>({
 	const filterHandle = useCallback(
 		(name: string, operator: ODataFilterOperator, value: any) => {
 			message.skip = 0;
-			message.filter.set(name, operator, value);
+			message.filter.set(name, name, operator, value);
 			setFiltersValues(message.filter.getValues());
 			setFitlersOperators(message.filter.getOperators());
 

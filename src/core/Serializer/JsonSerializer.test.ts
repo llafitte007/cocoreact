@@ -89,12 +89,12 @@ test("serialize odata parts [orderBy, select, fitler]", () => {
 
 	const filter = new ODataFilter();
 	expect(serializer.serialize(filter)).toBe("");
-	filter.set("test", "eq", "toto");
+	filter.set("test", "test", "eq", "toto");
 	expect(serializer.serialize(filter)).toBe("(test eq 'toto')");
 	filter.setOperator("test", "contains");
 	filter.setValue("test", "tutu");
 	expect(serializer.serialize(filter)).toBe("contains(test, 'tutu')");
-	filter.set("test2", "eq", "to'to");
+	filter.set("test2", "test2", "eq", "to'to");
 	expect(serializer.serialize(filter)).toBe(
 		"contains(test, 'tutu') and (test2 eq 'to''to')"
 	);
