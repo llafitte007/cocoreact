@@ -20,8 +20,7 @@ export default class DateConverter implements IConverter {
 	}
 
 	write(data: string | Date) {
-		let d = new Date(data);
-		d = new Date(d.setMinutes(d.getMinutes() - d.getTimezoneOffset()));
+		const d = new Date(data);
 		return d.toISOString();
 	}
 }
