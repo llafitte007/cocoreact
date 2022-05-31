@@ -27,6 +27,13 @@ export default function TableODataRowFilters<TFormField, T>({
 	widgetOptions,
 	onChange
 }: TableODataRowFiltersProps<TFormField, T>) {
+	const isAnyFilter = fields.reduce(
+		(acc, field) => field.filterable === true || acc,
+		false
+	);
+	if (!isAnyFilter) {
+		return null;
+	}
 	return (
 		<TableRow>
 			{fields.map((field, idx) => {
